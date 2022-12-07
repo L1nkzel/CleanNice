@@ -7,6 +7,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+body, .Reg-component {
+  background-image: url(../src/components/registerImage.jpg);
+  background-position: center;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.foreground {
+  backdrop-filter: blur(10px);
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
