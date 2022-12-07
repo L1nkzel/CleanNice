@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model customer {
+  customerId  Int    @id @default(autoincrement())
+  custName String
+  companyName String
+  orgNr String
+  phoneNumber Int
+  email String @unique
+  bookings bookings[]
+    history history[]
+}
+
+model employee {
+  employeeId  Int    @id @default(autoincrement())
+  employeeName String
+  personalNumber Int
+  accountNumber Int
+  phoneNumber Int
+  email String @unique
+  adress String
+  role String
+  bookings bookings[]
+  history history[]
+}
+model bookings {
+  bookingId  Int    @id @default(autoincrement())
+  cleaner employee @relation(fields: [employeeId], references: [employeeId])
+  employeeId Int
+  customer customer @relation(fields: [customerId], references: [customerId])
+  customerId Int
+  customerName String
+  cleanerName String
+  date DateTime
+  adress String 
+  time DateTime
+  status String
+
+}
+model history {
+  bookingId  Int    @id @default(autoincrement())
+  cleaner employee @relation(fields: [employeeId], references: [employeeId])
+  employeeId Int
+  customer customer @relation(fields: [customerId], references: [customerId])
+  customerId Int
+  customerName String
+  cleanerName String
+  date DateTime
+  adress String 
+  time DateTime
+  status String
+
+}
