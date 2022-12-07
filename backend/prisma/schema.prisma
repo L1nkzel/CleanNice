@@ -17,6 +17,7 @@ model customer {
   orgNr String
   phoneNumber Int
   email String @unique
+  password String
   bookings bookings[]
     history history[]
 }
@@ -28,6 +29,7 @@ model employee {
   accountNumber Int
   phoneNumber Int
   email String @unique
+  password String
   adress String
   role String
   bookings bookings[]
