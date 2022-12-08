@@ -5,6 +5,12 @@ import * as bcrypt from 'bcrypt'
 
 const route = express.Router();
 
+
+route.get('/', async (req,res)=>{
+  const customers = await prisma.customer.findMany({})
+  res.json(customers)
+})
+
 route.post("/register", async (req, res) => {
   const customer = await prisma.customer.create({
     data: {
