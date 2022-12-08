@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,55 +8,61 @@ datasource db {
 }
 
 model customer {
-  customerId  Int    @id @default(autoincrement())
-  custName String
+  customerId  Int        @id @default(autoincrement())
   companyName String
-  orgNr String
-  phoneNumber Int
-  email String @unique
-  password String
-  bookings bookings[]
-    history history[]
+  orgNr       String
+  phoneNumber String
+  email       String     @unique
+  custName    String
+  password    String
+  bookings    bookings[]
+  history     history[]
 }
 
 model employee {
-  employeeId  Int    @id @default(autoincrement())
-  employeeName String
-  personalNumber Int
-  accountNumber Int
-  phoneNumber Int
-  email String @unique
-  password String
-  adress String
-  role String
-  bookings bookings[]
-  history history[]
+  employeeId     Int        @id @default(autoincrement())
+  personalNumber String
+  accountNumber  String
+  phoneNumber    String
+  email          String     @unique
+  adress         String
+  role           String
+  employeeName   String
+  password       String
+  bookings       bookings[]
+  history        history[]
 }
+
 model bookings {
-  bookingId  Int    @id @default(autoincrement())
-  cleaner employee @relation(fields: [employeeId], references: [employeeId])
-  employeeId Int
-  customer customer @relation(fields: [customerId], references: [customerId])
-  customerId Int
+  bookingId    Int      @id @default(autoincrement())
+  employeeId   Int
+  customerId   Int
   customerName String
-  cleanerName String
-  date DateTime
-  adress String 
-  time DateTime
-  status String
+  cleanerName  String
+  date         DateTime
+  adress       String
+  time         DateTime
+  status       String
+  customer     customer @relation(fields: [customerId], references: [customerId])
+  cleaner      employee @relation(fields: [employeeId], references: [employeeId])
 
+  @@index([customerId], map: "bookings_customerId_fkey")
+  @@index([employeeId], map: "bookings_employeeId_fkey")
 }
-model history {
-  bookingId  Int    @id @default(autoincrement())
-  cleaner employee @relation(fields: [employeeId], references: [employeeId])
-  employeeId Int
-  customer customer @relation(fields: [customerId], references: [customerId])
-  customerId Int
-  customerName String
-  cleanerName String
-  date DateTime
-  adress String 
-  time DateTime
-  status String
 
+model history {
+  bookingId    Int      @id @default(autoincrement())
+  employeeId   Int
+  customerId   Int
+  customerName String
+  cleanerName  String
+  date         DateTime
+  adress       String
+  time         DateTime
+  status       String
+  customer     customer @relation(fields: [customerId], references: [customerId])
+  cleaner      employee @relation(fields: [employeeId], references: [employeeId])
+
+  @@index([customerId], map: "history_customerId_fkey")
+  @@index([employeeId], map: "history_employeeId_fkey")
 }
