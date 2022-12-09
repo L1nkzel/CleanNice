@@ -6,6 +6,7 @@ import cors from "cors";
 import customerRoutes from "./routes/customerRoutes.js";
 import passConfigCustomer from "./passports/passConfigCustomer.js";
 import { PrismaClient } from "@prisma/client";
+import * as bcrypt from 'bcrypt'
 
 const prisma = new PrismaClient();
 
@@ -50,8 +51,25 @@ server.post("/login", passport.authenticate('local', {}), (req, res) => {
 const isAuthenticated = (req, res, next) => {
   console.log(req.user)
   req.isAuthenticated() ? next() : res.sendStatus(403);
+
+
 };
 
+
+server.use("/register", async (req, res) => {
+  const customer = await prisma.customer.create({
+    data: {
+      custName: req.body.custName,
+      companyName: req.body.companyName,
+      orgNr: req.body.orgNr,
+      phoneNumber: req.body.phoneNumber,
+      email: req.body.email,
+      password: await bcrypt.hash(req.body.password,10),
+
+
+  }});
+  res.json(customer);
+});
 server.use("/api/customer", isAuthenticated, customerRoutes);
 
 server.listen(PORT, () => console.log(`Server started on ${PORT}`));
