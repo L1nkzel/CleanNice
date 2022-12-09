@@ -9,12 +9,15 @@ import {
 import CustomButton from "../ui/CustomButton";
 import FormStyle from "./FormStyle";
 import Title from "../ui/Title";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const onHandleChange = (e) => {
     const { name, value } = e.target;
@@ -25,12 +28,27 @@ function LoginForm() {
     });
   };
 
-  const handleSubmit = () => {
-    console.log(loginData);
-    setLoginData({
-      email: "",
-      password: ""
-    });
+  const handleSubmit = async() => {
+    const data={
+      email: loginData.email,
+      password: loginData.password
+    }
+      const res = await fetch('http://localhost:3500/login',{
+        method: 'POST',
+        headers:{ "Content-Type": "application/json" },
+        body:JSON.stringify(data)
+      })
+      const result = await res.json()
+    console.log(result);
+if(result.isAuthenticated){
+navigate('/customer',{state:result})
+  
+}
+setLoginData({
+  email: "",
+  password: ""
+});
+
   };
 
   return (
