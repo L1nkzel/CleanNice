@@ -15,9 +15,9 @@ const FormStyle = {
     alignItems: "center",
   },
   textInput: {
-    my: 0.7,
     borderRadius: 1,
-    bgcolor: "white",
+    bgcolor: "transparent",
+    
   },
 };
 
