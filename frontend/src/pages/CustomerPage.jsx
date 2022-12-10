@@ -1,6 +1,9 @@
+import { Box } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import CurrentBookings from '../components/booking/CurrentBookings'
 import Header from '../components/ui/Header'
+import Title from '../components/ui/Title'
 
 function CustomerPage() {
 /*   const location = useLocation();
@@ -26,7 +29,11 @@ if(!user.isAuthenticated){
 } */
   
   return (
+    <>
     <Header />
+<CurrentBookings />
+   
+    </>
   )
 }
 

@@ -1,13 +1,14 @@
 import { Typography } from "@mui/material";
 import React from "react";
 
-function Title({children}) {
+function Title({children, color}) {
   return (
     <Typography
       sx={{
         textAlign: "center",
-        mb: 5,
-        color: "white",
+        mt:2,
+        mb: 2,
+        color: color,
         fontSize: 22,
       }}
     >
