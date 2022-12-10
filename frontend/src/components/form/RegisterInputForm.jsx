@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
-  Box,
-  Button,
+  Box,  
   FormControl,
   Grid,
   Link,
@@ -10,16 +9,16 @@ import {
 } from "@mui/material";
 import CustomButton from "../ui/CustomButton";
 import {AccountCircle, Email, Key, Phone,Business, LocationOn} from "@mui/icons-material"
-import InputAdornment from '@mui/material/InputAdornment';
 import FormStyle from "./FormStyle";
 import Title from "../ui/Title";
 
 function RegisterInputForm() {
+  const regUrl = `http://localhost:3500/register/`;
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
-    password1: "",
-    password2: "",
+    password: "",
+    confirmPassword: "",
     phoneNumber: "",
     address: "",
     company: "",
@@ -35,19 +34,80 @@ function RegisterInputForm() {
     });
   };
 
-  const handleSubmit = () => {
-    console.log(formData);
-    setFormData({
-      fullName: "",
-      email: "",
-      password1: "",
-      password2: "",
-      phoneNumber: "",
-      address: "",
-      company: "",
-      orgNr: "",
+
+  const handleSubmit = async () => {
+    
+
+    const data = {
+      custName: formData.fullName,
+      companyName: formData.company,
+      orgNr: formData.orgNr,
+      phoneNumber: formData.phoneNumber,
+      email: formData.email,
+      password: formData.password,
+    };
+   
+    const res = await fetch(regUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
+    const result = await res.json()
+
+    
+    // setFormData({
+    //   fullName: "",
+    //   email: "",
+    //   password: "",
+    //   confirmPassword: "",
+    //   phoneNumber: "",
+    //   company: "",
+    //   orgNr: "",
+    // });
   };
+
+  const [formError, setFormError] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phoneNumber: "",
+    company: "",
+    orgNr: "",
+  });
+
+
+  const validateFormInput = (event) => {
+
+    let inputError = {
+        fullName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        phoneNumber: "",
+        company: "",
+        orgNr: "",
+    };
+
+    if (formData.confirmPassword !== formData.password) {
+        setFormError({
+          ...inputError,
+          confirmPassword: "Password and confirm password should be same",
+        });
+        return;
+      }
+
+      if (!formData.password) {
+        setFormError({
+          ...inputError,
+          password: "Password should not be empty",
+        });
+        return
+      }
+      setFormError(inputError);
+    };
 
   return (
     <Box sx={FormStyle.container}>
@@ -93,8 +153,8 @@ function RegisterInputForm() {
               <Box sx={{ display: 'flex', alignItems:'center', backgroundColor:'white', borderRadius:1, my:0.7}}>
         <Key sx={{ color: 'action.active',mr:1, px: 1, py: 1.5, backgroundColor:'#CEFFDC', borderRadius: "4px 0 0 4px" }} />
                 <TextField
-                  name="password1"
-                  value={formData.password1}
+                  name="password"
+                  value={formData.password}
                   onChange={onHandleChange}
                   sx={FormStyle.textInput}
                   id="outlined-password-input"
@@ -112,8 +172,8 @@ function RegisterInputForm() {
               <Grid item xs>
               <Box sx={{ display: 'flex', alignItems:'center', backgroundColor:'white', borderRadius:1, my:0.7, px: 1, py: 1,}}>
                 <TextField
-                  name="password2"
-                  value={formData.password2}
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
                   onChange={onHandleChange}
                   sx={FormStyle.textInput}
                   id="outlined-password-input"
