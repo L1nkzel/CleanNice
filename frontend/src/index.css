@@ -8,14 +8,14 @@ body {
 }
 
 
-body, .Reg-component {
+.Reg-component {
   background-image: url(../src/components/registerImage.jpg);
   background-position: center;
-
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
 }
+
 
 .foreground {
   backdrop-filter: blur(10px);
