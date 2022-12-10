@@ -55,8 +55,12 @@ const isAuthenticated = (req, res, next) => {
 
 };
 
+server.get('/', async (req,res)=>{
+  const customers = await prisma.customer.findMany({})
+  res.json(customers)
+})
 
-server.use("/register", async (req, res) => {
+server.post("/register", async (req, res) => {
   const customer = await prisma.customer.create({
     data: {
       custName: req.body.custName,
@@ -66,10 +70,10 @@ server.use("/register", async (req, res) => {
       email: req.body.email,
       password: await bcrypt.hash(req.body.password,10),
 
-
   }});
   res.json(customer);
 });
+
 server.use("/api/customer", isAuthenticated, customerRoutes);
 
 server.listen(PORT, () => console.log(`Server started on ${PORT}`));
