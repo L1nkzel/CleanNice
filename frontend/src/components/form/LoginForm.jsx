@@ -55,7 +55,7 @@ setLoginData({
     <Box sx={FormStyle.container}>
       <Grid container columnGap={1} sx={FormStyle.myStyle}>
         <FormControl>
-          <Title>Logga in</Title>
+          <Title color={'white'}>Logga in</Title>
 
           <TextField
             name="email"

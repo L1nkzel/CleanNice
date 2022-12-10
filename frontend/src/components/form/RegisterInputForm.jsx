@@ -113,7 +113,7 @@ function RegisterInputForm() {
     <Box sx={FormStyle.container}>
       <Grid container columnGap={1} sx={FormStyle.myStyle}>
         <FormControl>
-          <Title>Registrera dig</Title>
+          <Title color={'white'}>Registrera dig</Title>
 
           <Box sx={{ display: 'flex', alignItems:'center', backgroundColor:'white', borderRadius:1, my:0.7}}>
         <AccountCircle sx={{ color: 'action.active',mr:1, px: 1, py: 1.5, backgroundColor:'#CEFFDC', borderRadius: "4px 0 0 4px" }} />
