@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import Header from '../components/ui/Header'
 
 function CustomerPage() {
-  const location = useLocation();
+/*   const location = useLocation();
   const [user, setUser] = useState({})
   
   useEffect(() => {
@@ -22,10 +23,10 @@ function CustomerPage() {
   
 if(!user.isAuthenticated){
   return <div>You are not authorized to log in to this page</div>
-}
+} */
   
   return (
-    <div>{'hello'}</div>
+    <Header />
   )
 }
 
