@@ -9,13 +9,9 @@ function CustomButton({children, onClick}) {
       size="large"
       type="submit"
       variant="contained"
-      sx={{
-        width: 250,
-        fontSize: { xs: 13, sm: 14, md: 15 },
-        color: "black",
-        boxShadow: 2,
-        background: "linear-gradient(#216600, #FBFBFB)",
-      }}
+      sx={
+       buttonStyle
+      }
     >
       {children}
     </Button>
@@ -23,3 +19,11 @@ function CustomButton({children, onClick}) {
 }
 
 export default CustomButton;
+
+const buttonStyle = {
+  width: 250,
+  fontSize: { xs: 13, sm: 14, md: 15 },
+  color: "black",
+  boxShadow: 2,
+  background: "linear-gradient(#216600, #FBFBFB)",
+}
