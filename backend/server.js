@@ -44,10 +44,19 @@ server.use(passport.initialize());
 server.use(passport.session());
 
 server.post("/login", passport.authenticate('local', {}), (req, res) => {
-  console.log("user logged in");
+  console.log("user logged in" , req.user);
   res.json({isAuthenticated: req.isAuthenticated(), user:req.user});
   
 });
+
+server.post("/logout",  (req, res, next)=>{
+  
+  req.session.destroy(function(err) {
+
+    if (err) { return next(err); }
+    console.log('user  logged out:', req.user)
+  });
+}) 
 
 //middleware for authentication
 const isAuthenticated = (req, res, next) => {
@@ -77,7 +86,11 @@ server.post("/register", async (req, res) => {
   res.json(customer);
 });
 
-server.use("/api/customer", isAuthenticated, customerRoutes);
+
+  server.use("/api/customer", isAuthenticated, customerRoutes);
+  
+
+
 server.use("/api/employee", employeeRoutes);
 server.use("/api/bookings", bookingsRoutes);
 
