@@ -4,6 +4,8 @@ import passport from "passport";
 import session from "express-session";
 import cors from "cors";
 import customerRoutes from "./routes/customerRoutes.js";
+import employeeRoutes from "./routes/employeeRoutes.js";
+import bookingsRoutes from "./routes/bookingsRoutes.js";
 import passConfigCustomer from "./passports/passConfigCustomer.js";
 import { PrismaClient } from "@prisma/client";
 import * as bcrypt from 'bcrypt'
@@ -67,6 +69,7 @@ server.post("/register", async (req, res) => {
       companyName: req.body.companyName,
       orgNr: req.body.orgNr,
       phoneNumber: req.body.phoneNumber,
+      adress: req.body.adress,
       email: req.body.email,
       password: await bcrypt.hash(req.body.password,10),
 
@@ -75,5 +78,7 @@ server.post("/register", async (req, res) => {
 });
 
 server.use("/api/customer", isAuthenticated, customerRoutes);
+server.use("/api/employee", employeeRoutes);
+server.use("/api/bookings", bookingsRoutes);
 
 server.listen(PORT, () => console.log(`Server started on ${PORT}`));

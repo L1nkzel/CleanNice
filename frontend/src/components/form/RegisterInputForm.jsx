@@ -109,10 +109,10 @@ function RegisterInputForm() {
   });
 
   return (
-    <Box sx={FormStyle.container}>
-      <Grid container columnGap={1} sx={FormStyle.myStyle}>
+    <Box  sx={FormStyle.container}>
+      <Grid container columnGap={1}  sx={FormStyle.register}>
         <FormControl>
-          <Title color={'white'}>Registrera dig</Title>
+          <Title color={"white"}>Registrera dig</Title>
 
           <Box
             sx={{
