@@ -12,12 +12,16 @@ route.get('/', async (req,res)=>{
 })
 
 route.post("/register", async (req, res) => {
+
+
+
   const customer = await prisma.customer.create({
     data: {
       custName: req.body.custName,
       companyName: req.body.companyName,
       orgNr: req.body.orgNr,
       phoneNumber: req.body.phoneNumber,
+      adress: req.body.adress,
       email: req.body.email,
       password: await bcrypt.hash(req.body.password,10),
       
@@ -25,5 +29,10 @@ route.post("/register", async (req, res) => {
   }});
   res.json(customer);
 });
+
+
+
+
+
 
 export default route
