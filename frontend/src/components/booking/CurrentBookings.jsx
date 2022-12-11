@@ -1,21 +1,26 @@
-import { Box, Paper, Toolbar } from "@mui/material";
+import { Box, Paper, Toolbar, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
 import TableContent from "./TableContent";
 
 const CurrentBookings = ({ data }) => {
   const [userBookings, setUserBookings] = useState();
-
+const [errorMessage, setErrorMessage] = useState("")
   useEffect(() => {
     const checkUser = async () => {
       if (!isNaN(data.customerId)) {
-        const res = await fetch(
-          `http://localhost:3500/api/bookings/${data.customerId}/bookings`
-        );
+        try{
 
-        const result = await res.json();
-        setUserBookings(result);
-        console.log(result);
+          const res = await fetch(
+            `http://localhost:3500/api/bookings/${data.customerId}/bookings`
+            );
+            
+            const result = await res.json();
+            setUserBookings(result);
+            console.log(result);
+          }catch(err){
+           setErrorMessage(err)
+          }
       }
     };
     checkUser();
