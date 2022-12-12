@@ -19,8 +19,8 @@ function CustomerPage() {
         setUser(location?.state);
     };
 
-  //   checkUser();
-  // }, [location, user, setUser]);
+     checkUser();
+   }, [location, user, setUser]);
 
 
   if (!user?.isAuthenticated ) {
