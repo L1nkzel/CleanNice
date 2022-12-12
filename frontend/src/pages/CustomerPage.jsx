@@ -6,6 +6,7 @@ import Header from "../components/ui/Header";
 function CustomerPage() {
   const location = useLocation();
   const [user, setUser] = useState({});
+
   const entries = performance.getEntriesByType("navigation");
   entries.forEach((entry) => {
     if (entry.type === "back_forward") {
@@ -18,8 +19,9 @@ function CustomerPage() {
         setUser(location?.state);
     };
 
-    checkUser();
-  }, [location, user, setUser]);
+  //   checkUser();
+  // }, [location, user, setUser]);
+
 
   if (!user?.isAuthenticated ) {
     return <div>You are not authorized to log in to this page</div>;

@@ -1,5 +1,5 @@
 import React from 'react'
-import BookService from '../components/BookService'
+import BookService from '../components/booking/BookService'
 import Header from '../components/ui/Header'
 
 function ServicesPage() {
