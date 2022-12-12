@@ -13,6 +13,7 @@ model customer {
   orgNr       String
   phoneNumber String
   email       String     @unique
+  adress      String
   custName    String
   password    String
   bookings    bookings[]
@@ -29,8 +30,8 @@ model employee {
   role           String
   employeeName   String
   password       String
-  bookings       bookings[]
-  history        history[]
+  bookings       bookings[] @relation("bookingstoemployee")
+  history        history[]  @relation("employeetohistory")
 }
 
 model bookings {
@@ -42,15 +43,14 @@ model bookings {
   adress       String     @map("Besöksadress")
   time         String     @map("Bokad tid")
   status       String     @map("Bokningsstatus")
-  customer     customer   @relation(fields: [customerId], references: [customerId], onDelete: Cascade)
+  customer     customer   @relation(fields: [customerId], references: [customerId])
   employee     employee[] @relation("bookingstoemployee")
 
   @@index([customerId], map: "bookings_customerId_fkey")
 }
 
 model history {
-  bookingId    Int      @id @default(autoincrement())
-  employeeId   Int
+  bookingId    Int        @id @default(autoincrement())
   customerId   Int
   customerName String
   cleanerName  String
@@ -58,9 +58,8 @@ model history {
   adress       String
   time         DateTime
   status       String
-  customer     customer @relation(fields: [customerId], references: [customerId])
-  employee     employee @relation(fields: [employeeId], references: [employeeId])
+  customer     customer   @relation(fields: [customerId], references: [customerId])
+  employee     employee[] @relation("employeetohistory")
 
   @@index([customerId], map: "history_customerId_fkey")
-  @@index([employeeId], map: "history_employeeId_fkey")
 }
