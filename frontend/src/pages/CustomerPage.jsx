@@ -7,17 +7,17 @@ function CustomerPage() {
   const location = useLocation();
   const [user, setUser] = useState({});
 
-  useEffect(() => {
-    const checkUser = async () => {
-        setUser(location?.state?.user);
-    };
+  // useEffect(() => {
+  //   const checkUser = async () => {
+  //       setUser(location?.state?.user);
+  //   };
 
-    checkUser();
-  }, [location, user, setUser]);
+  //   checkUser();
+  // }, [location, user, setUser]);
 
-  if (!location?.state?.isAuthenticated || location.state === null) {
-    return <div>You are not authorized to log in to this page</div>;
-  }
+  // if (!location?.state?.isAuthenticated || location.state === null) {
+  //   return <div>You are not authorized to log in to this page</div>;
+  // }
 
   return (
     <>
