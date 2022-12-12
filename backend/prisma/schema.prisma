@@ -43,7 +43,7 @@ model bookings {
   adress       String     @map("Besöksadress")
   time         String     @map("Bokad tid")
   status       String     @map("Bokningsstatus")
-  customer     customer   @relation(fields: [customerId], references: [customerId])
+  customer     customer   @relation(fields: [customerId], references: [customerId], onDelete: Cascade)
   employee     employee[] @relation("bookingstoemployee")
 
   @@index([customerId], map: "bookings_customerId_fkey")

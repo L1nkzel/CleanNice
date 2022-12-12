@@ -7,6 +7,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import {
+ DeleteOutline
+} from "@mui/icons-material";
+
+import { Button } from '@mui/material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -30,7 +35,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 
 
-export default function TableContent({data}) {
+export default function TableContent({data, deleteBookingHandler}) {
 
   console.log(data)
   return (
@@ -62,6 +67,7 @@ export default function TableContent({data}) {
               <StyledTableCell >{row.adress}</StyledTableCell>
               <StyledTableCell >{row.time}</StyledTableCell>
               <StyledTableCell >{row.status}</StyledTableCell>
+              <StyledTableCell ><Button onClick={()=>deleteBookingHandler(row.bookingId)}><DeleteOutline sx={{color:'#62926C'}}/></Button></StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

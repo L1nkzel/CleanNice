@@ -54,10 +54,10 @@ route.post("/:id/newBooking", async (req, res) => {
   res.json(booking);
 });
 
-route.delete("/:id/bookings", async (req, res) => {
+route.delete("/:id/booking", async (req, res) => {
   const bookings = await prisma.bookings.delete({
     where: {
-      bookingId: req.params.id,
+      bookingId: parseInt(req.params.id),
     },
   });
   res.json(bookings);
