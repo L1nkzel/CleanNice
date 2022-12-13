@@ -8,14 +8,18 @@ export default function CalenderComponent(props) {
   return (
     <>
       <Box sx={{ mb: 1 }}>{props.date.toDateString()}</Box>
+      <Box sx={{mb:2}}>
+
       <Calender
-        onChange={props.setDate}
-        value={props.date}
-        onClickDay={() => props.setShowTime(true)}
-        tileDisabled={({ date, view }) =>
-          (view === "month" && date.getDay() === 0) || date.getDay() === 6 || date <= new Date()
-        }
-      />
+      
+      onChange={props.setDate}
+      value={props.date}
+      onClickDay={() => props.setShowTime(true)}
+      tileDisabled={({ date, view }) =>
+      (view === "month" && date.getDay() === 0) || date.getDay() === 6 || date <= new Date()
+    }
+    />
+    </Box>
       <Time showTime={props.showTime} time={props.time} setTime={props.setTime} />
     </>
   );

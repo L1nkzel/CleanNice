@@ -10,7 +10,6 @@ import RadioButtonsGroup from "./RadioButtonsGroup";
 import CalenderComponent from "./calender/CalenderComponent";
 import Title from "../ui/Title";
 
-
 export default function BookService() {
   const navigate = useNavigate();
   const [selected, setSelected] = React.useState("");
@@ -70,7 +69,6 @@ export default function BookService() {
             borderBottom: 1,
             borderColor: "divider",
             backgroundColor: "#BCC7B8",
-          
           }}
         >
           <Tabs
@@ -78,10 +76,31 @@ export default function BookService() {
             onChange={handleChange}
             aria-label="basic tabs example"
           >
-            <Tab color sx={{ fontWeight:"bold"}} disabled value={0} label="Välj tjänst" />
-            <Tab sx={{ fontWeight:"bold"}} disabled value={1} label="Välj datum och tid" />
-            <Tab sx={{ fontWeight:"bold"}} disabled value={2} label="Detaljer" />
-            <Tab sx={{ fontWeight:"bold"}} disabled value={3} label="Betalning" />
+            <Tab
+              color
+              sx={{ fontWeight: "bold" }}
+              disabled
+              value={0}
+              label="Välj tjänst"
+            />
+            <Tab
+              sx={{ fontWeight: "bold" }}
+              disabled
+              value={1}
+              label="Välj datum och tid"
+            />
+            <Tab
+              sx={{ fontWeight: "bold" }}
+              disabled
+              value={2}
+              label="Detaljer"
+            />
+            <Tab
+              sx={{ fontWeight: "bold" }}
+              disabled
+              value={3}
+              label="Betalning"
+            />
           </Tabs>
         </Box>
 
@@ -117,23 +136,38 @@ export default function BookService() {
         </TabPanel>
 
         <TabPanel value={value} index={2}>
-          
-          <Grid container rowGap={0.5} sx={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", mb:5, pb:2, maxWidth:400, borderRadius:3, boxShadow:10, backgroundColor:"#BCC7B8" }}>
+          <Grid
+            container
+            rowGap={0.5}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              mb: 5,
+              pb: 2,
+              maxWidth: 400,
+              borderRadius: 3,
+              boxShadow: 10,
+              backgroundColor: "#BCC7B8",
+            }}
+          >
             <Title>Bokningsöversikt</Title>
-           <Typography sx={{fontSize:18}}>Val av tjänst: </Typography>
-           {selected} 
-            <Typography sx={{fontSize:18}}>Datum: </Typography>
+            <Typography sx={{ fontSize: 18 }}>Val av tjänst: </Typography>
+            {selected}
+            <Typography sx={{ fontSize: 18 }}>Datum: </Typography>
             {dateNumbers}
-            <Typography sx={{fontSize:18}}>Tid:</Typography>
+            <Typography sx={{ fontSize: 18 }}>Tid:</Typography>
             {time}
-            
           </Grid>
           <Grid
             container
             columnGap={1}
             sx={{ display: "flex", justifyContent: "center" }}
           >
-            <CustomButton style={{}} onClick={handleBackTab}>Bakåt</CustomButton>
+            <CustomButton style={{}} onClick={handleBackTab}>
+              Bakåt
+            </CustomButton>
             <CustomButton onClick={handleNextTab}>Bekräfta</CustomButton>
           </Grid>
         </TabPanel>
