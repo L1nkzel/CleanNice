@@ -48,6 +48,7 @@ function RegisterInputForm() {
       password: "",
       confirmPassword: "",
       phoneNumber: "",
+      address: "",
       company: "",
       orgNr: "",
     };
@@ -74,6 +75,7 @@ function RegisterInputForm() {
       companyName: formData.company,
       orgNr: formData.orgNr,
       phoneNumber: formData.phoneNumber,
+      adress: formData.address,
       email: formData.email,
       password: formData.password,
     };
@@ -92,6 +94,7 @@ function RegisterInputForm() {
       email: "",
       password: "",
       confirmPassword: "",
+      address:"",
       phoneNumber: "",
       company: "",
       orgNr: "",
