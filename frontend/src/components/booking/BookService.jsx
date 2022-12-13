@@ -1,35 +1,48 @@
-import * as React from "react";
+import { useState} from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import { Box, Grid } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import CustomButton from "../ui/CustomButton";
 import RadioButtonsGroup from "./RadioButtonsGroup";
 import CalenderComponent from "./calender/CalenderComponent";
 import Title from "../ui/Title";
 
-
-export default function BookService() {
+export default function BookService({ data }) {
   const navigate = useNavigate();
-  const [selected, setSelected] = React.useState("");
-  const [value, setValue] = React.useState(0);
-  const [date, setDate] = React.useState(new Date());
-  const [showTime, setShowTime] = React.useState(false);
-  const [time, setTime] = React.useState("");
-
-  const dateNumbers = `${date.getDate()}/${
+  const [selected, setSelected] = useState("");
+  const [value, setValue] = useState(0);
+  const [date, setDate] = useState(new Date());
+  const [showTime, setShowTime] = useState(false);
+  const [time, setTime] = useState("");
+  const bookUrl = `http://localhost:3500/api/bookings/`;
+  const dateNumbers = `${date.getFullYear()}-${
     date.getMonth() + 1
-  }/${date.getFullYear()}`;
+  }-${date.getDate()}`;
 
   const handleChange = (newValue) => {
     setValue({ value: newValue });
   };
 
-  function handleNextTab() {
-    setValue(value + 1);
+  async function handleConfirmPress() {
+    const dataValue = {
+      date: dateNumbers,
+      time: time,
+    };
+
+    const res = await fetch(`${bookUrl}${data.customerId}/newBooking`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataValue),
+    });
+    const test = await res.json();
+    console.log(test);
   }
+
   function handleCalenderOnPress() {
     setValue(value + 1);
   }
@@ -70,7 +83,6 @@ export default function BookService() {
             borderBottom: 1,
             borderColor: "divider",
             backgroundColor: "#BCC7B8",
-          
           }}
         >
           <Tabs
@@ -78,10 +90,30 @@ export default function BookService() {
             onChange={handleChange}
             aria-label="basic tabs example"
           >
-            <Tab color sx={{ fontWeight:"bold"}} disabled value={0} label="Välj tjänst" />
-            <Tab sx={{ fontWeight:"bold"}} disabled value={1} label="Välj datum och tid" />
-            <Tab sx={{ fontWeight:"bold"}} disabled value={2} label="Detaljer" />
-            <Tab sx={{ fontWeight:"bold"}} disabled value={3} label="Betalning" />
+            <Tab
+              sx={{ fontWeight: "bold" }}
+              disabled
+              value={0}
+              label="Välj tjänst"
+            />
+            <Tab
+              sx={{ fontWeight: "bold" }}
+              disabled
+              value={1}
+              label="Välj datum och tid"
+            />
+            <Tab
+              sx={{ fontWeight: "bold" }}
+              disabled
+              value={2}
+              label="Detaljer"
+            />
+            <Tab
+              sx={{ fontWeight: "bold" }}
+              disabled
+              value={3}
+              label="Betalning"
+            />
           </Tabs>
         </Box>
 
@@ -117,24 +149,39 @@ export default function BookService() {
         </TabPanel>
 
         <TabPanel value={value} index={2}>
-          
-          <Grid container rowGap={0.5} sx={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", mb:5, pb:2, maxWidth:400, borderRadius:3, boxShadow:10, backgroundColor:"#BCC7B8" }}>
+          <Grid
+            container
+            rowGap={0.5}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              mb: 5,
+              pb: 2,
+              maxWidth: 400,
+              borderRadius: 3,
+              boxShadow: 10,
+              backgroundColor: "#BCC7B8",
+            }}
+          >
             <Title>Bokningsöversikt</Title>
-           <Typography sx={{fontSize:18}}>Val av tjänst: </Typography>
-           {selected} 
-            <Typography sx={{fontSize:18}}>Datum: </Typography>
+            <Typography sx={{ fontSize: 18 }}>Val av tjänst: </Typography>
+            {selected}
+            <Typography sx={{ fontSize: 18 }}>Datum: </Typography>
             {dateNumbers}
-            <Typography sx={{fontSize:18}}>Tid:</Typography>
+            <Typography sx={{ fontSize: 18 }}>Tid:</Typography>
             {time}
-            
           </Grid>
           <Grid
             container
             columnGap={1}
             sx={{ display: "flex", justifyContent: "center" }}
           >
-            <CustomButton style={{}} onClick={handleBackTab}>Bakåt</CustomButton>
-            <CustomButton onClick={handleNextTab}>Bekräfta</CustomButton>
+            <CustomButton style={{}} onClick={handleBackTab}>
+              Bakåt
+            </CustomButton>
+            <CustomButton onClick={handleConfirmPress}>Bekräfta</CustomButton>
           </Grid>
         </TabPanel>
         <TabPanel value={value} index={3}>
@@ -145,7 +192,7 @@ export default function BookService() {
             sx={{ display: "flex", justifyContent: "center" }}
           >
             <CustomButton onClick={handleBackTab}>Bakåt</CustomButton>
-            <CustomButton onClick={handleNextTab}>Slutför</CustomButton>
+            {/* <CustomButton onClick={handleNextTab}>Slutför</CustomButton> */}
           </Grid>
         </TabPanel>
       </Box>

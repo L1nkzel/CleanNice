@@ -25,8 +25,8 @@ return (
  <Grid container margin={2} width={300} spacing={1}>
    {time.map(times => {
     return (
-    <Grid item md={4} sx={{display:"flex", justifyContent:"center"}}>
-      <Button variant="contained" onClick={clickHandler}>{times}</Button> 
+    <Grid key={times} item md={4} sx={{display:"flex", justifyContent:"center"}}>
+      <Button  variant="contained" onClick={clickHandler}>{times}</Button> 
     </Grid>
         )
      })}
