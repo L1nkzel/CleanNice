@@ -35,16 +35,17 @@ model employee {
 }
 
 model bookings {
-  bookingId    Int        @id @default(autoincrement()) @map("Boknings ID")
-  customerId   Int        @map("Kund ID")
-  customerName String     @map("Namn")
-  cleanerName  String     @map("Städare")
-  date         String     @map("Datum")
-  adress       String     @map("Besöksadress")
-  time         String     @map("Bokad tid")
-  status       String     @map("Bokningsstatus")
-  customer     customer   @relation(fields: [customerId], references: [customerId])
-  employee     employee[] @relation("bookingstoemployee")
+  bookingId       Int        @id @default(autoincrement())
+  customerId      Int
+  customerName    String
+  cleanerName     String
+  date            String
+  adress          String
+  cleaningService String
+  time            String
+  status          String
+  customer        customer   @relation(fields: [customerId], references: [customerId])
+  employee        employee[] @relation("bookingstoemployee")
 
   @@index([customerId], map: "bookings_customerId_fkey")
 }

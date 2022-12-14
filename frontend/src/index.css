@@ -16,6 +16,14 @@ body {
   overflow: hidden;
 }
 
+.Reg-component-emp {
+  background-image: url(../src/components/cowomen-1hlFqUdFv1s-unsplash.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
 
 .foreground {
   backdrop-filter: blur(10px);

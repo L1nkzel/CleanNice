@@ -15,17 +15,22 @@ import { Button } from '@mui/material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#62926C',
+    backgroundColor: "#6982db",
     color: theme.palette.common.white,
+    fontSize:16,
+    padding:20,
+  
+    
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
+    paddingLeft:20,
   },
 }));
 
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: 'rgba(155,255,155,0.1)',
+    backgroundColor: 'rgba(105, 130, 219, 0.3)',
   },
   // hide last border
   '&:last-child td, &:last-child th': {
@@ -47,8 +52,9 @@ export default function TableContent({data, deleteBookingHandler}) {
             <StyledTableCell>Kund Id</StyledTableCell>
             <StyledTableCell >För- och efternamn</StyledTableCell>
             <StyledTableCell >Ansvarig städare</StyledTableCell>
-            <StyledTableCell >Datum</StyledTableCell>
             <StyledTableCell >Adress</StyledTableCell>
+            <StyledTableCell >Städtjänst</StyledTableCell>
+            <StyledTableCell >Datum</StyledTableCell>
             <StyledTableCell >Tid</StyledTableCell>
             <StyledTableCell >Bokningsstatus</StyledTableCell>
             <StyledTableCell ></StyledTableCell>
@@ -63,8 +69,9 @@ export default function TableContent({data, deleteBookingHandler}) {
               <StyledTableCell >{row.customerId}</StyledTableCell>
               <StyledTableCell >{row.customerName}</StyledTableCell>
               <StyledTableCell >{row.cleanerName}</StyledTableCell>
-              <StyledTableCell >{row.date}</StyledTableCell>
               <StyledTableCell >{row.adress}</StyledTableCell>
+              <StyledTableCell >{row.cleaningService}</StyledTableCell>
+              <StyledTableCell >{row.date}</StyledTableCell>
               <StyledTableCell >{row.time}</StyledTableCell>
               <StyledTableCell >{row.status}</StyledTableCell>
               <StyledTableCell ><Button onClick={()=>deleteBookingHandler(row.bookingId)}><DeleteOutline sx={{color:'#62926C'}}/></Button></StyledTableCell>
