@@ -7,7 +7,7 @@ import ServicesPage from "./pages/ServicesPage";
 function App() {
   return (
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="/" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/customer" element={<CustomerPage />} />
       <Route path="/customer/services" element={<ServicesPage />} />

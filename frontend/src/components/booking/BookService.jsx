@@ -1,10 +1,10 @@
-import { useState} from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import { Box, Grid } from "@mui/material";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CustomButton from "../ui/CustomButton";
 import RadioButtonsGroup from "./RadioButtonsGroup";
 import CalenderComponent from "./calender/CalenderComponent";
@@ -17,6 +17,7 @@ export default function BookService({ data }) {
   const [date, setDate] = useState(new Date());
   const [showTime, setShowTime] = useState(false);
   const [time, setTime] = useState("");
+  const [error, setError] = useState("");
   const bookUrl = `http://localhost:3500/api/bookings/`;
   const dateNumbers = `${date.getFullYear()}-${
     date.getMonth() + 1
@@ -44,12 +45,24 @@ export default function BookService({ data }) {
   }
 
   function handleCalenderOnPress() {
-    setValue(value + 1);
+    if (time !== "" && date !== new Date()) {
+      setValue(value + 1);
+      setError("");
+    } else {
+      setError(
+        "Du måste välja en ett datum och en tid för att gå vidare för att gå vidare"
+      );
+    }
   }
   function handleServicesTab() {
-    setValue(value + 1);
-    console.log(selected);
+    if (selected !== "") {
+      setValue(value + 1);
+      setError("");
+    } else {
+      setError("Du måste välja en tjänst för att gå vidare");
+    }
   }
+
   function handleBackTab() {
     setValue(value - 1);
   }
@@ -60,7 +73,7 @@ export default function BookService({ data }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        my: 5,
+        my: 20,
       }}
     >
       <Box
@@ -72,6 +85,7 @@ export default function BookService({ data }) {
           borderColor: "black",
           borderRadius: 2,
           boxShadow: 10,
+          background: "linear-gradient(to top,#6982db, #FBFBFB)",
         }}
       >
         <Box
@@ -80,9 +94,6 @@ export default function BookService({ data }) {
             justifyContent: "center",
             alignItems: "center",
             borderRadius: "4px 4px 0 0",
-            borderBottom: 1,
-            borderColor: "divider",
-            backgroundColor: "#BCC7B8",
           }}
         >
           <Tabs
@@ -126,6 +137,17 @@ export default function BookService({ data }) {
           >
             <CustomButton onClick={handleServicesTab}>Nästa</CustomButton>
           </Grid>
+          <Typography
+            sx={{
+              mt: 1,
+              px: 0.5,
+              borderRadius: 1,
+              color: "red",
+              backgroundColor: "rgba(1, 17, 17, 0.6)",
+            }}
+          >
+            {error}
+          </Typography>
         </TabPanel>
 
         <TabPanel value={value} index={1}>
@@ -146,6 +168,17 @@ export default function BookService({ data }) {
             <CustomButton onClick={handleBackTab}>Bakåt</CustomButton>
             <CustomButton onClick={handleCalenderOnPress}>Nästa</CustomButton>
           </Grid>
+          <Typography
+            sx={{
+              mt: 1,
+              px: 0.5,
+              borderRadius: 1,
+              color: "red",
+              backgroundColor: "rgba(1, 17, 17, 0.6)",
+            }}
+          >
+            {error}
+          </Typography>
         </TabPanel>
 
         <TabPanel value={value} index={2}>
@@ -162,7 +195,7 @@ export default function BookService({ data }) {
               maxWidth: 400,
               borderRadius: 3,
               boxShadow: 10,
-              backgroundColor: "#BCC7B8",
+              backgroundColor: "white",
             }}
           >
             <Title>Bokningsöversikt</Title>
