@@ -1,5 +1,6 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
+
 const prisma = new PrismaClient();
 
 const route = express.Router();
@@ -19,6 +20,7 @@ route.get("/:id/bookings", async (req, res) => {
       customerId: true,
       customerName: true,
       adress: true,
+      cleaningService: true,
       date:true,
       time: true,
       cleanerName:true,
@@ -47,6 +49,7 @@ route.post("/:id/newBooking", async (req, res) => {
       cleanerName:"Ej tildelad ännu",
       date: req.body.date,
       time: req.body.time,
+      cleaningService: req.body.cleaningService,
       adress: customer.adress,
       status: "Obekräftad",
     },

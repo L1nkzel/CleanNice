@@ -31,6 +31,7 @@ export default function BookService({ data }) {
     const dataValue = {
       date: dateNumbers,
       time: time,
+      cleaningService: selected
     };
 
     const res = await fetch(`${bookUrl}${data.customerId}/newBooking`, {
@@ -50,7 +51,7 @@ export default function BookService({ data }) {
       setError("");
     } else {
       setError(
-        "Du måste välja en ett datum och en tid för att gå vidare för att gå vidare"
+        "Du måste välja ett datum och en tid för att gå vidare"
       );
     }
   }
