@@ -30,7 +30,7 @@ export default function RadioButtonsGroup({ selected, setSelected }) {
     
     borderRadius: 3,
     boxShadow: 10,
-    backgroundColor: "#BCC7B8",}}
+    background: "linear-gradient(to right,#FBFBFB, #FBFBFB)",}}
         onChange={handleChange}
       >
         
@@ -39,7 +39,7 @@ export default function RadioButtonsGroup({ selected, setSelected }) {
           sx={{ mt: 2, ml: 4}}
           value="Brons Städning"
           control={<Radio />}
-          label={<Typography sx={{backgroundColor:"#CD7F32", py:0.5, px:1, borderRadius:2, fontWeight:'bold', fontSize:18}} >Brons Städning</Typography>}
+          label={<Typography sx={{backgroundColor:"#CD7F32", py:0.5, px:1, borderRadius:2, fontSize:18}} >Brons Städning</Typography>}
           />
         <Typography sx={{ ml: 9.5, mb: 4, mr:2 }}>
           Dammsugning, moppning, städ av toaletter och tömning av papperskorgar.
@@ -48,7 +48,7 @@ export default function RadioButtonsGroup({ selected, setSelected }) {
           sx={{ ml: 4 }}
           value="Silver Städning"
           control={<Radio />}
-          label={<Typography sx={{backgroundColor:"#aaa9ad", py:0.5, px:1, borderRadius:2, fontWeight:'bold', fontSize:18}} >Silver Städning</Typography>}
+          label={<Typography sx={{backgroundColor:"#aaa9ad", py:0.5, px:1, borderRadius:2,  fontSize:18}} >Silver Städning</Typography>}
           />
         <Typography sx={{ ml: 9.5, mb: 4, mr:2 }}>
           Allt som erbjuds i brons städning samt avdamning och skrivbords
@@ -58,7 +58,7 @@ export default function RadioButtonsGroup({ selected, setSelected }) {
           sx={{ ml: 4, }}
           value="Guld Städning"
           control={<Radio />}
-          label={<Typography sx={{backgroundColor:"#FFD700", py:0.5, px:1, borderRadius:2, fontWeight:'bold', fontSize:18}} >Guld Städning</Typography>}
+          label={<Typography sx={{backgroundColor:"#FFD700", py:0.5, px:1.5, borderRadius:2, fontSize:18,}} >Guld Städning</Typography>}
         />
         <Typography sx={{ ml: 9.5, mb: 4 , mr:2 }}>
           Allt som erbjuds i brons och silver städning samt fönsterputsning.

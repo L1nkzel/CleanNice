@@ -7,7 +7,7 @@ export default function Header() {
   const navigate = useNavigate();
   const handleLogOut = async () => {
     localStorage.removeItem("userData");
-    navigate("/login");
+    navigate("/");
     const res = await fetch(`http://localhost:3500/logout`, {
       method: "POST",
     });
