@@ -42,6 +42,7 @@ export default function BookService({ data }) {
     });
     const test = await res.json();
     console.log(test);
+    navigate("/customer")
   }
 
   function handleCalenderOnPress() {
@@ -118,12 +119,6 @@ export default function BookService({ data }) {
               disabled
               value={2}
               label="Detaljer"
-            />
-            <Tab
-              sx={{ fontWeight: "bold" }}
-              disabled
-              value={3}
-              label="Betalning"
             />
           </Tabs>
         </Box>
@@ -215,17 +210,6 @@ export default function BookService({ data }) {
               Bakåt
             </CustomButton>
             <CustomButton onClick={handleConfirmPress}>Bekräfta</CustomButton>
-          </Grid>
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          <Typography sx={{ mb: 30 }}>Item Four</Typography>
-          <Grid
-            container
-            columnGap={1}
-            sx={{ display: "flex", justifyContent: "center" }}
-          >
-            <CustomButton onClick={handleBackTab}>Bakåt</CustomButton>
-            {/* <CustomButton onClick={handleNextTab}>Slutför</CustomButton> */}
           </Grid>
         </TabPanel>
       </Box>
