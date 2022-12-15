@@ -18,6 +18,7 @@ import {
 } from "@mui/icons-material";
 import FormStyle from "./FormStyle";
 import Title from "../ui/Title";
+import * as bcrypt from "bcrypt"
 
 function RegisterInputForm() {
   const regUrl = `http://localhost:3500/register/`;
@@ -77,7 +78,7 @@ function RegisterInputForm() {
       phoneNumber: formData.phoneNumber,
       adress: formData.address,
       email: formData.email,
-      password: formData.password,
+      password: await bcrypt.hash(formData.password,10)
     };
 
     const res = await fetch(regUrl, {

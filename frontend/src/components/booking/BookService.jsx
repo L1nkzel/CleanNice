@@ -41,8 +41,23 @@ export default function BookService({ data }) {
       },
       body: JSON.stringify(dataValue),
     });
-    const test = await res.json();
-    console.log(test);
+    const newBooking = await res.json();
+    if(res.status === 200){
+      const data = {
+        status: 'Bekräftad',
+      }
+      const res = await fetch(`${bookUrl}${newBooking.bookingId}/editBooking`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const info = await res.json();
+      console.log(info)
+      navigate('/customer')
+    }
+ 
   }
 
   function handleCalenderOnPress() {
@@ -142,9 +157,7 @@ export default function BookService({ data }) {
             sx={{
               mt: 1,
               px: 0.5,
-              borderRadius: 1,
-              color: "red",
-              backgroundColor: "rgba(1, 17, 17, 0.6)",
+              color: "#f59d9d",
             }}
           >
             {error}
@@ -174,8 +187,7 @@ export default function BookService({ data }) {
               mt: 1,
               px: 0.5,
               borderRadius: 1,
-              color: "red",
-              backgroundColor: "rgba(1, 17, 17, 0.6)",
+              color: "#f59d9d",
             }}
           >
             {error}

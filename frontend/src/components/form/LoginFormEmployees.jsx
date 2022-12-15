@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import { Box, FormControl, Grid, Link, TextField } from "@mui/material";
+import { Box, FormControl, Grid, Link, TextField, Typography } from "@mui/material";
 import CustomButton from "../ui/CustomButton";
 import FormStyle from "./FormStyle";
 import Title from "../ui/Title";
 import { useNavigate } from "react-router-dom";
 import { Email, Key } from "@mui/icons-material";
+import * as bcrypt from "bcrypt"
+
 
 function LoginFormEmployees() {
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
-
+  const [loginError, setLoginError] = useState("");
   const navigate = useNavigate();
 
   const onHandleChange = (e) => {
@@ -26,13 +28,18 @@ function LoginFormEmployees() {
   const handleSubmit = async () => {
     const data = {
       email: loginData.email,
-      password: loginData.password,
+      password: await bcrypt.hash(loginData.password,10),
     };
     const res = await fetch("http://localhost:3500/employee/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
+
+    if(res.status !== 200){
+      setLoginError('Fel Epost eller lösenord. Var god försök igen')
+      return
+    }
     const result = await res.json();
 
     if (result.isEmployeeAuthenticated) {
@@ -119,6 +126,17 @@ function LoginFormEmployees() {
               }}
             />
           </Box>
+          <Typography
+              sx={{
+                mt: 1,
+                px: 0.5,
+               
+                color: "#f59d9d",
+                
+              }}
+            >
+              {loginError}
+            </Typography>
           <Box
             sx={{
               display: "flex",

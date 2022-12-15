@@ -36,6 +36,7 @@ passport.use(
   new LocalStrategy(
     { usernameField: "email" },
     async (email, password, done) => {
+      try {
       const user = await prisma.customer.findUnique({
         where: {
           email: email,
@@ -46,10 +47,13 @@ passport.use(
         done(null, false);
       }
 
-      if (await bcrypt.compare(password, user.password)) {
-        done(null, user);
-      } else {
-        done(null, false);
+        if (await bcrypt.compare(password, user.password)) {
+          done(null, user);
+        } else {
+          done(null, false);
+        }
+      } catch (err) {
+        console.log(err);
       }
     }
   )
@@ -59,6 +63,7 @@ passport.use(
   new LocalStrategy(
     { usernameField: "email" },
     async (email, password, done) => {
+      try {
       const user = await prisma.employee.findUnique({
         where: {
           email: email,
@@ -69,10 +74,13 @@ passport.use(
         done(null, false);
       }
 
-      if (await bcrypt.compare(password, user.password)) {
-        done(null, user);
-      } else {
-        done(null, false);
+        if (await bcrypt.compare(password, user.password)) {
+          done(null, user);
+        } else {
+          done(null, false);
+        }
+      } catch (err) {
+        console.log(err);
       }
     }
   )
@@ -97,7 +105,11 @@ server.post(
   passport.authenticate("employee", {}),
   (req, res) => {
     console.log("user logged in", req.user);
-    res.json({ isEmployeeAuthenticated: req.isAuthenticated(), user: req.user });
+    console.log(res);
+    res.json({
+      isEmployeeAuthenticated: req.isAuthenticated(),
+      user: req.user,
+    });
   }
 );
 
@@ -122,18 +134,22 @@ server.get("/", async (req, res) => {
 });
 
 server.post("/register", async (req, res) => {
-  const customer = await prisma.customer.create({
-    data: {
-      custName: req.body.custName,
-      companyName: req.body.companyName,
-      orgNr: req.body.orgNr,
-      phoneNumber: req.body.phoneNumber,
-      adress: req.body.adress,
-      email: req.body.email,
-      password: await bcrypt.hash(req.body.password, 10),
-    },
-  });
-  res.json(customer);
+  try {
+    const customer = await prisma.customer.create({
+      data: {
+        custName: req.body.custName,
+        companyName: req.body.companyName,
+        orgNr: req.body.orgNr,
+        phoneNumber: req.body.phoneNumber,
+        adress: req.body.adress,
+        email: req.body.email,
+        password: await bcrypt.hash(req.body.password, 10),
+      },
+    });
+    res.json(customer);
+  } catch (error) {
+    res.json(error);
+  }
 });
 
 server.use("/api/customer", isAuthenticated, customerRoutes);
