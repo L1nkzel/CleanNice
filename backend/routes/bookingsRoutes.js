@@ -69,19 +69,15 @@ route.post("/:id/newBooking", async (req, res) => {
 });
 
 route.patch("/:id/editBooking", async (req, res) => {
-
-    const booking = await prisma.bookings.update({
-      where: {
-        bookingId: parseInt(req.params.id),
-      },
-      data: {
-        status: req.body.status,
-  
-        
-      },
-    });
-    res.json(booking);
- 
+  const booking = await prisma.bookings.update({
+    where: {
+      bookingId: parseInt(req.params.id),
+    },
+    data: {
+      status: req.body.status,
+    },
+  });
+  res.json(booking);
 });
 
 route.delete("/:id/booking", async (req, res) => {

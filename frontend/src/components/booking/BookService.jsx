@@ -33,29 +33,33 @@ export default function BookService({ data }) {
       time: time,
       cleaningService: selected
     };
+    if(!isNaN(data.customerId)){
 
-    const res = await fetch(`${bookUrl}${data.customerId}/newBooking`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataValue),
-    });
-    const newBooking = await res.json();
-    if(res.status === 200){
-      const data = {
-        status: 'Bekräftad',
-      }
-      const res = await fetch(`${bookUrl}${newBooking.bookingId}/editBooking`, {
-        method: "PATCH",
+      const res = await fetch(`${bookUrl}${data.customerId}/newBooking`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(dataValue),
       });
-      const info = await res.json();
-      console.log(info)
-      navigate('/customer')
+      const newBooking = await res.json();
+      if(res.status === 200){
+        const data = {
+          status: 'Bekräftad',
+        }
+        const res = await fetch(`${bookUrl}${newBooking.bookingId}/editBooking`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        const info = await res.json();
+        console.log(info)
+        navigate('/customer')
+      }else{
+        return
+      }
     }
  
   }

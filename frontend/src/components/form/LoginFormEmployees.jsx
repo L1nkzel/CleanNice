@@ -5,10 +5,12 @@ import FormStyle from "./FormStyle";
 import Title from "../ui/Title";
 import { useNavigate } from "react-router-dom";
 import { Email, Key } from "@mui/icons-material";
-import * as bcrypt from "bcrypt"
+
 
 
 function LoginFormEmployees() {
+
+
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -28,7 +30,7 @@ function LoginFormEmployees() {
   const handleSubmit = async () => {
     const data = {
       email: loginData.email,
-      password: await bcrypt.hash(loginData.password,10),
+      password: loginData.password
     };
     const res = await fetch("http://localhost:3500/employee/login", {
       method: "POST",
