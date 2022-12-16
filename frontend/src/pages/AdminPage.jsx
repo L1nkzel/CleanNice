@@ -13,7 +13,18 @@ function AdminPage() {
 
   return (
     <>
-      <Header />
+      <Header 
+       url1='#'
+       link1Name='Översikt'
+       url2='#'
+       link2Name='Administrera anställda'
+       url3='#'
+       link3Name='Administrera kunder'
+       url4='#'
+       link4Name='Faktura'
+      
+      
+      />
       <AllBookings data={userData.user} />
     </>
   );

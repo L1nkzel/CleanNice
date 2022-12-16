@@ -3,7 +3,7 @@ import Toolbar from "@mui/material/Toolbar";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 
-export default function Header() {
+export default function Header(props) {
   const navigate = useNavigate();
   const handleLogOut = async () => {
     localStorage.removeItem("userData");
@@ -26,14 +26,17 @@ export default function Header() {
             justifyContent: "space-around",
           }}
         >
-          <Link to="/customer" sx={{ fontSize: 20 }}>
-            Min sida
+          <Link to={`${props.url1}`} sx={{ fontSize: 20 }}>
+            {props.link1Name}
           </Link>
-          <Link to="/customer/services" sx={{ fontSize: 20 }}>
-            Tjänster
+          <Link to={`${props.url2}`} sx={{ fontSize: 20 }}>
+          {props.link2Name}
           </Link>
-          <Link to="/customer/support" sx={{ fontSize: 20 }}>
-            Support
+          <Link to={`${props.url3}`} sx={{ fontSize: 20 }}>
+          {props.link3Name}
+          </Link>
+          <Link to={`${props.url4}`} sx={{ fontSize: 20 }}>
+          {props.link4Name}
           </Link>
         </Box>
         <Button onClick={handleLogOut} sx={{ color: "black", boxShadow: 3 }}>

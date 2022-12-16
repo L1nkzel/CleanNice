@@ -8,7 +8,16 @@ function ServicesPage() {
 
   return (
     <>
-      <Header />
+      <Header 
+      url1='/customer'
+      link1Name='Mina Sidor'
+      url2='/customer/services'
+      link2Name='Tjänster'
+      url3='/customer/history'
+      link3Name='Historik'
+      url4='/customer/contact'
+      link4Name='Kontakt'
+      />
       <BookService data={userData?.user} />
     </>
   );

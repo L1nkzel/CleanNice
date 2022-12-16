@@ -26,5 +26,5 @@ const buttonStyle = {
   color: "black",
   
   boxShadow: 2,
-  background: "linear-gradient(to left top,#98aced, #cfcfcf)",
+  background: "linear-gradient(to left top,#CEFFDC, #cfcfcf)",
 }

@@ -57,7 +57,7 @@ function LoginForm() {
   return (
     <Box sx={FormStyle.container}>
       <Grid container columnGap={1} sx={FormStyle.login}>
-        <FormControl>
+        <form>
           <Title color={"white"}>Logga in</Title>
 
           <Box
@@ -67,11 +67,12 @@ function LoginForm() {
               backgroundColor: "white",
               borderRadius: 1,
               my: 0.7,
+              width:350
             }}
           >
             <Email
               sx={{
-                color: "action.active",
+                color: "grey",
                 mr: 1,
                 px: 1,
                 py: 1.5,
@@ -99,12 +100,12 @@ function LoginForm() {
               alignItems: "center",
               backgroundColor: "white",
               borderRadius: 1,
-              my: 0.7,
+              my: 1,
             }}
           >
             <Key
               sx={{
-                color: "action.active",
+                color: "grey",
                 mr: 1,
                 px: 1,
                 py: 1.5,
@@ -144,15 +145,16 @@ function LoginForm() {
               justifyContent: "center",
               alignItems: "center",
               my: 1,
+              flexDirection:'column'
             }}
           >
             <CustomButton onClick={handleSubmit}>Logga in</CustomButton>
 
-          </Box>
           <Link href="/register" sx={{ textAlign: "center", color: "white" }}>
             Inte registrerad? Skapa konto
           </Link>
-        </FormControl>
+          </Box>
+        </form>
       </Grid>
     </Box>
   );
