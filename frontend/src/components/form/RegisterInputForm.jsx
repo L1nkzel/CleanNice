@@ -18,6 +18,7 @@ import {
 } from "@mui/icons-material";
 import FormStyle from "./FormStyle";
 import Title from "../ui/Title";
+import { Form } from "react-router-dom";
 
 
 function RegisterInputForm() {
@@ -115,7 +116,7 @@ function RegisterInputForm() {
   return (
     <Box  sx={FormStyle.container}>
       <Grid container columnGap={1}  sx={FormStyle.register}>
-        <FormControl>
+        <form>
           <Title color={"white"}>Registrera dig</Title>
 
           <Box
@@ -124,12 +125,12 @@ function RegisterInputForm() {
               alignItems: "center",
               backgroundColor: "white",
               borderRadius: 1,
-              my: 0.7,
+              my: 1,
             }}
           >
             <AccountCircle
               sx={{
-                color: "action.active",
+                color: "grey",
                 mr: 1,
                 px: 1,
                 py: 1.5,
@@ -157,12 +158,12 @@ function RegisterInputForm() {
               alignItems: "center",
               backgroundColor: "white",
               borderRadius: 1,
-              my: 0.7,
+              my: 1,
             }}
           >
             <Email
               sx={{
-                color: "action.active",
+                color: "grey",
                 mr: 1,
                 px: 1,
                 py: 1.5,
@@ -193,12 +194,12 @@ function RegisterInputForm() {
                     alignItems: "center",
                     backgroundColor: "white",
                     borderRadius: 1,
-                    my: 0.7,
+                    mb:1,
                   }}
                 >
                   <Key
                     sx={{
-                      color: "action.active",
+                      color: "grey",
                       mr: 1,
                       px: 1,
                       py: 1.5,
@@ -215,6 +216,7 @@ function RegisterInputForm() {
                     placeholder="Lösenord"
                     type="password"
                     required
+                    autoComplete="password"
                     variant="standard"
                     InputProps={{
                       disableUnderline: true,
@@ -231,7 +233,6 @@ function RegisterInputForm() {
                     alignItems: "center",
                     backgroundColor: "white",
                     borderRadius: 1,
-                    my: 0.7,
                     px: 1,
                     py: 1,
                   }}
@@ -241,8 +242,9 @@ function RegisterInputForm() {
                     value={formData.confirmPassword}
                     onChange={onHandleChange}
                     sx={FormStyle.textInput}
-                    id="outlined-password-input"
+                    id="outlined-password-input2"
                     placeholder="Upprepa lösenord"
+                    autoComplete="repeat-password"
                     type="password"
                     required
                     variant="standard"
@@ -261,12 +263,12 @@ function RegisterInputForm() {
               alignItems: "center",
               backgroundColor: "white",
               borderRadius: 1,
-              my: 0.7,
+              
             }}
           >
             <Phone
               sx={{
-                color: "action.active",
+                color: "grey",
                 mr: 1,
                 px: 1,
                 py: 1.5,
@@ -293,12 +295,12 @@ function RegisterInputForm() {
               alignItems: "center",
               backgroundColor: "white",
               borderRadius: 1,
-              my: 0.7,
+              my: 1,
             }}
           >
             <LocationOn
               sx={{
-                color: "action.active",
+                color: "grey",
                 mr: 1,
                 px: 1,
                 py: 1.5,
@@ -327,12 +329,12 @@ function RegisterInputForm() {
                   alignItems: "center",
                   backgroundColor: "white",
                   borderRadius: 1,
-                  my: 0.7,
+                  mb: 1,
                 }}
               >
                 <Business
                   sx={{
-                    color: "action.active",
+                    color: "grey",
                     mr: 1,
                     px: 1,
                     py: 1.5,
@@ -362,7 +364,7 @@ function RegisterInputForm() {
                   alignItems: "center",
                   backgroundColor: "white",
                   borderRadius: 1,
-                  my: 0.7,
+                  
                   px: 1,
                   py: 1,
                 }}
@@ -387,15 +389,16 @@ function RegisterInputForm() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              flexDirection:'column',
               my: 1,
             }}
           >
             <CustomButton onClick={handleSubmit}>Skapa konto</CustomButton>
-          </Box>
-          <Link href="/login" sx={{ textAlign: "center", color: "white" }}>
+          <Link href="/" sx={{justifyContent:'center', textAlign: "center", color: "white" }}>
             Redan registrerad? Logga in
           </Link>
-        </FormControl>
+          </Box>
+        </form>
       </Grid>
     </Box>
   );

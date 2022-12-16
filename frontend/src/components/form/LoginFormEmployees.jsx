@@ -58,7 +58,7 @@ function LoginFormEmployees() {
   return (
     <Box sx={FormStyle.container}>
       <Grid container columnGap={1} sx={FormStyle.login}>
-        <FormControl>
+        <form>
           <Title color={"white"}>Logga in</Title>
 
           <Box
@@ -68,6 +68,7 @@ function LoginFormEmployees() {
               backgroundColor: "white",
               borderRadius: 1,
               my: 0.7,
+              width:350
             }}
           >
             <Email
@@ -88,10 +89,12 @@ function LoginFormEmployees() {
               sx={FormStyle.textInput}
               placeholder="Epost"
               variant="standard"
+              
               InputProps={{
                 disableUnderline: true,
               }}
               required
+              autoComplete="email"
             />
           </Box>
           <Box
@@ -100,7 +103,8 @@ function LoginFormEmployees() {
               alignItems: "center",
               backgroundColor: "white",
               borderRadius: 1,
-              my: 0.7,
+              my: 1,
+              width:350
             }}
           >
             <Key
@@ -144,15 +148,15 @@ function LoginFormEmployees() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              my: 1,
+              mt: 1,
+              mb:3.7
+              
             }}
           >
             <CustomButton onClick={handleSubmit}>Logga in</CustomButton>
+
           </Box>
-          <Link href="/register" sx={{ textAlign: "center", color: "white" }}>
-            Inte registrerad? Skapa konto
-          </Link>
-        </FormControl>
+        </form>
       </Grid>
     </Box>
   );

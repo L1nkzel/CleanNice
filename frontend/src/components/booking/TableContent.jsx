@@ -50,7 +50,9 @@ export default function TableContent({data, deleteBookingHandler}) {
           <TableRow>
             <StyledTableCell>Boknings Id</StyledTableCell>
             <StyledTableCell>Kund Id</StyledTableCell>
-            <StyledTableCell >För- och efternamn</StyledTableCell>
+            <StyledTableCell >Kontaktperson</StyledTableCell>
+            <StyledTableCell >Telefonnummer</StyledTableCell>
+            <StyledTableCell >Företagsnamn</StyledTableCell>
             <StyledTableCell >Ansvarig städare</StyledTableCell>
             <StyledTableCell >Adress</StyledTableCell>
             <StyledTableCell >Städtjänst</StyledTableCell>
@@ -68,6 +70,8 @@ export default function TableContent({data, deleteBookingHandler}) {
               </StyledTableCell>
               <StyledTableCell >{row.customerId}</StyledTableCell>
               <StyledTableCell >{row.customerName}</StyledTableCell>
+              <StyledTableCell >{row.phoneNumber}</StyledTableCell>
+              <StyledTableCell >{row.companyName}</StyledTableCell>
               <StyledTableCell >{row.cleanerName}</StyledTableCell>
               <StyledTableCell >{row.adress}</StyledTableCell>
               <StyledTableCell >{row.cleaningService}</StyledTableCell>

@@ -39,8 +39,10 @@ model bookings {
   customerId      Int
   customerName    String
   cleanerName     String
+  companyName     String
   date            String
   adress          String
+  phoneNumber     String
   cleaningService String
   time            String
   status          String
