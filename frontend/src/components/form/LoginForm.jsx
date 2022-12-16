@@ -57,7 +57,7 @@ function LoginForm() {
   return (
     <Box sx={FormStyle.container}>
       <Grid container columnGap={1} sx={FormStyle.login}>
-        <form>
+        <FormControl>
           <Title color={"white"}>Logga in</Title>
 
           <Box
@@ -154,7 +154,7 @@ function LoginForm() {
             Inte registrerad? Skapa konto
           </Link>
           </Box>
-        </form>
+        </FormControl>
       </Grid>
     </Box>
   );

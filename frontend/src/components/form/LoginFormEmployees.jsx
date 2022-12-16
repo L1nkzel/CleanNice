@@ -58,7 +58,7 @@ function LoginFormEmployees() {
   return (
     <Box sx={FormStyle.container}>
       <Grid container columnGap={1} sx={FormStyle.login}>
-        <form>
+        <FormControl>
           <Title color={"white"}>Logga in</Title>
 
           <Box
@@ -156,7 +156,7 @@ function LoginFormEmployees() {
             <CustomButton onClick={handleSubmit}>Logga in</CustomButton>
 
           </Box>
-        </form>
+        </FormControl>
       </Grid>
     </Box>
   );

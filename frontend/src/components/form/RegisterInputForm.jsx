@@ -116,7 +116,7 @@ function RegisterInputForm() {
   return (
     <Box  sx={FormStyle.container}>
       <Grid container columnGap={1}  sx={FormStyle.register}>
-        <form>
+        <FormControl>
           <Title color={"white"}>Registrera dig</Title>
 
           <Box
@@ -158,7 +158,7 @@ function RegisterInputForm() {
               alignItems: "center",
               backgroundColor: "white",
               borderRadius: 1,
-              my: 1,
+              mb: 1,
             }}
           >
             <Email
@@ -398,7 +398,7 @@ function RegisterInputForm() {
             Redan registrerad? Logga in
           </Link>
           </Box>
-        </form>
+        </FormControl>
       </Grid>
     </Box>
   );
