@@ -27,6 +27,9 @@ const FormStyle = {
     bgcolor: "transparent",
     
   },
+  dialogInput: {
+    py:0.5,
+  }
 };
 
 export default FormStyle;
