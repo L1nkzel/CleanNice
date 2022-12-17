@@ -87,7 +87,7 @@ export default function BasicModal() {
 
   return (
     <Box sx={{display:"flex", justifyContent:"center"}} >
-      <Button variant="outlined" onClick={handleOpen}>
+      <Button  sx={{background:"linear-gradient(to left top,#CEFFDC, #cfcfcf)", borderStyle:'none'}} onClick={handleOpen}>
         Skapa användare
       </Button>
       <Dialog
@@ -195,7 +195,7 @@ export default function BasicModal() {
             />
         <DialogActions sx={{display:"flex", justifyContent:"center"}}>
           <Button variant="outlined" onClick={handleClose}>Avbryt</Button>
-          <Button variant="outlined" onClick={handleClick}>Registrera</Button>
+          <Button variant="outlined"  onClick={handleClick}>Registrera</Button>
         </DialogActions>
         </DialogContent>
         </Box>
