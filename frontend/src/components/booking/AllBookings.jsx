@@ -1,18 +1,16 @@
 import { Box, Paper, Toolbar, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
-import TableContent from "./TableContent";
+import TableContent from "./tables/TableContent";
 
 const AllBookings = ({ data }) => {
   const [bookings, setBookings] = useState();
   const [errorMessage, setErrorMessage] = useState("");
   useEffect(() => {
     const checkUser = async () => {
-      if (data.role === 'Admin') {
+      if (data.role === "Admin") {
         try {
-          const res = await fetch(
-            `http://localhost:3500/api/bookings/`
-          );
+          const res = await fetch(`http://localhost:3500/api/bookings/`);
 
           const result = await res.json();
           setBookings(result);
@@ -30,9 +28,7 @@ const AllBookings = ({ data }) => {
       await fetch(`http://localhost:3500/api/bookings/${id}/booking`, {
         method: "DELETE",
       });
-      setBookings(
-        bookings.filter((booking) => booking.bookingId !== id)
-      );
+      setBookings(bookings.filter((booking) => booking.bookingId !== id));
     } else {
       return;
     }

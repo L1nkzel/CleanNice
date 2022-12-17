@@ -128,6 +128,7 @@ const isAuthenticated = (req, res, next) => {
   req.isAuthenticated() ? next() : res.sendStatus(403);
 };
 
+
 server.get("/", async (req, res) => {
   const customers = await prisma.customer.findMany({});
   res.json(customers);

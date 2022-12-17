@@ -15,9 +15,9 @@ function AdminPage() {
   return (
     <>
       <Header 
-       url1='#'
+       url1='/adminpage/'
        link1Name='Översikt'
-       url2='#'
+       url2='/adminpage/employees'
        link2Name='Administrera anställda'
        url3='#'
        link3Name='Administrera kunder'
@@ -27,7 +27,7 @@ function AdminPage() {
       
       />
       <AllBookings data={userData.user} />
-      <BasicModal />
+   
     </>
   );
 }
