@@ -38,7 +38,7 @@ route.patch("/:id/editEmployee", async (req, res) => {
   try {
     const employee = await prisma.employee.update({
       where: {
-        id: parseInt(req.params.id),
+        employeeId: parseInt(req.params.id),
       },
       data: {
         employeeName: req.body.employeeName || undefined,
@@ -46,7 +46,23 @@ route.patch("/:id/editEmployee", async (req, res) => {
         phoneNumber: req.body.phoneNumber || undefined,
         email: req.body.email || undefined,
         accountNumber: req.body.accountNumber || undefined,
-        role: req.body.role,
+        
+      },
+    });
+    res.json(employee);
+  } catch (err) {
+    res.json(err);
+  }
+});
+route.patch("/:id/editEmployeePass", async (req, res) => {
+  try {
+    const employee = await prisma.employee.update({
+      where: {
+        employeeId: parseInt(req.params.id),
+      },
+      data: {
+        password: await bcrypt.hash(req.body.password, 10),
+    
       },
     });
     res.json(employee);
@@ -59,7 +75,7 @@ route.delete("/:id/deleteEmployee", async (req, res) => {
   try {
     const employee = await prisma.employee.delete({
       where: {
-        id: parseInt(req.params.id),
+        employeeId: parseInt(req.params.id),
       },
     });
     res.json(employee);

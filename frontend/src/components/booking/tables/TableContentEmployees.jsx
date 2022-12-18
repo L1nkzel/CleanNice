@@ -8,10 +8,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {
- DeleteOutline
+ DeleteOutline, Edit
 } from "@mui/icons-material";
 
 import { Button } from '@mui/material';
+import EditEmployee from '../../EditEmployee';
+import EditEmployeePass from '../../EditEmployeePass';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,7 +42,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 
 
-export default function TableContentEmployees(props) {
+export default function TableContentEmployees(props,{editEmployeeHandler, data}) {
 
 
 
@@ -73,8 +75,8 @@ export default function TableContentEmployees(props) {
               <StyledTableCell >{row.accountNumber}</StyledTableCell>
               <StyledTableCell >{row.email}</StyledTableCell>
               <StyledTableCell >
-                <Button onClick={()=>props.deleteEmployeeHandler(row.employeeId)}><DeleteOutline sx={{color:'#62926C'}}/></Button>
-                <Button onClick={()=>props.deleteEmployeeHandler(row.employeeId)}><DeleteOutline sx={{color:'#62926C'}}/></Button>
+                <EditEmployee row={row}/>
+                <EditEmployeePass row={row} />
                 <Button onClick={()=>props.deleteEmployeeHandler(row.employeeId)}><DeleteOutline sx={{color:'#62926C'}}/></Button></StyledTableCell>
             </StyledTableRow>
           ))}
