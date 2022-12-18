@@ -93,7 +93,7 @@ export default function BasicModal() {
       <Dialog
       PaperProps={{
         sx: {
-          background:"linear-gradient(to left top,#e0f0e4, #d9e5eb)"
+          background:"linear-gradient(to left top,#5e92ce, #ffffff)"
         }
       }}
         sx={{
@@ -112,6 +112,7 @@ export default function BasicModal() {
               sx={FormStyle.dialogInput}
               onChange={onHandleChange}
               fullWidth
+              label="För- efternamn"
               placeholder="För- efternamn"
               required
               variant="outlined"
@@ -125,7 +126,7 @@ export default function BasicModal() {
               sx={FormStyle.dialogInput}
               onChange={onHandleChange}
               fullWidth
-              
+              label="Adress"
               placeholder="Adress"
               required
               InputProps={{
@@ -138,6 +139,7 @@ export default function BasicModal() {
               sx={FormStyle.dialogInput}
               onChange={onHandleChange}
               fullWidth
+              label="Telefonnr"
               placeholder="Telefonnr"
               required
               InputProps={{
@@ -150,6 +152,7 @@ export default function BasicModal() {
               sx={FormStyle.dialogInput}
               onChange={onHandleChange}
               fullWidth
+              label="Epost"
               placeholder="Epost"
               required
               InputProps={{
@@ -162,6 +165,7 @@ export default function BasicModal() {
               sx={FormStyle.dialogInput}
               onChange={onHandleChange}
               fullWidth
+              label="Personnr"
               placeholder="Personnr"
               required
               InputProps={{
@@ -174,6 +178,7 @@ export default function BasicModal() {
               sx={FormStyle.dialogInput}
               onChange={onHandleChange}
               fullWidth
+              label="Kontonr"
               placeholder="Kontonr"
               required
               InputProps={{
@@ -186,6 +191,7 @@ export default function BasicModal() {
               sx={FormStyle.dialogInput}
               onChange={onHandleChange}
               fullWidth
+              label="Lösenord"
               placeholder="Lösenord"
               required
               autoFocus

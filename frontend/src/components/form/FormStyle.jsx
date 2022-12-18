@@ -29,6 +29,12 @@ const FormStyle = {
   },
   dialogInput: {
     py:0.5,
+    my:0.7
+  },
+  editDialogInput: {
+      py:0.5,
+      my:0.7
+  
   }
 };
 
