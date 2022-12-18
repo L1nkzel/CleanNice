@@ -88,9 +88,26 @@ passport.use(
 
 passport.serializeUser((user, done) => done(null, user.email));
 
-passport.deserializeUser(async (user, done) =>
-  done(null, await loadUserBy(user))
-);
+passport.deserializeUser(async (user, done) =>{
+const customer = await prisma.customer.findUnique({
+  where:{
+    customerId: user.customerId
+  }
+})
+const employee = await prisma.employee.findUnique({
+  where:{
+    employeeId: user.employeeId
+  }
+})
+
+if(customer){
+  done(null, customer)
+}else{
+
+  done(null, employee)
+}
+
+});
 
 server.use(passport.initialize());
 server.use(passport.session());
@@ -123,9 +140,13 @@ server.post("/logout", (req, res, next) => {
 });
 
 //middleware for authentication
-const isAuthenticated = (req, res, next) => {
+const isCustomerAuthenticated = (req, res, next) => {
   console.log(req.user);
-  req.isAuthenticated() ? next() : res.sendStatus(403);
+  req.isAuthenticated() && !isNaN(req.user.customerId) ? next() : res.sendStatus(403);
+};
+const isEmployeeAuthenticated = (req, res, next) => {
+  console.log(req.user);
+  req.isAuthenticated() && !isNaN(req.user.employeeId) ? next() : res.sendStatus(403);
 };
 
 
@@ -153,9 +174,9 @@ server.post("/register", async (req, res) => {
   }
 });
 
-server.use("/api/customer", isAuthenticated, customerRoutes);
+server.use("/api/customer", isCustomerAuthenticated, customerRoutes);
 
-server.use("/api/employee", employeeRoutes);
+server.use("/api/employee", isEmployeeAuthenticated, employeeRoutes);
 server.use("/api/bookings", bookingsRoutes);
 
 server.listen(PORT, () => console.log(`Server started on ${PORT}`));
