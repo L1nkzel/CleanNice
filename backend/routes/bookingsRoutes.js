@@ -72,6 +72,7 @@ route.post("/:id/newBooking", async (req, res) => {
   }
 });
 
+
 route.patch("/:id/editBooking", async (req, res) => {
   const booking = await prisma.bookings.update({
     where: {
