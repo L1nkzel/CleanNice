@@ -18,7 +18,7 @@ import {
 } from "@mui/icons-material";
 import FormStyle from "./FormStyle";
 import Title from "../ui/Title";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 
 
 function RegisterInputForm() {
@@ -33,6 +33,7 @@ function RegisterInputForm() {
     company: "",
     orgNr: "",
   });
+  const navigate = useNavigate()
 
   const onHandleChange = (e) => {
     const { name, value } = e.target;
@@ -89,7 +90,7 @@ function RegisterInputForm() {
       },
       body: JSON.stringify(data),
     });
-    await res.json();
+ 
 
     setFormData({
       fullName: "",
@@ -101,6 +102,7 @@ function RegisterInputForm() {
       company: "",
       orgNr: "",
     });
+    navigate("/")
   };
 
   const [formError, setFormError] = useState({
