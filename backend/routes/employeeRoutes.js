@@ -7,9 +7,18 @@ const route = express.Router();
 
 route.get("/", async (req, res) => {
   try {
-    const employees = await prisma.employee.findMany({});
+    const employees = await prisma.employee.findMany({
+  
+        include:{
+          _count: {
+            select:{bookings: true},
+          },
+        
+      }
+      
+    });
     res.json(employees);
-  } catch {
+  } catch(err) {
     res.json(err);
   }
 });

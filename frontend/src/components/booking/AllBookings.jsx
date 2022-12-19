@@ -4,28 +4,26 @@ import Title from "../ui/Title";
 import TableContent from "./tables/TableContent";
 
 const AllBookings = ({ data }) => {
-  const [bookings, setBookings] = useState();
+  const [bookings, setBookings] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const book = JSON.stringify(bookings);
+
   useEffect(() => {
     const checkUser = async () => {
-      if (data.role === "Admin") {
-        try {
-          const res = await fetch(`http://localhost:3500/api/bookings/`,{
+      try {
+        const res = await fetch(`http://localhost:3500/api/bookings/`, {
+          credentials: "include",
+        });
 
-            credentials: 'include'
-          }
-          );
+        const result = await res.json();
 
-          const result = await res.json();
-          setBookings(result);
-          console.log(result);
-        } catch (err) {
-          setErrorMessage(err);
-        }
+        setBookings(result);
+      } catch (err) {
+        setErrorMessage(err);
       }
     };
     checkUser();
-  }, [data.role]);
+  }, []);
 
   const deleteBookingHandler = async (id) => {
     if (window.confirm("Är du säker att du vill ta bort denna bokning")) {
@@ -44,6 +42,7 @@ const AllBookings = ({ data }) => {
         <Title color={"darkgreen"}>Alla bokningar</Title>
         <TableContent
           data={bookings}
+          dataUser={data}
           deleteBookingHandler={deleteBookingHandler}
         />
       </Box>
