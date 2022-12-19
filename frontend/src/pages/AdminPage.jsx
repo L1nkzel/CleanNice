@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AllBookings from "../components/booking/AllBookings";
+import BookingsTabs from "../components/booking/bookingsAdmin/BookingsTabs";
 import Header from "../components/ui/Header";
 
 function AdminPage() {
@@ -25,8 +26,8 @@ function AdminPage() {
       
       
       />
-      <AllBookings data={userData.user} />
-   
+     {/* <AllBookings  /> */}
+      <BookingsTabs data={userData.user}/>
     </>
   );
 }
