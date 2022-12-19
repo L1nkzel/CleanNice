@@ -72,10 +72,12 @@ export default function BasicModal() {
       accountNumber: "",
       password: "",
     });
+   
     setOpen(false);
   };
 
   const onHandleChange = (e) => {
+    
     const { name, value } = e.target;
 
     setFormData({

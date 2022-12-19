@@ -37,7 +37,7 @@ const CurrentBookings = ({ data }) => {
       return;
     }
   };
-
+  console.log("userbookings:",userBookings)
   return (
     <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
       <Box sx={{ flexGrow: 1, mx: 5 }}>

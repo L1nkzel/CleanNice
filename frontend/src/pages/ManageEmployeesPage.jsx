@@ -17,11 +17,14 @@ const ManageEmployeesPage = () => {
       });
 
       const data = await res.json();
-
+     
+      
       setEmployeeData(data);
+      console.log(employeeData)
     };
     fetchUsers();
-  }, [employeeData.length, setEmployeeData]);
+    
+  }, []);
 
   for (let i = 0; i < employeeData.length; i++) {
     if (employeeData[i].role === "Admin") {

@@ -12,6 +12,7 @@ import {
 } from "@mui/icons-material";
 
 import { Button } from '@mui/material';
+import Options from '../../ui/Options';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,7 +41,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 
 
-export default function TableContent({data, deleteBookingHandler}) {
+export default function TableContent({data,dataUser, deleteBookingHandler}) {
 
   console.log(data)
   return (
@@ -64,7 +65,7 @@ export default function TableContent({data, deleteBookingHandler}) {
         </TableHead>
         <TableBody>
           {data?.map((row) => (
-            <StyledTableRow key={row.bookingId}>
+            <StyledTableRow  key={row.bookingId}>
               <StyledTableCell component="th" scope="row">
                 {row.bookingId}
               </StyledTableCell>
@@ -72,7 +73,7 @@ export default function TableContent({data, deleteBookingHandler}) {
               <StyledTableCell >{row.customerName}</StyledTableCell>
               <StyledTableCell >{row.phoneNumber}</StyledTableCell>
               <StyledTableCell >{row.companyName}</StyledTableCell>
-              <StyledTableCell >{row.cleanerName}</StyledTableCell>
+              <StyledTableCell  >{row.cleanerName}{dataUser?.role==='Admin'? <Options bookingId={row.bookingId}/>: null}</StyledTableCell>
               <StyledTableCell >{row.adress}</StyledTableCell>
               <StyledTableCell >{row.cleaningService}</StyledTableCell>
               <StyledTableCell >{row.date}</StyledTableCell>
