@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import AlertDialogModal from "./AlertDialogModal";
-import FormStyle from "./form/FormStyle";
+import FormStyle from "../form/FormStyle";
 
 function EditEmployeePass({ row }) {
   const [open, setOpen] = useState(false);

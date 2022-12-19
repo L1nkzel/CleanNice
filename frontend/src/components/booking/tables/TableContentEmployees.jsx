@@ -10,8 +10,8 @@ import Paper from "@mui/material/Paper";
 import { DeleteOutline, Edit } from "@mui/icons-material";
 
 import { Button, IconButton, Tooltip } from "@mui/material";
-import EditEmployee from "../../EditEmployee";
-import EditEmployeePass from "../../EditEmployeePass";
+import EditEmployee from "../../manageEmployees/EditEmployee";
+import EditEmployeePass from "../../manageEmployees/EditEmployeePass";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
