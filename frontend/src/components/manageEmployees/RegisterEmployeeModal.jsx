@@ -10,10 +10,8 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import FormStyle from "./form/FormStyle";
+import FormStyle from "../form/FormStyle";
 import { useState } from "react";
-
-
 
 const style = {
   position: "absolute",
@@ -57,7 +55,7 @@ export default function BasicModal() {
 
     const res = await fetch(url, {
       method: "POST",
-      credentials: 'include',
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -87,26 +85,38 @@ export default function BasicModal() {
   };
 
   return (
-    <Box sx={{display:"flex", justifyContent:"center"}} >
-      <Button  sx={{background:"linear-gradient(to left top,#CEFFDC, #cfcfcf)", borderStyle:'none'}} onClick={handleOpen}>
+    <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Button
+        sx={{
+          background: "linear-gradient(to left top,#CEFFDC, #cfcfcf)",
+          borderStyle: "none",
+        }}
+        onClick={handleOpen}
+      >
         Skapa användare
       </Button>
       <Dialog
-      PaperProps={{
-        sx: {
-          background:"linear-gradient(to left top,#5e92ce, #ffffff)"
-        }
-      }}
+        PaperProps={{
+          sx: {
+            background: "linear-gradient(to left top,#5e92ce, #ffffff)",
+          },
+        }}
         sx={{
           backdropFilter: "blur(3px)",
           bgColor: "rgba(0,0,30,0.4)",
         }}
-        
         maxWidth="sm"
         open={open}
-      ><Box sx={{display:"flex", flexDirection:"column",alignItems:"center"}}>
-        <DialogTitle>Registrera ny städare</DialogTitle>
-        <DialogContent>
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <DialogTitle>Registrera ny städare</DialogTitle>
+          <DialogContent>
             <TextField
               name="employeeName"
               value={formData.employeeName}
@@ -200,11 +210,15 @@ export default function BasicModal() {
                 disableUnderline: true,
               }}
             />
-        <DialogActions sx={{display:"flex", justifyContent:"center"}}>
-          <Button variant="outlined" onClick={handleClose}>Avbryt</Button>
-          <Button variant="outlined"  onClick={handleClick}>Registrera</Button>
-        </DialogActions>
-        </DialogContent>
+            <DialogActions sx={{ display: "flex", justifyContent: "center" }}>
+              <Button variant="outlined" onClick={handleClose}>
+                Avbryt
+              </Button>
+              <Button variant="outlined" onClick={handleClick}>
+                Registrera
+              </Button>
+            </DialogActions>
+          </DialogContent>
         </Box>
       </Dialog>
     </Box>

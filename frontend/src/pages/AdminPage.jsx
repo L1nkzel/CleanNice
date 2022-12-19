@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import AllBookings from "../components/booking/AllBookings";
 import Header from "../components/ui/Header";
-import BasicModal from "../components/RegisterEmployeeModal"
 
 function AdminPage() {
   const loggedInUser = JSON.parse(localStorage.getItem("userData"));

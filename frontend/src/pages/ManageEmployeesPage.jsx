@@ -3,20 +3,17 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import TableContentEmployees from "../components/booking/tables/TableContentEmployees";
-import TableContent from "../components/booking/tables/TableContentEmployees";
-import EditEmployee from "../components/EditEmployee";
-import BasicModal from "../components/RegisterEmployeeModal";
+import RegisterEmployeeModal from "../components/manageEmployees/RegisterEmployeeModal";
 import Header from "../components/ui/Header";
 import Title from "../components/ui/Title";
 
 const ManageEmployeesPage = () => {
-  const URL = "http://localhost:3500/api/employee/"
+  const URL = "http://localhost:3500/api/employee/";
   const [employeeData, setEmployeeData] = useState([]);
   useEffect(() => {
     const fetchUsers = async () => {
-      const res = await fetch("http://localhost:3500/api/employee/",
-      {
-        credentials: 'include',
+      const res = await fetch("http://localhost:3500/api/employee/", {
+        credentials: "include",
       });
 
       const data = await res.json();
@@ -36,12 +33,11 @@ const ManageEmployeesPage = () => {
     }
   }
 
-
   const deleteEmployeeHandler = async (id) => {
     if (window.confirm("Är du säker att du vill ta bort denna anställd")) {
       await fetch(`http://localhost:3500/api/employee/${id}/deleteEmployee`, {
         method: "DELETE",
-        credentials: 'include',
+        credentials: "include",
       });
       setEmployeeData(
         employeeData.filter((employee) => employee.employeeId !== id)
@@ -67,7 +63,7 @@ const ManageEmployeesPage = () => {
         <Box sx={{ flexGrow: 1, mx: 5 }}>
           <Title color={"darkgreen"}>Anställda</Title>
           <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
-            <BasicModal />
+            <RegisterEmployeeModal />
           </Box>
 
           <TableContentEmployees
