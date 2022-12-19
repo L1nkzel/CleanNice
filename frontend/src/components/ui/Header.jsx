@@ -9,6 +9,7 @@ export default function Header(props) {
     localStorage.removeItem("userData");
     navigate("/");
     const res = await fetch(`http://localhost:3500/logout`, {
+      credentials: 'include',
       method: "POST",
     });
     const result = await res.json();

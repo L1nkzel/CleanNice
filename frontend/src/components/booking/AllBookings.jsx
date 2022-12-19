@@ -10,7 +10,11 @@ const AllBookings = ({ data }) => {
     const checkUser = async () => {
       if (data.role === "Admin") {
         try {
-          const res = await fetch(`http://localhost:3500/api/bookings/`);
+          const res = await fetch(`http://localhost:3500/api/bookings/`,{
+
+            credentials: 'include'
+          }
+          );
 
           const result = await res.json();
           setBookings(result);

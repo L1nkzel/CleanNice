@@ -14,14 +14,17 @@ const ManageEmployeesPage = () => {
   const [employeeData, setEmployeeData] = useState([]);
   useEffect(() => {
     const fetchUsers = async () => {
-      const res = await fetch("http://localhost:3500/api/employee/");
+      const res = await fetch("http://localhost:3500/api/employee/",
+      {
+        credentials: 'include',
+      });
 
       const data = await res.json();
 
       setEmployeeData(data);
     };
     fetchUsers();
-  }, [employeeData]);
+  }, [employeeData.length, setEmployeeData]);
 
   for (let i = 0; i < employeeData.length; i++) {
     if (employeeData[i].role === "Admin") {
@@ -38,6 +41,7 @@ const ManageEmployeesPage = () => {
     if (window.confirm("Är du säker att du vill ta bort denna anställd")) {
       await fetch(`http://localhost:3500/api/employee/${id}/deleteEmployee`, {
         method: "DELETE",
+        credentials: 'include',
       });
       setEmployeeData(
         employeeData.filter((employee) => employee.employeeId !== id)

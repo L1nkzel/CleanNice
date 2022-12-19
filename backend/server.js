@@ -1,7 +1,7 @@
 import express from "express";
 import "dotenv/config";
-import LocalStrategy from "passport-local";
 import passport from "passport";
+import { strategy } from "./passport/strategies.js";
 import session from "express-session";
 import cors from "cors";
 import customerRoutes from "./routes/customerRoutes.js";
@@ -19,6 +19,7 @@ const PORT = process.env.PORT || 5000;
 server.use(express.json());
 const corsConfig = {
   origin: "http://localhost:3000",
+  credentials: true
 };
 
 server.use(cors(corsConfig));
@@ -27,90 +28,22 @@ server.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
+    
   })
-);
+  );
+ strategy(passport)
 
-passport.use(
-  "customer",
-  new LocalStrategy(
-    { usernameField: "email" },
-    async (email, password, done) => {
-      try {
-      const user = await prisma.customer.findUnique({
-        where: {
-          email: email,
-        },
-      });
 
-      if (!user) {
-        done(null, false);
-      }
 
-        if (await bcrypt.compare(password, user.password)) {
-          done(null, user);
-        } else {
-          done(null, false);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  )
-);
-passport.use(
-  "employee",
-  new LocalStrategy(
-    { usernameField: "email" },
-    async (email, password, done) => {
-      try {
-      const user = await prisma.employee.findUnique({
-        where: {
-          email: email,
-        },
-      });
+  server.use(passport.session());
+  server.use(passport.initialize());
+  
+  
 
-      if (!user) {
-        done(null, false);
-      }
 
-        if (await bcrypt.compare(password, user.password)) {
-          done(null, user);
-        } else {
-          done(null, false);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  )
-);
 
-passport.serializeUser((user, done) => done(null, user.email));
 
-passport.deserializeUser(async (user, done) =>{
-const customer = await prisma.customer.findUnique({
-  where:{
-    customerId: user.customerId
-  }
-})
-const employee = await prisma.employee.findUnique({
-  where:{
-    employeeId: user.employeeId
-  }
-})
-
-if(customer){
-  done(null, customer)
-}else{
-
-  done(null, employee)
-}
-
-});
-
-server.use(passport.initialize());
-server.use(passport.session());
 
 server.post("/login", passport.authenticate("customer", {}), (req, res) => {
   console.log("user logged in", req.user);
@@ -121,8 +54,9 @@ server.post(
   "/employee/login",
   passport.authenticate("employee", {}),
   (req, res) => {
+   
     console.log("user logged in", req.user);
-    console.log(res);
+
     res.json({
       isEmployeeAuthenticated: req.isAuthenticated(),
       user: req.user,
@@ -145,7 +79,7 @@ const isCustomerAuthenticated = (req, res, next) => {
   req.isAuthenticated() && !isNaN(req.user.customerId) ? next() : res.sendStatus(403);
 };
 const isEmployeeAuthenticated = (req, res, next) => {
-  console.log(req.user);
+  console.log('is logged in?',req.user);
   req.isAuthenticated() && !isNaN(req.user.employeeId) ? next() : res.sendStatus(403);
 };
 
