@@ -8,10 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { DeleteOutline, Edit } from "@mui/icons-material";
-
 import { Button, IconButton, Tooltip } from "@mui/material";
-import EditEmployee from "../../manageEmployees/EditEmployee";
-import EditEmployeePass from "../../manageEmployees/EditEmployeePass";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -36,16 +33,16 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function TableContentEmployees(
+export default function TableContentCustomer(
   props,
-  { editEmployeeHandler, data }
+  { data }
 ) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Anställnings id</StyledTableCell>
+            <StyledTableCell>Kund id</StyledTableCell>
             <StyledTableCell>Namn- och efternamn</StyledTableCell>
             <StyledTableCell>Personnummer</StyledTableCell>
             <StyledTableCell>Telefonnummer</StyledTableCell>
@@ -57,23 +54,19 @@ export default function TableContentEmployees(
         </TableHead>
         <TableBody>
           {props.data?.map((row) => (
-            <StyledTableRow key={row.employeeId}>
+            <StyledTableRow key={row.customerId}>
               <StyledTableCell component="th" scope="row">
-                {row.employeeId}
+                {row.customerId}
               </StyledTableCell>
-              <StyledTableCell>{row.employeeName}</StyledTableCell>
+              <StyledTableCell>{row.customerName}</StyledTableCell>
               <StyledTableCell>{row.personalNumber}</StyledTableCell>
               <StyledTableCell>{row.phoneNumber}</StyledTableCell>
               <StyledTableCell>{row.adress}</StyledTableCell>
               <StyledTableCell>{row.accountNumber}</StyledTableCell>
               <StyledTableCell>{row.email}</StyledTableCell>
               <StyledTableCell>
-                <EditEmployee row={row} />
-                <EditEmployeePass row={row} />
                 <Tooltip title="Delete">
-                  <IconButton
-                    onClick={() => props.deleteEmployeeHandler(row.employeeId)}
-                  >
+                  <IconButton>
                     <DeleteOutline sx={{ color: "#62926C" }} />
                   </IconButton>
                 </Tooltip>

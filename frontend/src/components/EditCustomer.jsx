@@ -1,85 +1,98 @@
-import { Edit } from '@mui/icons-material';
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
-import React, { useState } from 'react'
-import FormStyle from './form/FormStyle'
+import { Edit } from "@mui/icons-material";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  TextField,
+  Tooltip,
+} from "@mui/material";
+import React, { useState } from "react";
+import FormStyle from "./form/FormStyle";
 
-function EditEmployee({row}) {
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => {
-        setOpen(true)
-    }
-    const handleClose = () => setOpen(false);
-    const URL = "http://localhost:3500/api/employee"
-    const [formData, setFormData] = useState({
-        employeeName: row.employeeName,
-        adress: row.adress,
-        phoneNumber: row.phoneNumber,
-        email: row.email,
-        personalNumber: row.personalNumber,
-        accountNumber: row.accountNumber,
+function EditCustomer({ row }) {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => setOpen(false);
+  const URL = "http://localhost:3500/api/employee";
+  const [formData, setFormData] = useState({
+    customerName: row.customerName,
+    adress: row.adress,
+    phoneNumber: row.phoneNumber,
+    email: row.email,
+    personalNumber: row.personalNumber,
+    accountNumber: row.accountNumber,
+  });
 
-    })
+  const onHandleChange = (e) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
-    const onHandleChange = (e) => {
-        const { name, value } = e.target;
-    console.log(name, value)
-        setFormData({
-          ...formData,
-          [name]: value,
-        });
+  const editCustomerHandler = async () => {
+    const data = {
+      customerName: formData.customerName,
+      adress: formData.adress,
+      phoneNumber: formData.phoneNumber,
+      email: formData.email,
+      personalNumber: formData.personalNumber,
+      accountNumber: formData.accountNumber,
+    };
 
-      };
+    const res = await fetch(`${URL}/${row.employeeId}/editCustomer`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
-      const editEmployeeHandler = async () => {
+    const dataF = await res.json();
+    console.log(dataF);
+  };
 
-        const data = {
-          employeeName: formData.employeeName,
-          adress: formData.adress,
-          phoneNumber: formData.phoneNumber,
-          email: formData.email,
-          personalNumber: formData.personalNumber,
-          accountNumber: formData.accountNumber
-         
-        }
-
-       const res = await fetch(`${URL}/${row.employeeId}/editEmployee`, {
-           method: "PATCH",
-           credentials: 'include',
-               headers: {
-                 "Content-Type": "application/json",
-               },
-               body: JSON.stringify(data)
-             })
-
-             const dataF = await res.json()
-             console.log(dataF)
-       }
-     
-      
   return (
-<>
-      <Button onClick={handleOpen}>
-      <Edit sx={{color:'#62926C'}}/>
-      </Button>
+    <>
+      <Tooltip title="Edit">
+        <IconButton onClick={handleOpen}>
+          <Edit sx={{ color: "#62926C" }} />
+        </IconButton>
+      </Tooltip>
       <Dialog
-      PaperProps={{
-        sx: {
-          background:"linear-gradient(to left top,#5e92ce, #ffffff)"
-        }
-      }}
+        PaperProps={{
+          sx: {
+            background: "linear-gradient(to left top,#5e92ce, #ffffff)",
+          },
+        }}
         sx={{
           backdropFilter: "blur(3px)",
           bgColor: "rgba(0,0,30,0.4)",
         }}
-        
         maxWidth="sm"
         open={open}
-      ><Box sx={{display:"flex", flexDirection:"column",alignItems:"center"}}>
-        <DialogTitle>Redigera städare</DialogTitle>
-        <DialogContent >
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <DialogTitle>Redigera städare</DialogTitle>
+          <DialogContent>
             <TextField
-              name="employeeName"
-              value={formData.employeeName}
+              name="customerName"
+              value={formData.customerName}
               sx={FormStyle.editDialogInput}
               onChange={onHandleChange}
               fullWidth
@@ -156,16 +169,20 @@ function EditEmployee({row}) {
                 disableunderline: true,
               }}
             />
-            
-        <DialogActions sx={{display:"flex", justifyContent:"center"}}>
-          <Button variant="outlined" onClick={handleClose}>Avbryt</Button>
-          <Button variant="outlined" onClick={editEmployeeHandler}>Update</Button>
-        </DialogActions>
-        </DialogContent>
+
+            <DialogActions sx={{ display: "flex", justifyContent: "center" }}>
+              <Button variant="outlined" onClick={handleClose}>
+                Avbryt
+              </Button>
+              <Button variant="outlined" onClick={editCustomerHandler}>
+                Update
+              </Button>
+            </DialogActions>
+          </DialogContent>
         </Box>
       </Dialog>
-</>
-  )
+    </>
+  );
 }
 
-export default EditEmployee
+export default EditCustomer;
