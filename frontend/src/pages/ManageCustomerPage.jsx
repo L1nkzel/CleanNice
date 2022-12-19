@@ -37,7 +37,7 @@ const ManageCostumerPage = () => {
       />
       <Box sx={{ display: "flex", mt: 4 }}>
         <Box sx={{ flexGrow: 1, mx: 5 }}>
-          <Title color={"darkgreen"}>Kunder</Title>
+          <Title color={"darkgreen"}>anställda</Title>
           <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
             register cosutumer
           </Box>
