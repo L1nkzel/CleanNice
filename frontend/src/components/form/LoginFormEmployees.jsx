@@ -34,8 +34,13 @@ function LoginFormEmployees() {
     };
     const res = await fetch("http://localhost:3500/employee/login", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      credentials:'include',
+      headers: { "Content-Type": "application/json",
+      'Accept': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:3000/'
+    },
       body: JSON.stringify(data),
+
     });
 
     if(res.status !== 200){

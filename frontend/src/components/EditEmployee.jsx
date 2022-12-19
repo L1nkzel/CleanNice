@@ -44,6 +44,7 @@ function EditEmployee({row}) {
 
        const res = await fetch(`${URL}/${row.employeeId}/editEmployee`, {
            method: "PATCH",
+           credentials: 'include',
                headers: {
                  "Content-Type": "application/json",
                },
