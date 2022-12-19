@@ -114,3 +114,5 @@ server.use("/api/employee", isEmployeeAuthenticated, employeeRoutes);
 server.use("/api/bookings", bookingsRoutes);
 
 server.listen(PORT, () => console.log(`Server started on ${PORT}`));
+
+

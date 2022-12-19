@@ -19,7 +19,7 @@ function AdminPage() {
        link1Name='Översikt'
        url2='/adminpage/employees'
        link2Name='Administrera anställda'
-       url3='#'
+       url3='/adminpage/costumer'
        link3Name='Administrera kunder'
        url4='#'
        link4Name='Faktura'
