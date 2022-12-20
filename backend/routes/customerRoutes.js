@@ -25,11 +25,65 @@ route.post("/register", async (req, res) => {
         adress: req.body.adress,
         email: req.body.email,
         password: await bcrypt.hash(req.body.password, 10),
+        forceChangePass:'no'
       },
     });
     res.json(customer);
   } catch (error) {
     res.json(error);
+  }
+});
+
+route.patch("/:id/editCustomer", async (req, res) => {
+  try {
+    const customer = await prisma.customer.update({
+      where: {
+        customerId: parseInt(req.params.id),
+      },
+      data: {
+        custName: req.body.custName || undefined,
+        companyName: req.body.companyName || undefined,
+        orgNr: req.body.orgNr || undefined,
+        phoneNumber: req.body.phoneNumber || undefined,
+        adress: req.body.adress || undefined,
+        email: req.body.email || undefined,
+        
+        
+      },
+    });
+    res.json(customer);
+  } catch (err) {
+    res.json(err);
+  }
+});
+route.patch("/:id/editCustomerPass", async (req, res) => {
+  try {
+    const customer = await prisma.customer.update({
+      where: {
+        customerId: parseInt(req.params.id),
+      },
+      data: {
+        password: await bcrypt.hash(req.body.password, 10),
+        forceChangePass:'yes'
+    
+      },
+    });
+    res.json(customer);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
+route.delete("/:id/deleteCustomer", async (req, res) => {
+  try {
+    const customer = await prisma.customer.delete({
+      where: {
+        customerId: parseInt(req.params.id),
+      },
+    });
+    res.json(customer);
+  } catch (err) {
+    res.json(err);
   }
 });
 

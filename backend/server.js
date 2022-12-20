@@ -34,16 +34,8 @@ server.use(
   );
  strategy(passport)
 
-
-
   server.use(passport.session());
   server.use(passport.initialize());
-  
-  
-
-
-
-
 
 server.post("/login", passport.authenticate("customer", {}), (req, res) => {
   console.log("user logged in", req.user);
@@ -76,7 +68,7 @@ server.post("/logout", (req, res, next) => {
 //middleware for authentication
 const isCustomerAuthenticated = (req, res, next) => {
   console.log(req.user);
-  req.isAuthenticated() && !isNaN(req.user.customerId) ? next() : res.sendStatus(403);
+  req.isAuthenticated() && !isNaN(req.user.customerId) || req.isAuthenticated() && req.user.role === 'Admin' ? next() : res.sendStatus(403);
 };
 const isEmployeeAuthenticated = (req, res, next) => {
   console.log('is logged in?',req.user);
@@ -105,6 +97,23 @@ server.post("/register", async (req, res) => {
     res.json(customer);
   } catch (error) {
     res.json(error);
+  }
+});
+
+server.patch("/:id/changePass", async (req, res) => {
+  try {
+    const employee = await prisma.employee.update({
+      where: {
+        employeeId: parseInt(req.params.id),
+      },
+      data: {
+        password: await bcrypt.hash(req.body.password, 10),
+        forceChangePass: "no",
+      },
+    });
+    res.json(employee);
+  } catch (err) {
+    res.json(err);
   }
 });
 

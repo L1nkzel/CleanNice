@@ -57,7 +57,7 @@ const ManageEmployeesPage = () => {
         link1Name="Översikt"
         url2="/adminpage/employees"
         link2Name="Administrera anställda"
-        url3="#"
+        url3="/adminpage/customer"
         link3Name="Administrera kunder"
         url4="#"
         link4Name="Faktura"
