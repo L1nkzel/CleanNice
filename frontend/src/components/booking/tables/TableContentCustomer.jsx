@@ -9,6 +9,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { DeleteOutline, Edit } from "@mui/icons-material";
 import { Button, IconButton, Tooltip } from "@mui/material";
+import EditCustomer from "../../manageCustomers/EditCustomer";
+import EditCustomerPass from "../../manageCustomers/EditCustomerPass";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,10 +35,7 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function TableContentCustomer(
-  props,
-  { data }
-) {
+export default function TableContentCustomer(props, { data }) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -44,11 +43,11 @@ export default function TableContentCustomer(
           <TableRow>
             <StyledTableCell>Kund id</StyledTableCell>
             <StyledTableCell>Namn- och efternamn</StyledTableCell>
-            <StyledTableCell>Personnummer</StyledTableCell>
             <StyledTableCell>Telefonnummer</StyledTableCell>
-            <StyledTableCell>Address</StyledTableCell>
-            <StyledTableCell>Konto nummer</StyledTableCell>
             <StyledTableCell>E-post</StyledTableCell>
+            <StyledTableCell>Address</StyledTableCell>
+            <StyledTableCell>Företagsnamn</StyledTableCell>
+            <StyledTableCell>Org nummer</StyledTableCell>
             <StyledTableCell>Hantera</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -58,13 +57,15 @@ export default function TableContentCustomer(
               <StyledTableCell component="th" scope="row">
                 {row.customerId}
               </StyledTableCell>
-              <StyledTableCell>{row.customerName}</StyledTableCell>
-              <StyledTableCell>{row.personalNumber}</StyledTableCell>
+              <StyledTableCell>{row.custName}</StyledTableCell>
               <StyledTableCell>{row.phoneNumber}</StyledTableCell>
-              <StyledTableCell>{row.adress}</StyledTableCell>
-              <StyledTableCell>{row.accountNumber}</StyledTableCell>
               <StyledTableCell>{row.email}</StyledTableCell>
+              <StyledTableCell>{row.adress}</StyledTableCell>
+              <StyledTableCell>{row.companyName}</StyledTableCell>
+              <StyledTableCell>{row.orgNr}</StyledTableCell>
               <StyledTableCell>
+                <EditCustomer row={row}/>
+                <EditCustomerPass row={row}/>
                 <Tooltip title="Delete">
                   <IconButton>
                     <DeleteOutline sx={{ color: "#62926C" }} />

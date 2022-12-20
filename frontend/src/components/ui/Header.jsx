@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
+import { Typography } from "@mui/material";
 
 export default function Header(props) {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export default function Header(props) {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, padding: 2, backgroundColor: "#62926C" }}>
+    <Box sx={{ flexGrow: 1, padding: 2,  background: "linear-gradient(to bottom, #207b38cd, #fbfbfbcc)",}}>
       <Toolbar sx={{ alignItems: "center", justifyContent: "space-between" }}>
         <Box
           sx={{
@@ -27,17 +28,17 @@ export default function Header(props) {
             justifyContent: "space-around",
           }}
         >
-          <Link to={`${props.url1}`} sx={{ fontSize: 20 }}>
-            {props.link1Name}
+          <Link to={`${props.url1}`} style={{ textDecoration:'none',  }}>
+          <Typography sx={{fontFamily: "Poppins",fontSize: 21, color: '#443f3f'}}>{props.link1Name}</Typography> 
           </Link>
-          <Link to={`${props.url2}`} sx={{ fontSize: 20 }}>
-          {props.link2Name}
+          <Link to={`${props.url2}`} style={{ textDecoration:'none',  }}>
+         <Typography sx={{fontFamily: "Poppins",fontSize: 21, color: '#443f3f'}}>{props.link2Name}</Typography> 
           </Link>
-          <Link to={`${props.url3}`} sx={{ fontSize: 20 }}>
-          {props.link3Name}
+          <Link to={`${props.url3}`} style={{ textDecoration:'none',  }}>
+          <Typography sx={{fontFamily: "Poppins",fontSize: 21, color: '#443f3f'}}>{props.link3Name}</Typography> 
           </Link>
-          <Link to={`${props.url4}`} sx={{ fontSize: 20 }}>
-          {props.link4Name}
+          <Link to={`${props.url4}`} style={{ textDecoration:'none',  }}>
+          <Typography sx={{fontFamily: "Poppins", fontSize: 21, color: '#443f3f'}}>{props.link4Name}</Typography> 
           </Link>
         </Box>
         <Button onClick={handleLogOut} sx={{ color: "black", boxShadow: 3 }}>

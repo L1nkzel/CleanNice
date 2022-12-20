@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -13,13 +13,35 @@ export default function BookingsTabs({ data }) {
   const [value, setValue] = useState(0);
   const bookUrl = `http://localhost:3500/api/bookings/`;
 
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const [bookings, setBookings] = useState([]);
+const [bookings, setBookings] = useState([])
+const [confirmedServices, setConfirmedServices] = useState([])
+const [bookedServices, setBookedServices] = useState([])
   const [errorMessage, setErrorMessage] = useState("");
-  const book = JSON.stringify(bookings);
+
+
+  
+
+useLayoutEffect(() => {
+    
+    setConfirmedServices(
+      confirmedServices.filter(
+        (confirmed) => confirmed.status === "Bekräftad"
+      )
+    );
+
+    setBookedServices(
+        bookedServices.filter(
+            (booked) => booked.status ==="Bokad"
+        )
+    )
+},[bookings])
+    
+  
 
   useEffect(() => {
     const checkUser = async () => {
@@ -31,6 +53,8 @@ export default function BookingsTabs({ data }) {
         const result = await res.json();
 
         setBookings(result);
+        setConfirmedServices(result);
+        setBookedServices(result);
       } catch (err) {
         setErrorMessage(err);
       }
@@ -51,7 +75,7 @@ export default function BookingsTabs({ data }) {
 
   return (
     <>
-    <Title color={"darkgreen"}>Administreara bookningar</Title>
+    <Title color={"darkgreen"}>Administrera bookningar</Title>
     <Box
       sx={{
         display: "flex",
@@ -111,7 +135,7 @@ export default function BookingsTabs({ data }) {
 
         <TabPanel value={value} index={0}>
           <TableContent
-            data={bookings}
+            data={confirmedServices}
             dataUser={data}
             deleteBookingHandler={deleteBookingHandler}
           />
@@ -119,7 +143,7 @@ export default function BookingsTabs({ data }) {
 
         <TabPanel value={value} index={1}>
         <TableContent
-            data={bookings}
+            data={bookedServices}
             dataUser={data}
             deleteBookingHandler={deleteBookingHandler}
           />

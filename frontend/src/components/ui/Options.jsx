@@ -73,9 +73,11 @@ export default function Options({bookingId}) {
   const res = await fetch(`http://localhost:3500/api/bookings/${bookingId}/editBooking`, fetchConfig)
   const body = await res.json()
   console.log(body)
+  
+  handleClose()
+}
 
-   handleClose()
-  }
+
 
   return (
     <div>

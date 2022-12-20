@@ -16,6 +16,7 @@ model customer {
   adress      String
   custName    String
   password    String
+  forceChangePass String
   bookings    bookings[]
   history     history[]
 }
@@ -30,6 +31,7 @@ model employee {
   role           String
   employeeName   String
   password       String
+  forceChangePass String
   bookings       bookings[] @relation("bookingstoemployee")
   history        history[]  @relation("employeetohistory")
 }

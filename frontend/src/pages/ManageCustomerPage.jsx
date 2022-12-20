@@ -5,8 +5,9 @@ import { useState } from "react";
 import TableContentCustomer from "../components/booking/tables/TableContentCustomer";
 import Header from "../components/ui/Header";
 import Title from "../components/ui/Title";
+import RegisterCustomerModal from "../components/manageCustomers/RegisterCustomerModal"
 
-const ManageCostumerPage = () => {
+const ManageCustomerPage = () => {
   const URL = "http://localhost:3500/api/customer/"
   const [costumerData, setCostumerData] = useState([]);
   useEffect(() => {
@@ -21,16 +22,16 @@ const ManageCostumerPage = () => {
       setCostumerData(data);
     };
     fetchUsers();
-  }, [costumerData]);
+  }, []);
 
   return (
     <>
       <Header
         url1="/adminpage/"
         link1Name="Översikt"
-        url2="/adminpage/costumer"
+        url2="/adminpage/employees"
         link2Name="Administrera anställda"
-        url3="#"
+        url3="/adminpage/customer"
         link3Name="Administrera kunder"
         url4="#"
         link4Name="Faktura"
@@ -39,7 +40,7 @@ const ManageCostumerPage = () => {
         <Box sx={{ flexGrow: 1, mx: 5 }}>
           <Title color={"darkgreen"}>Kunder</Title>
           <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
-            register cosutumer
+           <RegisterCustomerModal />
           </Box>
 
           <TableContentCustomer
@@ -51,4 +52,4 @@ const ManageCostumerPage = () => {
   );
 };
 
-export default ManageCostumerPage;
+export default ManageCustomerPage;

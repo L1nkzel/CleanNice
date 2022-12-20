@@ -35,6 +35,7 @@ route.post("/newEmployee", async (req, res) => {
         accountNumber: req.body.accountNumber,
         role: req.body.role,
         password: await bcrypt.hash(req.body.password, 10),
+        forceChangePass:'yes'
       },
     });
     res.json(employee);
@@ -71,7 +72,7 @@ route.patch("/:id/editEmployeePass", async (req, res) => {
       },
       data: {
         password: await bcrypt.hash(req.body.password, 10),
-    
+        forceChangePass:'yes'
       },
     });
     res.json(employee);
@@ -79,6 +80,8 @@ route.patch("/:id/editEmployeePass", async (req, res) => {
     res.json(err);
   }
 });
+
+
 
 route.delete("/:id/deleteEmployee", async (req, res) => {
   try {

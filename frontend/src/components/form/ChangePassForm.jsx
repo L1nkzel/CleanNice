@@ -1,21 +1,30 @@
 import React, { useState } from "react";
-import { Box, FormControl, Grid, Link, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+} from "@mui/material";
 import CustomButton from "../ui/CustomButton";
 import FormStyle from "./FormStyle";
 import Title from "../ui/Title";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Email, Key } from "@mui/icons-material";
 
-
-
-function LoginFormEmployees() {
-
-
+function ChangePassForm() {
   const [loginData, setLoginData] = useState({
-    email: "",
     password: "",
+    confirmPassword: "",
   });
-  const [loginError, setLoginError] = useState("");
+  const [formError, setFormError] = useState({
+    password: "",
+    confirmPassword: "",
+  });
+
+  const loggedInUser = JSON.parse(localStorage.getItem("userData"));
+
   const navigate = useNavigate();
 
   const onHandleChange = (e) => {
@@ -28,45 +37,56 @@ function LoginFormEmployees() {
   };
 
   const handleSubmit = async () => {
-    const data = {
-      email: loginData.email,
-      password: loginData.password
-    };
-    const res = await fetch("http://localhost:3500/employee/login", {
-      method: "POST",
-      credentials:'include',
-      headers: { "Content-Type": "application/json",
-      'Accept': 'application/json',
-      'Access-Control-Allow-Origin': 'http://localhost:3000/'
-    },
-      body: JSON.stringify(data),
 
+    let inputError = {
+        password: "",
+        confirmPassword: "",
+      };
+  
+      if (loginData.confirmPassword !== loginData.password) {
+        setFormError({
+          ...inputError,
+          confirmPassword: "Password and confirm password should be same",
+        });
+        return;
+      }
+  
+      if (!loginData.password) {
+        setFormError({
+          ...inputError,
+          password: "Password should not be empty",
+        });
+        return;
+      }
+      setFormError(inputError);
+
+
+    const data = {
+      password: loginData.password,
+    };
+
+ console.log('loggedInUser', loggedInUser)
+
+    const URL = `http://localhost:3500/${loggedInUser.user.employeeId}/changePass`;
+    const res = await fetch(URL, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
     });
 
-    
-    if(res.status !== 200){
-      setLoginError('Fel Epost eller lösenord. Var god försök igen')
-      return
-    }
     const result = await res.json();
-    console.log(result);
-    if(result?.user.forceChangePass === "yes") {
-      localStorage.setItem("userData", JSON.stringify(result));
-              
-      navigate("/changeEmployeePass", {
-        state: {id: result.user.employeeId}
-      } )
-      return
-      
-    } 
-     if (result.isEmployeeAuthenticated) {
-      localStorage.setItem("userData", JSON.stringify(result));
 
-      navigate("/adminpage");
-     }
+    console.log(result)
+    // if (result.isAuthenticated) {
+    //   localStorage.setItem("userData", JSON.stringify(result));
+    //   navigate("/loginForEmployees");
+    // }
+
+    navigate("/adminpage")
+
     setLoginData({
-      email: "",
       password: "",
+      confirmPassword: "",
     });
   };
 
@@ -74,7 +94,7 @@ function LoginFormEmployees() {
     <Box sx={FormStyle.container}>
       <Grid container columnGap={1} sx={FormStyle.login}>
         <FormControl>
-          <Title color={"white"}>Logga in</Title>
+          <Title color={"white"}>Ändra ditt lösenord</Title>
 
           <Box
             sx={{
@@ -83,48 +103,12 @@ function LoginFormEmployees() {
               backgroundColor: "white",
               borderRadius: 1,
               my: 0.7,
-              width:350
-            }}
-          >
-            <Email
-              sx={{
-                color: "action.active",
-                mr: 1,
-                px: 1,
-                py: 1.5,
-                backgroundColor: "#CEFFDC",
-                borderRadius: "4px 0 0 4px",
-              }}
-            />
-            <TextField
-              name="email"
-              type="email"
-              value={loginData.email}
-              onChange={onHandleChange}
-              sx={FormStyle.textInput}
-              placeholder="Epost"
-              variant="standard"
-              
-              InputProps={{
-                disableUnderline: true,
-              }}
-              required
-              autoComplete="email"
-            />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              backgroundColor: "white",
-              borderRadius: 1,
-              my: 1,
-              width:350
+              width: 350,
             }}
           >
             <Key
               sx={{
-                color: "action.active",
+                color: "grey",
                 mr: 1,
                 px: 1,
                 py: 1.5,
@@ -147,29 +131,59 @@ function LoginFormEmployees() {
               }}
             />
           </Box>
-          <Typography
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              backgroundColor: "white",
+              borderRadius: 1,
+              my: 1,
+            }}
+          >
+            <Key
               sx={{
-                mt: 1,
-                px: 0.5,
-               
-                color: "#f59d9d",
-                
+                color: "grey",
+                mr: 1,
+                px: 1,
+                py: 1.5,
+                backgroundColor: "#CEFFDC",
+                borderRadius: "4px 0 0 4px",
               }}
-            >
-              {loginError}
-            </Typography>
+            />
+            <TextField
+              name="confirmPassword"
+              type="password"
+              value={loginData.confirmPassword}
+              onChange={onHandleChange}
+              sx={FormStyle.textInput}
+              placeholder="Upprepa lösenord"
+              variant="standard"
+              InputProps={{
+                disableUnderline: true,
+              }}
+              required
+            />
+          </Box>
+          <Typography
+            sx={{
+              mt: 1,
+              px: 0.5,
+
+              color: "#f59d9d",
+            }}
+          >
+        
+          </Typography>
           <Box
             sx={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              mt: 1,
-              mb:3.7
-              
+              my: 1,
+              flexDirection: "column",
             }}
           >
-            <CustomButton onClick={handleSubmit}>Logga in</CustomButton>
-
+            <CustomButton onClick={handleSubmit}>Ändra lösenord</CustomButton>
           </Box>
         </FormControl>
       </Grid>
@@ -177,4 +191,4 @@ function LoginFormEmployees() {
   );
 }
 
-export default LoginFormEmployees;
+export default ChangePassForm;
