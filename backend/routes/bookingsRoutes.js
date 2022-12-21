@@ -39,6 +39,7 @@ route.get("/:id/bookings", async (req, res) => {
         time: true,
         cleanerName: true,
         status: true,
+        comment: true,
       },
     });
     res.json(bookings);
@@ -71,6 +72,7 @@ route.post("/:id/newBooking", async (req, res) => {
         adress: customer.adress,
         phoneNumber: customer.phoneNumber,
         status: "Obekräftad",
+        comment: "N/A",
       },
     });
     res.json(booking);
@@ -106,7 +108,7 @@ route.patch("/:id/editBooking", async (req, res) => {
     data: {
       cleanerName: req.body.cleanerName || undefined,
       status: req.body.status,
-     
+      comment: req.body.comment,
     },
   });
   res.json(booking);
