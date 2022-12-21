@@ -1,6 +1,8 @@
+import { Button } from "@mui/material";
 import React, { useState } from "react";
 import AllBookings from "../components/booking/AllBookings";
 import BookingsTabs from "../components/booking/bookingsAdmin/BookingsTabs";
+import AlertDialog, { confirmDialog } from "../components/manageEmployees/AlertDialog";
 import Header from "../components/ui/Header";
 
 function AdminPage() {
@@ -28,6 +30,7 @@ function AdminPage() {
       />
      {/* <AllBookings  /> */}
       <BookingsTabs data={userData.user}/>
+      <AlertDialog/>
     </>
   );
 }
