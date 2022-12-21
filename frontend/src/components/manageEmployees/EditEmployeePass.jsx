@@ -11,7 +11,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import React, { useState } from "react";
-import AlertDialogModal from "./AlertDialogModal";
+import AlertDialog from "./AlertDialog";
 import FormStyle from "../form/FormStyle";
 
 function EditEmployeePass({ row }) {
@@ -50,8 +50,6 @@ function EditEmployeePass({ row }) {
 
     const dataF = await res.json();
     console.log(dataF);
-
-    return <AlertDialogModal />;
   };
 
   return (

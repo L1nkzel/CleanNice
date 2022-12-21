@@ -16,7 +16,7 @@ export default function BookService({ data }) {
   const [value, setValue] = useState(0);
   const [date, setDate] = useState(new Date());
   const [showTime, setShowTime] = useState(false);
-  const [time, setTime] = useState("");
+  const [time, setTime] = useState([]);
   const [error, setError] = useState("");
   const bookUrl = `http://localhost:3500/api/bookings/`;
   const dateNumbers = `${date.getFullYear()}-${
