@@ -37,13 +37,59 @@ const CurrentBookings = ({ data }) => {
       return;
     }
   };
-  console.log("userbookings:",userBookings)
+
+  const approveBooking = async (id) => {
+    const data = {
+      status: "Godkänd",
+    };
+    if (window.confirm("Vill du godkänna denna bokning")) {
+      const res = await fetch(
+        `http://localhost:3500/api/bookings/${id}/editBooking`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      const data2 = await res.json();
+      console.log(data2);
+      return;
+    }
+  };
+  const failBooking = async (id) => {
+    const data = {
+      status: "Underkänd",
+    };
+    if (window.confirm("Vill du underkänna denna bokning")) {
+      const res = await fetch(
+        `http://localhost:3500/api/bookings/${id}/editBooking`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      const data2 = await res.json();
+      console.log(data2);
+      return;
+    }
+    
+  };
+
+  console.log("userbookings:", userBookings);
   return (
     <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
       <Box sx={{ flexGrow: 1, mx: 5 }}>
         <Title color={"darkgreen"}>Mina bokningar</Title>
         <TableContent
+        
           data={userBookings}
+          approveBooking={approveBooking}
+          failBooking={failBooking}
           deleteBookingHandler={deleteBookingHandler}
         />
       </Box>

@@ -57,9 +57,7 @@ filterEmployees()
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
-    fetchBookings()
-    fetchUsers()
-    filterEmployees()
+
     setAnchorEl(null);
   };
 
@@ -91,7 +89,7 @@ filterEmployees()
     const body2 = await res.json();
     console.log(body2);
 
-   
+  
     handleClose();
   };
 
