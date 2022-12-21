@@ -81,8 +81,12 @@ function ChangePassForm() {
     //   localStorage.setItem("userData", JSON.stringify(result));
     //   navigate("/loginForEmployees");
     // }
+    if(loggedInUser.user.role==="Admin"){
 
-    navigate("/adminpage")
+      navigate("/adminpage")
+    }else if(loggedInUser.user.role==="Employee"){
+      navigate("/employee")
+    }
 
     setLoginData({
       password: "",

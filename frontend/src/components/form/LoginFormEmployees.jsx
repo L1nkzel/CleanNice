@@ -50,19 +50,18 @@ function LoginFormEmployees() {
     }
     const result = await res.json();
     console.log(result);
-    if(result?.user.forceChangePass === "yes") {
-      localStorage.setItem("userData", JSON.stringify(result));
-              
+    localStorage.setItem("userData", JSON.stringify(result));
+    if(result?.user.forceChangePass === "yes") {       
       navigate("/changeEmployeePass", {
         state: {id: result.user.employeeId}
       } )
       return
       
     } 
-     if (result.isEmployeeAuthenticated) {
-      localStorage.setItem("userData", JSON.stringify(result));
-
+     if (result.isEmployeeAuthenticated && result.user.role === "Admin") {
       navigate("/adminpage");
+     }else if(result.isEmployeeAuthenticated && result.user.role === "Employee"){
+      navigate("/employee")
      }
     setLoginData({
       email: "",

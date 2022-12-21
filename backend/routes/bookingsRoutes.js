@@ -20,6 +20,7 @@ route.get("/", async (req, res) => {
   }
 });
 
+
 route.get("/:id/bookings", async (req, res) => {
   try {
     const bookings = await prisma.bookings.findMany({
@@ -110,6 +111,8 @@ route.patch("/:id/editBooking", async (req, res) => {
   });
   res.json(booking);
 });
+
+
 
 route.delete("/:id/booking", async (req, res) => {
   try {

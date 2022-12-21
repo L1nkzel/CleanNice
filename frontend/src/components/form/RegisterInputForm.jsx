@@ -90,6 +90,8 @@ function RegisterInputForm() {
       },
       body: JSON.stringify(data),
     });
+    const data2 = res.json()
+    console.log(data2)
  
 
     setFormData({

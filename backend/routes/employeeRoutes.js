@@ -8,19 +8,27 @@ const route = express.Router();
 route.get("/", async (req, res) => {
   try {
     const employees = await prisma.employee.findMany({
-  
-        include:{
-          _count: {
-            select:{bookings: true},
-          },
-        
-      }
-      
+      include: {
+        _count: {
+          select: { bookings: true },
+        },
+      },
     });
     res.json(employees);
-  } catch(err) {
+  } catch (err) {
     res.json(err);
   }
+});
+
+route.get("/:id/bookings", async (req, res) => {
+  
+    const employees = await prisma.employee.findUnique({
+      where: { employeeId:parseInt(req.params.id) },
+      select: { bookings: true },
+    });
+    res.json(employees);
+ 
+
 });
 
 route.post("/newEmployee", async (req, res) => {
@@ -35,7 +43,7 @@ route.post("/newEmployee", async (req, res) => {
         accountNumber: req.body.accountNumber,
         role: req.body.role,
         password: await bcrypt.hash(req.body.password, 10),
-        forceChangePass:'yes'
+        forceChangePass: "yes",
       },
     });
     res.json(employee);
@@ -56,7 +64,6 @@ route.patch("/:id/editEmployee", async (req, res) => {
         phoneNumber: req.body.phoneNumber || undefined,
         email: req.body.email || undefined,
         accountNumber: req.body.accountNumber || undefined,
-        
       },
     });
     res.json(employee);
@@ -72,7 +79,7 @@ route.patch("/:id/editEmployeePass", async (req, res) => {
       },
       data: {
         password: await bcrypt.hash(req.body.password, 10),
-        forceChangePass:'yes'
+        forceChangePass: "yes",
       },
     });
     res.json(employee);
@@ -80,8 +87,6 @@ route.patch("/:id/editEmployeePass", async (req, res) => {
     res.json(err);
   }
 });
-
-
 
 route.delete("/:id/deleteEmployee", async (req, res) => {
   try {

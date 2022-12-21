@@ -25,7 +25,7 @@ route.post("/register", async (req, res) => {
         adress: req.body.adress,
         email: req.body.email,
         password: await bcrypt.hash(req.body.password, 10),
-        forceChangePass:'no'
+        forceChangePass:"no"
       },
     });
     res.json(customer);
