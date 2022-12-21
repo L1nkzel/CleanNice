@@ -43,23 +43,23 @@ useLayoutEffect(() => {
     
   
 
+const fetchBookings = async () => {
+  try {
+    const res = await fetch(`http://localhost:3500/api/bookings/`, {
+      credentials: "include",
+    });
+
+    const result = await res.json();
+
+    setBookings(result);
+    setConfirmedServices(result);
+    setBookedServices(result);
+  } catch (err) {
+    setErrorMessage(err);
+  }
+};
   useEffect(() => {
-    const checkUser = async () => {
-      try {
-        const res = await fetch(`http://localhost:3500/api/bookings/`, {
-          credentials: "include",
-        });
-
-        const result = await res.json();
-
-        setBookings(result);
-        setConfirmedServices(result);
-        setBookedServices(result);
-      } catch (err) {
-        setErrorMessage(err);
-      }
-    };
-    checkUser();
+    fetchBookings();
   }, []);
 
   const deleteBookingHandler = async (id) => {
@@ -136,6 +136,7 @@ useLayoutEffect(() => {
         <TabPanel value={value} index={0}>
           <TableContent
           setConfirmedServices={setConfirmedServices}
+          fetchBookings={fetchBookings}
             data={confirmedServices}
             dataUser={data}
             deleteBookingHandler={deleteBookingHandler}

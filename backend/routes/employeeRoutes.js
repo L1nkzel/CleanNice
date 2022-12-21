@@ -6,18 +6,29 @@ const prisma = new PrismaClient();
 const route = express.Router();
 
 route.get("/", async (req, res) => {
-  try {
+
     const employees = await prisma.employee.findMany({
-      include: {
+
+      select: { 
+        employeeId:true,
+        employeeName:true,
+        accountNumber:true,
+        adress:true,
+        email:true,
+        phoneNumber:true,
+        role:true,
+        personalNumber:true,
+        password:true,
+        bookings: true,
         _count: {
           select: { bookings: true },
-        },
-      },
+       }}
+        
+        
+      
     });
     res.json(employees);
-  } catch (err) {
-    res.json(err);
-  }
+ 
 });
 
 route.get("/:id/bookings", async (req, res) => {
