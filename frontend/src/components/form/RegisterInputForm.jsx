@@ -80,6 +80,7 @@ function RegisterInputForm() {
       adress: formData.address,
       email: formData.email,
       password: formData.password,
+      forceChangePass: "no",
     };
 
     const res = await fetch(regUrl, {
@@ -221,9 +222,10 @@ function RegisterInputForm() {
                     InputProps={{
                       disableUnderline: true,
                     }}
+                    
                   />
                 </Box>
-                <Typography>{formError.password}</Typography>
+  
               </Grid>
 
               <Grid item xs>
@@ -253,9 +255,9 @@ function RegisterInputForm() {
                     }}
                   />
                 </Box>
-                <Typography>{formError.confirmPassword}</Typography>
               </Grid>
             </Grid>
+              
           </Box>
           <Box
             sx={{
@@ -393,6 +395,8 @@ function RegisterInputForm() {
               my: 1,
             }}
           >
+            <Typography sx={{color:"red", textAlign:"center", display:"flex", justifyContent:"center", alignItems:"center", mb:1}}>{formError.password}</Typography>
+            <Typography sx={{color:"red", textAlign:"center", display:"flex", justifyContent:"center", alignItems:"center", mb:1}}>{formError.confirmPassword}</Typography>
             <CustomButton onClick={handleSubmit}>Skapa konto</CustomButton>
           <Link href="/" sx={{justifyContent:'center', textAlign: "center", color: "white" }}>
             Redan registrerad? Logga in
