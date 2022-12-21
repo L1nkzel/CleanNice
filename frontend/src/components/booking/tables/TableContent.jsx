@@ -41,7 +41,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 
 
-export default function TableContent({data,dataUser, deleteBookingHandler, setConfirmedServices}) {
+export default function TableContent({data,dataUser, deleteBookingHandler, fetchBookings, setConfirmedServices}) {
 
   console.log(data)
   return (
@@ -73,7 +73,7 @@ export default function TableContent({data,dataUser, deleteBookingHandler, setCo
               <StyledTableCell >{row.customerName}</StyledTableCell>
               <StyledTableCell >{row.phoneNumber}</StyledTableCell>
               <StyledTableCell >{row.companyName}</StyledTableCell>
-              <StyledTableCell  >{row.cleanerName}{dataUser?.role==='Admin'? <Options bookingId={row.bookingId} setConfirmedServices={setConfirmedServices}/>: null}</StyledTableCell>
+              <StyledTableCell  >{row.cleanerName}{dataUser?.role==='Admin'? <Options booking={row} fetchBookings={fetchBookings} setConfirmedServices={setConfirmedServices}/>: null}</StyledTableCell>
               <StyledTableCell >{row.adress}</StyledTableCell>
               <StyledTableCell >{row.cleaningService}</StyledTableCell>
               <StyledTableCell >{row.date}</StyledTableCell>
