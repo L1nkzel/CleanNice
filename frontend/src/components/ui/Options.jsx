@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 
 const ITEM_HEIGHT = 48;
 
-export default function Options({bookingId}) {
+export default function Options({bookingId,setConfirmedServices}) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [employeeList, setEmployeeList] = useState([])
@@ -23,9 +23,9 @@ export default function Options({bookingId}) {
         credentials: 'include',
       });
 
-      const data = await res.json();
+      const dataUsers = await res.json();
 
-      setEmployeeList(data);
+      setEmployeeList(dataUsers);
     };
     fetchUsers();
   }, [ employee?.count?.bookings]);
@@ -54,8 +54,9 @@ export default function Options({bookingId}) {
     console.log(bookingId)
     setEmployee(option)
     console.log(option)
+    
 
-  const data ={
+  const body ={
     cleanerName: option?.employeeName,
     status: 'Bokad',
     employeeId: option?.employeeId
@@ -67,13 +68,15 @@ export default function Options({bookingId}) {
       'Access-Control-Allow-Origin': 'http://localhost:3000/'
     },
     credentials:'include',
-    body:JSON.stringify(data)
+    body:JSON.stringify(body)
   }
 
-  const res = await fetch(`http://localhost:3500/api/bookings/${bookingId}/editBooking`, fetchConfig)
-  const body = await res.json()
-  console.log(body)
-  
+  const res = await fetch(`http://localhost:3500/api/bookings/${bookingId}/editBookingCleaner`, fetchConfig)
+  const body2 = await res.json()
+  console.log(body2)
+  const re = await fetch(`http://localhost:3500/api/bookings/`)
+  const re2 = await re.json()
+  setConfirmedServices(re2.filter((confirmed) => confirmed.status === "Bekräftad"))
   handleClose()
 }
 

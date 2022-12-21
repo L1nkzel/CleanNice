@@ -135,6 +135,7 @@ useLayoutEffect(() => {
 
         <TabPanel value={value} index={0}>
           <TableContent
+          setConfirmedServices={setConfirmedServices}
             data={confirmedServices}
             dataUser={data}
             deleteBookingHandler={deleteBookingHandler}

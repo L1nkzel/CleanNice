@@ -36,10 +36,7 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function TableContentEmployees(
-  props,
-  { editEmployeeHandler, data }
-) {
+export default function TableContentEmployees(props) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">

@@ -7,12 +7,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {
- DeleteOutline
-} from "@mui/icons-material";
+
+  import CheckIcon from '@mui/icons-material/Check';
 
 import { Button } from '@mui/material';
-import Options from '../../ui/Options';
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -41,7 +40,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 
 
-export default function TableContent({data,dataUser, deleteBookingHandler, setConfirmedServices}) {
+export default function TableContentEmployee({data,dataUser, cleaningDoneHandler}) {
 
   console.log(data)
   return (
@@ -54,7 +53,6 @@ export default function TableContent({data,dataUser, deleteBookingHandler, setCo
             <StyledTableCell >Kontaktperson</StyledTableCell>
             <StyledTableCell >Telefonnummer</StyledTableCell>
             <StyledTableCell >Företagsnamn</StyledTableCell>
-            <StyledTableCell >Ansvarig städare</StyledTableCell>
             <StyledTableCell >Adress</StyledTableCell>
             <StyledTableCell >Städtjänst</StyledTableCell>
             <StyledTableCell >Datum</StyledTableCell>
@@ -73,13 +71,12 @@ export default function TableContent({data,dataUser, deleteBookingHandler, setCo
               <StyledTableCell >{row.customerName}</StyledTableCell>
               <StyledTableCell >{row.phoneNumber}</StyledTableCell>
               <StyledTableCell >{row.companyName}</StyledTableCell>
-              <StyledTableCell  >{row.cleanerName}{dataUser?.role==='Admin'? <Options bookingId={row.bookingId} setConfirmedServices={setConfirmedServices}/>: null}</StyledTableCell>
               <StyledTableCell >{row.adress}</StyledTableCell>
               <StyledTableCell >{row.cleaningService}</StyledTableCell>
               <StyledTableCell >{row.date}</StyledTableCell>
               <StyledTableCell >{row.time}</StyledTableCell>
               <StyledTableCell >{row.status}</StyledTableCell>
-              <StyledTableCell ><Button onClick={()=>deleteBookingHandler(row.bookingId)}><DeleteOutline sx={{color:'#62926C'}}/></Button></StyledTableCell>
+              <StyledTableCell ><Button onClick={()=>cleaningDoneHandler(row.bookingId)}><CheckIcon sx={{color:'#62926C'}}/></Button></StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,8 +6,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { DeleteOutline, Edit } from "@mui/icons-material";
-import { Button, IconButton, Tooltip } from "@mui/material";
+import { DeleteOutline} from "@mui/icons-material";
+import {IconButton, Tooltip } from "@mui/material";
 import EditCustomer from "../../manageCustomers/EditCustomer";
 import EditCustomerPass from "../../manageCustomers/EditCustomerPass";
 
@@ -35,7 +34,7 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function TableContentCustomer(props, { data }) {
+export default function TableContentCustomer(props, { data, deleteBookingHandler }) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -68,7 +67,7 @@ export default function TableContentCustomer(props, { data }) {
                 <EditCustomerPass row={row}/>
                 <Tooltip title="Delete">
                   <IconButton>
-                    <DeleteOutline sx={{ color: "#62926C" }} />
+                    <DeleteOutline onclick={()=>deleteBookingHandler(row.customerId)} sx={{ color: "#62926C" }} />
                   </IconButton>
                 </Tooltip>
               </StyledTableCell>

@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import TableContentEmployees from "../components/booking/tables/TableContentEmployees";
+import TableContentAdmin from "../components/booking/tables/TableContentAdmin";
 import RegisterEmployeeModal from "../components/manageEmployees/RegisterEmployeeModal";
 import Header from "../components/ui/Header";
 import Title from "../components/ui/Title";
@@ -69,7 +69,7 @@ const ManageEmployeesPage = () => {
             <RegisterEmployeeModal />
           </Box>
 
-          <TableContentEmployees
+          <TableContentAdmin
             deleteEmployeeHandler={deleteEmployeeHandler}
             data={employeeData}
           />
