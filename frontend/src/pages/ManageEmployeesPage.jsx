@@ -2,7 +2,7 @@ import { Box, Button } from "@mui/material";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import TableContentEmployees from "../components/booking/tables/TableContentEmployees";
+import TableContentAdmin from "../components/booking/tables/TableContentAdmin";
 import AlertDialog, { confirmDialog } from "../components/manageEmployees/AlertDialog";
 import RegisterEmployeeModal from "../components/manageEmployees/RegisterEmployeeModal";
 import Header from "../components/ui/Header";
@@ -74,7 +74,7 @@ const ManageEmployeesPage = () => {
             <RegisterEmployeeModal />
           </Box>
 
-          <TableContentEmployees
+          <TableContentAdmin
             deleteEmployeeHandler={deleteEmployeeHandler}
             data={employeeData}
           />
