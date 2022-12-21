@@ -48,6 +48,7 @@ model bookings {
   cleaningService String
   time            String
   status          String
+  comment         String
   customer        customer   @relation(fields: [customerId], references: [customerId])
   employee        employee[] @relation("bookingstoemployee")
 

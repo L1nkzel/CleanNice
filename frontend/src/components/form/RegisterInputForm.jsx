@@ -81,6 +81,7 @@ function RegisterInputForm() {
       adress: formData.address,
       email: formData.email,
       password: formData.password,
+      forceChangePass: "no",
     };
 
     const res = await fetch(regUrl, {
