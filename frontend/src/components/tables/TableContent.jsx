@@ -10,7 +10,7 @@ import Paper from "@mui/material/Paper";
 import { DeleteOutline, Done, Clear } from "@mui/icons-material";
 
 import { Button } from "@mui/material";
-import Options from "../../ui/Options";
+import Options from "../ui/Options";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {

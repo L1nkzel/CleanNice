@@ -120,7 +120,7 @@ server.patch("/:id/changePass", async (req, res) => {
 
 server.use("/api/customer", isCustomerAuthenticated, customerRoutes);
 
-server.use("/api/employee", isEmployeeAuthenticated, employeeRoutes);
+server.use("/api/employee",  employeeRoutes);
 server.use("/api/bookings", bookingsRoutes);
 
 server.listen(PORT, () => console.log(`Server started on ${PORT}`));

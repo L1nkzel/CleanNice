@@ -1,7 +1,7 @@
 import { Box} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
-import TableContentEmployee from "./tables/TableContentEmployee";
+import TableContentEmployee from "../tables/TableContentEmployee";
 
 const BookedEmployee = ({ data }) => {
   const [userBookings, setUserBookings] = useState();

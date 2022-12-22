@@ -1,7 +1,7 @@
 import { Box, Paper, Toolbar, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
-import TableContent from "./tables/TableContent";
+import TableContent from "../tables/TableContent";
 
 const AllBookings = ({ data }) => {
   const [bookings, setBookings] = useState([]);
