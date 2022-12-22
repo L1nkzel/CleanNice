@@ -21,14 +21,13 @@ export default function BookingsTabs({ data }) {
 const [bookings, setBookings] = useState([])
 const [confirmedServices, setConfirmedServices] = useState([])
 const [bookedServices, setBookedServices] = useState([])
-  const [errorMessage, setErrorMessage] = useState("");
-
-
+const [historyServices, setHistoryServices] = useState([])
+const [errorMessage, setErrorMessage] = useState("");
   
 
 useLayoutEffect(() => {
     
-    setConfirmedServices(
+   setConfirmedServices(
       confirmedServices.filter(
         (confirmed) => confirmed.status === "Bekräftad"
       )
@@ -36,10 +35,16 @@ useLayoutEffect(() => {
 
     setBookedServices(
         bookedServices.filter(
-            (booked) => booked.status ==="Bokad"
+            (booked) => booked.status === "Bokad"
         )
     )
-},[bookings])
+
+    setHistoryServices(
+      bookings.filter(
+        (paid) => paid.status === "Betald"
+      )
+    )
+},[])
     
   
 
@@ -129,7 +134,9 @@ useLayoutEffect(() => {
               value={3}
               label="Icke godkända Städningar"
             />
-            <Tab sx={{ fontWeight: "bold" }} value={4} label="Historik" />
+            <Tab sx={{ fontWeight: "bold" }}
+              value={4} 
+              label="Historik" />
           </Tabs>
         </Box>
 
@@ -154,7 +161,13 @@ useLayoutEffect(() => {
 
         <TabPanel value={value} index={3}></TabPanel>
 
-        <TabPanel value={value} index={4}></TabPanel>
+        <TabPanel value={value} index={4}>
+        <TableContent
+            data={historyServices}
+            dataUser={data}
+            deleteBookingHandler={deleteBookingHandler}
+          />
+        </TabPanel>
       </Box>
     </Box>
     </>
