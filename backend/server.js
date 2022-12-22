@@ -7,6 +7,7 @@ import cors from "cors";
 import customerRoutes from "./routes/customerRoutes.js";
 import employeeRoutes from "./routes/employeeRoutes.js";
 import bookingsRoutes from "./routes/bookingsRoutes.js";
+import emailRoutes from "./routes/emailRoutes.js";
 import { PrismaClient } from "@prisma/client";
 import * as bcrypt from "bcrypt";
 
@@ -122,6 +123,7 @@ server.use("/api/customer", isCustomerAuthenticated, customerRoutes);
 
 server.use("/api/employee",  employeeRoutes);
 server.use("/api/bookings", bookingsRoutes);
+server.use("/api/email", emailRoutes);
 
 server.listen(PORT, () => console.log(`Server started on ${PORT}`));
 
