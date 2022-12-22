@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import { Box, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "../ui/CustomButton";
-import RadioButtonsGroup from "./RadioButtonsGroup";
+import RadioButtonsGroup from "../ui/RadioButtonsGroup";
 import CalenderComponent from "./calender/CalenderComponent";
 import Title from "../ui/Title";
 
