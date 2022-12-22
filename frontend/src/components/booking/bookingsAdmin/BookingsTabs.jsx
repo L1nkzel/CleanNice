@@ -21,6 +21,8 @@ export default function BookingsTabs({ data }) {
 const [bookings, setBookings] = useState([])
 const [confirmedServices, setConfirmedServices] = useState([])
 const [bookedServices, setBookedServices] = useState([])
+const [approvedServices, setApprovedServices] = useState([])
+const [failedServices, setFailedServices] = useState([])
   const [errorMessage, setErrorMessage] = useState("");
 
 
@@ -35,6 +37,16 @@ useLayoutEffect(() => {
     );
 
     setBookedServices(
+        bookedServices.filter(
+            (booked) => booked.status ==="Bokad"
+        )
+    )
+    setApprovedServices(
+        bookedServices.filter(
+            (booked) => booked.status ==="Bokad"
+        )
+    )
+    setFailedServices(
         bookedServices.filter(
             (booked) => booked.status ==="Bokad"
         )
@@ -54,6 +66,8 @@ const fetchBookings = async () => {
     setBookings(result);
     setConfirmedServices(result);
     setBookedServices(result);
+    setApprovedServices(result)
+    setFailedServices(result)
   } catch (err) {
     setErrorMessage(err);
   }
@@ -151,9 +165,21 @@ const fetchBookings = async () => {
           />
         </TabPanel>
 
-        <TabPanel value={value} index={2}></TabPanel>
+        <TabPanel value={value} index={2}>
+        <TableContent
+            data={approvedServices}
+            dataUser={data}
+            deleteBookingHandler={deleteBookingHandler}
+          />
+        </TabPanel>
 
-        <TabPanel value={value} index={3}></TabPanel>
+        <TabPanel value={value} index={3}>
+        <TableContent
+            data={failedServices}
+            dataUser={data}
+            deleteBookingHandler={deleteBookingHandler}
+          />
+        </TabPanel>
 
         <TabPanel value={value} index={4}></TabPanel>
       </Box>
