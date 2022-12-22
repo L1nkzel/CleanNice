@@ -8,8 +8,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { DeleteOutline} from "@mui/icons-material";
 import {IconButton, Tooltip } from "@mui/material";
-import EditCustomer from "../../manageCustomers/EditCustomer";
-import EditCustomerPass from "../../manageCustomers/EditCustomerPass";
+import EditCustomer from "../manageCustomers/EditCustomer";
+import EditCustomerPass from "../manageCustomers/EditCustomerPass";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {

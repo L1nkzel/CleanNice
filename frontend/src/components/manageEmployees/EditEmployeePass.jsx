@@ -11,7 +11,6 @@ import {
   Tooltip,
 } from "@mui/material";
 import React, { useState } from "react";
-import AlertDialog from "./AlertDialog";
 import FormStyle from "../form/FormStyle";
 
 function EditEmployeePass({ row }) {

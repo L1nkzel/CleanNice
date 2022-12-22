@@ -41,11 +41,6 @@ const AlertDialog = () => {
       </Box>
       <DialogContent>
         <Typography>{message}</Typography>
-        <TextField 
-        fullWidth
-          value={textInput}
-          multiline
-        />
       </DialogContent>
       <DialogActions>
         <Button color="primary" variant="contained" onClick={close}>

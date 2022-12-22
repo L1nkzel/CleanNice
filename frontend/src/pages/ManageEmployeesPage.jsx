@@ -2,7 +2,7 @@ import { Box, Button } from "@mui/material";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import TableContentAdmin from "../components/booking/tables/TableContentAdmin";
+import TableContentAdmin from "../components/tables/TableContentAdmin";
 import AlertDialog, { confirmDialog } from "../components/manageEmployees/AlertDialog";
 import RegisterEmployeeModal from "../components/manageEmployees/RegisterEmployeeModal";
 import Header from "../components/ui/Header";
@@ -37,7 +37,7 @@ const ManageEmployeesPage = () => {
     }
   }
   const deleteEmployeeHandler = (id) => {
-    if (confirmDialog("Ta bort anställd", 'Anledning till borttagning av anställd:', () => 
+    if (confirmDialog("Ta bort anställd", 'Är du säker att du vill ta bort all data?', () => 
     deleteEmployee(id))) 
     return
   }

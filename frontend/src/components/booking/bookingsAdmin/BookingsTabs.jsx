@@ -5,7 +5,7 @@ import Tab from "@mui/material/Tab";
 
 import { Box, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import TableContent from "../tables/TableContent";
+import TableContent from "../../tables/TableContent";
 import Title from "../../ui/Title";
 
 export default function BookingsTabs({ data }) {

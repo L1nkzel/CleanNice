@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import TableContentCustomer from "../components/booking/tables/TableContentCustomer";
+import TableContentCustomer from "../components/tables/TableContentCustomer";
 import Header from "../components/ui/Header";
 import Title from "../components/ui/Title";
 import RegisterCustomerModal from "../components/manageCustomers/RegisterCustomerModal"

@@ -9,7 +9,7 @@ body {
 
 
 .Reg-component {
-  background-image: url(../src/components/registerImage.jpg);
+  background-image: url(../src/components/images/registerImage.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -17,7 +17,7 @@ body {
 }
 
 .Reg-component-emp {
-  background-image: url(../src/components/cowomen-1hlFqUdFv1s-unsplash.jpg);
+  background-image: url(../src/components/images/cowomen-1hlFqUdFv1s-unsplash.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
