@@ -24,6 +24,19 @@ const ManageCustomerPage = () => {
     fetchUsers();
   }, []);
 
+
+  const deleteBookingHandler = async (id) => {
+
+    await fetch(`http://localhost:3500/api/customer/${id}/deleteCustomer`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+    setCostumerData(
+      costumerData.filter((customer) => customer.employeeId !== id)
+    );
+
+};
+
   return (
     <>
       <Header
@@ -45,6 +58,7 @@ const ManageCustomerPage = () => {
 
           <TableContentCustomer
           data={costumerData}
+          deleteBookingHandler={deleteBookingHandler}
           />
         </Box>
       </Box>
