@@ -5,7 +5,7 @@ import Tab from "@mui/material/Tab";
 
 import { Box, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import TableContent from "../../tables/TableContent";
+import TableContent from "../tables/TableContent";
 import Title from "../../ui/Title";
 
 export default function BookingsTabs({ data }) {
@@ -21,19 +21,14 @@ export default function BookingsTabs({ data }) {
 const [bookings, setBookings] = useState([])
 const [confirmedServices, setConfirmedServices] = useState([])
 const [bookedServices, setBookedServices] = useState([])
-const [approvedServices, setApprovedServices] = useState([])
-const [failedServices, setFailedServices] = useState([])
-const [historyServices, setHistoryServices] = useState([])
-const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-
-  
 
   
 
 useLayoutEffect(() => {
     
-   setConfirmedServices(
+    setConfirmedServices(
       confirmedServices.filter(
         (confirmed) => confirmed.status === "Bekräftad"
       )
@@ -41,48 +36,30 @@ useLayoutEffect(() => {
 
     setBookedServices(
         bookedServices.filter(
-            (booked) => booked.status === "Bokad"
-        )
-    )
-    setApprovedServices(
-        bookedServices.filter(
             (booked) => booked.status ==="Bokad"
         )
     )
-    setFailedServices(
-        bookedServices.filter(
-            (booked) => booked.status ==="Bokad"
-        )
-    )
-
-    setHistoryServices(
-      bookings.filter(
-        (paid) => paid.status === "Betald"
-      )
-    )
-},[])
+},[bookings])
     
-  
 
-const fetchBookings = async () => {
-  try {
-    const res = await fetch(`http://localhost:3500/api/bookings/`, {
-      credentials: "include",
-    });
 
-    const result = await res.json();
-
-    setBookings(result);
-    setConfirmedServices(result);
-    setBookedServices(result);
-    setApprovedServices(result)
-    setFailedServices(result)
-  } catch (err) {
-    setErrorMessage(err);
-  }
-};
   useEffect(() => {
-    fetchBookings();
+    const checkUser = async () => {
+      try {
+        const res = await fetch(`http://localhost:3500/api/history/`, {
+          credentials: "include",
+        });
+
+        const result = await res.json();
+
+        setBookings(result);
+        setConfirmedServices(result);
+        setBookedServices(result);
+      } catch (err) {
+        setErrorMessage(err);
+      }
+    };
+    checkUser();
   }, []);
 
   const deleteBookingHandler = async (id) => {
@@ -152,16 +129,13 @@ const fetchBookings = async () => {
               value={3}
               label="Icke godkända Städningar"
             />
-            <Tab sx={{ fontWeight: "bold" }}
-              value={4} 
-              label="Historik" />
+            <Tab sx={{ fontWeight: "bold" }} value={4} label="Historik" />
           </Tabs>
         </Box>
 
         <TabPanel value={value} index={0}>
           <TableContent
           setConfirmedServices={setConfirmedServices}
-          fetchBookings={fetchBookings}
             data={confirmedServices}
             dataUser={data}
             deleteBookingHandler={deleteBookingHandler}
@@ -176,29 +150,11 @@ const fetchBookings = async () => {
           />
         </TabPanel>
 
-        <TabPanel value={value} index={2}>
-        <TableContent
-            data={approvedServices}
-            dataUser={data}
-            deleteBookingHandler={deleteBookingHandler}
-          />
-        </TabPanel>
+        <TabPanel value={value} index={2}></TabPanel>
 
-        <TabPanel value={value} index={3}>
-        <TableContent
-            data={failedServices}
-            dataUser={data}
-            deleteBookingHandler={deleteBookingHandler}
-          />
-        </TabPanel>
+        <TabPanel value={value} index={3}></TabPanel>
 
-        <TabPanel value={value} index={4}>
-        <TableContent
-            data={historyServices}
-            dataUser={data}
-            deleteBookingHandler={deleteBookingHandler}
-          />
-        </TabPanel>
+        <TabPanel value={value} index={4}></TabPanel>
       </Box>
     </Box>
     </>
