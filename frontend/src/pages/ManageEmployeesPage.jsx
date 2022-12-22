@@ -1,8 +1,9 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import TableContentAdmin from "../components/booking/tables/TableContentAdmin";
+import AlertDialog, { confirmDialog } from "../components/manageEmployees/AlertDialog";
 import RegisterEmployeeModal from "../components/manageEmployees/RegisterEmployeeModal";
 import Header from "../components/ui/Header";
 import Title from "../components/ui/Title";
@@ -35,9 +36,14 @@ const ManageEmployeesPage = () => {
       );
     }
   }
+  const deleteEmployeeHandler = (id) => {
+    if (confirmDialog("Ta bort anställd", 'Anledning till borttagning av anställd:', () => 
+    deleteEmployee(id))) 
+    return
+  }
 
-  const deleteEmployeeHandler = async (id) => {
-    if (window.confirm("Är du säker att du vill ta bort denna anställd")) {
+  const deleteEmployee = async (id) => {
+
       await fetch(`http://localhost:3500/api/employee/${id}/deleteEmployee`, {
         method: "DELETE",
         credentials: "include",
@@ -45,13 +51,12 @@ const ManageEmployeesPage = () => {
       setEmployeeData(
         employeeData.filter((employee) => employee.employeeId !== id)
       );
-    } else {
-      return;
-    }
+
   };
 
   return (
     <>
+    <AlertDialog />
       <Header
         url1="/adminpage/"
         link1Name="Översikt"

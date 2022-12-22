@@ -21,8 +21,14 @@ export default function BookingsTabs({ data }) {
 const [bookings, setBookings] = useState([])
 const [confirmedServices, setConfirmedServices] = useState([])
 const [bookedServices, setBookedServices] = useState([])
+const [approvedServices, setApprovedServices] = useState([])
+const [failedServices, setFailedServices] = useState([])
 const [historyServices, setHistoryServices] = useState([])
 const [errorMessage, setErrorMessage] = useState("");
+
+
+  
+
   
 
 useLayoutEffect(() => {
@@ -38,6 +44,16 @@ useLayoutEffect(() => {
             (booked) => booked.status === "Bokad"
         )
     )
+    setApprovedServices(
+        bookedServices.filter(
+            (booked) => booked.status ==="Bokad"
+        )
+    )
+    setFailedServices(
+        bookedServices.filter(
+            (booked) => booked.status ==="Bokad"
+        )
+    )
 
     setHistoryServices(
       bookings.filter(
@@ -48,23 +64,25 @@ useLayoutEffect(() => {
     
   
 
+const fetchBookings = async () => {
+  try {
+    const res = await fetch(`http://localhost:3500/api/bookings/`, {
+      credentials: "include",
+    });
+
+    const result = await res.json();
+
+    setBookings(result);
+    setConfirmedServices(result);
+    setBookedServices(result);
+    setApprovedServices(result)
+    setFailedServices(result)
+  } catch (err) {
+    setErrorMessage(err);
+  }
+};
   useEffect(() => {
-    const checkUser = async () => {
-      try {
-        const res = await fetch(`http://localhost:3500/api/bookings/`, {
-          credentials: "include",
-        });
-
-        const result = await res.json();
-
-        setBookings(result);
-        setConfirmedServices(result);
-        setBookedServices(result);
-      } catch (err) {
-        setErrorMessage(err);
-      }
-    };
-    checkUser();
+    fetchBookings();
   }, []);
 
   const deleteBookingHandler = async (id) => {
@@ -143,6 +161,7 @@ useLayoutEffect(() => {
         <TabPanel value={value} index={0}>
           <TableContent
           setConfirmedServices={setConfirmedServices}
+          fetchBookings={fetchBookings}
             data={confirmedServices}
             dataUser={data}
             deleteBookingHandler={deleteBookingHandler}
@@ -157,9 +176,21 @@ useLayoutEffect(() => {
           />
         </TabPanel>
 
-        <TabPanel value={value} index={2}></TabPanel>
+        <TabPanel value={value} index={2}>
+        <TableContent
+            data={approvedServices}
+            dataUser={data}
+            deleteBookingHandler={deleteBookingHandler}
+          />
+        </TabPanel>
 
-        <TabPanel value={value} index={3}></TabPanel>
+        <TabPanel value={value} index={3}>
+        <TableContent
+            data={failedServices}
+            dataUser={data}
+            deleteBookingHandler={deleteBookingHandler}
+          />
+        </TabPanel>
 
         <TabPanel value={value} index={4}>
         <TableContent

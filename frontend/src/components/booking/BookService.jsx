@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import { Box, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "../ui/CustomButton";
-import RadioButtonsGroup from "./RadioButtonsGroup";
+import RadioButtonsGroup from "../ui/RadioButtonsGroup";
 import CalenderComponent from "./calender/CalenderComponent";
 import Title from "../ui/Title";
 
@@ -16,7 +16,7 @@ export default function BookService({ data }) {
   const [value, setValue] = useState(0);
   const [date, setDate] = useState(new Date());
   const [showTime, setShowTime] = useState(false);
-  const [time, setTime] = useState("");
+  const [time, setTime] = useState([]);
   const [error, setError] = useState("");
   const bookUrl = `http://localhost:3500/api/bookings/`;
   const dateNumbers = `${date.getFullYear()}-${
