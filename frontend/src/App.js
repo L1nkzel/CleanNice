@@ -9,6 +9,7 @@ import ManageEmployeesPage from "./pages/ManageEmployeesPage";
 import ManageCostumerPage from "./pages/ManageCustomerPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
 import EmployeePage from "./pages/EmployeePage";
+import IntegrityPage from "./pages/IntegrityPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <Route path="/customer/services/:id/" element={<ServicesPage />} />
       <Route path="/customer/support" element={<CustomerPage />} />
       <Route path="/employee/" element={<EmployeePage />} />
+      <Route path="/customer/integrity" element={<IntegrityPage />} />
           </Routes>
     </>
     
