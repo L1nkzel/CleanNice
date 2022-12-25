@@ -22,6 +22,8 @@ function CustomerPage() {
       link3Name='Historik'
       url4='/customer/contact'
       link4Name='Kontakt'
+      url5='/customer/integrity'
+      link5Name ='Integritetspolicy'
       />
       <CurrentBookings data={userData.user} />
     </>
