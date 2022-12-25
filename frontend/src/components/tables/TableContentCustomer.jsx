@@ -6,10 +6,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { DeleteOutline} from "@mui/icons-material";
-import {IconButton, Tooltip } from "@mui/material";
+import { DeleteOutline } from "@mui/icons-material";
+import { IconButton, Tooltip } from "@mui/material";
 import EditCustomer from "../manageCustomers/EditCustomer";
 import EditCustomerPass from "../manageCustomers/EditCustomerPass";
+import AlertDialogCustomer from "../manageCustomers/AlertDialogCustomer";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -34,7 +35,8 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function TableContentCustomer(props, { data, deleteBookingHandler }) {
+export default function TableContentCustomer(props) {
+  const { customerData, setCustomerData, input, setInput } = props;
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -51,7 +53,7 @@ export default function TableContentCustomer(props, { data, deleteBookingHandler
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.data?.map((row) => (
+          {customerData?.map((row) => (
             <StyledTableRow key={row.customerId}>
               <StyledTableCell component="th" scope="row">
                 {row.customerId}
@@ -63,13 +65,15 @@ export default function TableContentCustomer(props, { data, deleteBookingHandler
               <StyledTableCell>{row.companyName}</StyledTableCell>
               <StyledTableCell>{row.orgNr}</StyledTableCell>
               <StyledTableCell>
-                <EditCustomer row={row}/>
-                <EditCustomerPass row={row}/>
-                <Tooltip title="Delete">
-                  <IconButton>
-                    <DeleteOutline onclick={()=>deleteBookingHandler(row.customerId)} sx={{ color: "#62926C" }} />
-                  </IconButton>
-                </Tooltip>
+                <EditCustomer row={row} />
+                <EditCustomerPass row={row} />
+                <AlertDialogCustomer
+                  customerData={customerData}
+                  setCustomerData={setCustomerData}
+                  input={input}
+                  setInput={setInput}
+                  row={row}
+                />
               </StyledTableCell>
             </StyledTableRow>
           ))}

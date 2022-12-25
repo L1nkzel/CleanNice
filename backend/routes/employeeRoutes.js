@@ -54,7 +54,7 @@ route.post("/newEmployee", async (req, res) => {
         accountNumber: req.body.accountNumber,
         role: req.body.role,
         password: await bcrypt.hash(req.body.password, 10),
-        forceChangePass: "yes",
+        forceChangePass: req.body.forceChangePass,
       },
     });
     res.json(employee);

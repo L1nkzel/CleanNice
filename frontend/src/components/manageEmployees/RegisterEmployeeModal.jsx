@@ -49,6 +49,7 @@ export default function BasicModal() {
       accountNumber: formData.accountNumber,
       role: "Employee",
       password: formData.password,
+      forceChangePass: "yes"
     };
 
     const res = await fetch(url, {

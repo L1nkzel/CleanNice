@@ -12,6 +12,8 @@ import { DeleteOutline, Edit } from "@mui/icons-material";
 import { Button, IconButton, Tooltip } from "@mui/material";
 import EditEmployee from "../manageEmployees/EditEmployee";
 import EditEmployeePass from "../manageEmployees/EditEmployeePass";
+import AlertDialog from "../manageCustomers/AlertDialogCustomer";
+import AlertDialogEmployee from "../manageEmployees/AlertDialogEmployee";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -37,6 +39,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 export default function TableContentEmployees(props) {
+  const {employeeData, setEmployeeData } = props;
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -53,7 +56,7 @@ export default function TableContentEmployees(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.data?.map((row) => (
+          {employeeData?.map((row) => (
             <StyledTableRow key={row.employeeId}>
               <StyledTableCell component="th" scope="row">
                 {row.employeeId}
@@ -67,13 +70,7 @@ export default function TableContentEmployees(props) {
               <StyledTableCell>
                 <EditEmployee row={row} />
                 <EditEmployeePass row={row} />
-                <Tooltip title="Delete">
-                  <IconButton
-                    onClick={() => props.deleteEmployeeHandler(row.employeeId)}
-                  >
-                    <DeleteOutline sx={{ color: "#62926C" }} />
-                  </IconButton>
-                </Tooltip>
+                <AlertDialogEmployee employeeData={employeeData} setEmployeeData={setEmployeeData} row={row}/>
               </StyledTableCell>
             </StyledTableRow>
           ))}

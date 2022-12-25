@@ -5,37 +5,26 @@ import { useState } from "react";
 import TableContentCustomer from "../components/tables/TableContentCustomer";
 import Header from "../components/ui/Header";
 import Title from "../components/ui/Title";
-import RegisterCustomerModal from "../components/manageCustomers/RegisterCustomerModal"
+import RegisterCustomerModal from "../components/manageCustomers/RegisterCustomerModal";
+import AlertDialog from "../components/manageCustomers/AlertDialogCustomer";
 
 const ManageCustomerPage = () => {
-  const URL = "http://localhost:3500/api/customer/"
-  const [costumerData, setCostumerData] = useState([]);
+  const URL = "http://localhost:3500/api/customer/";
+  const [customerData, setCustomerData] = useState([]);
+  const [input, setInput] = useState("");
+
   useEffect(() => {
     const fetchUsers = async () => {
-      const res = await fetch("http://localhost:3500/api/customer/",
-      {
-        credentials: 'include',
+      const res = await fetch(URL, {
+        credentials: "include",
       });
 
       const data = await res.json();
 
-      setCostumerData(data);
+      setCustomerData(data);
     };
     fetchUsers();
   }, []);
-
-
-  const deleteBookingHandler = async (id) => {
-
-    await fetch(`http://localhost:3500/api/customer/${id}/deleteCustomer`, {
-      method: "DELETE",
-      credentials: "include",
-    });
-    setCostumerData(
-      costumerData.filter((customer) => customer.employeeId !== id)
-    );
-
-};
 
   return (
     <>
@@ -53,12 +42,14 @@ const ManageCustomerPage = () => {
         <Box sx={{ flexGrow: 1, mx: 5 }}>
           <Title color={"darkgreen"}>Kunder</Title>
           <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
-           <RegisterCustomerModal />
+            <RegisterCustomerModal title="Skapa en ny kund" />
           </Box>
 
           <TableContentCustomer
-          data={costumerData}
-          deleteBookingHandler={deleteBookingHandler}
+            customerData={customerData}
+            setCustomerData={setCustomerData}
+            input={input}
+            setInput={setInput}
           />
         </Box>
       </Box>
