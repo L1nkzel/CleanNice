@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 const ITEM_HEIGHT = 48;
 
-export default function Options({ booking, fetchBookings, setConfirmedServices }) {
+export default function Options({ booking }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [employeeList, setEmployeeList] = useState([]);
@@ -102,6 +102,7 @@ filterEmployees()
         aria-expanded={open ? "true" : undefined}
         aria-haspopup="true"
         onClick={handleClick}
+        sx={{mx:0.5}}
       >
         <ArrowDropDownIcon />
       </IconButton>

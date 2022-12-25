@@ -25,7 +25,7 @@ const style = {
 
 const url = `http://localhost:3500/register`;
 
-export default function BasicModal() {
+export default function BasicModal({title}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -48,6 +48,7 @@ export default function BasicModal() {
       companyName: formData.companyName,
       orgNr: formData.orgNr,
       password: formData.password,
+      forceChangePass: "yes"
     };
 
     const res = await fetch(url, {
@@ -114,7 +115,7 @@ export default function BasicModal() {
             alignItems: "center",
           }}
         >
-          <DialogTitle>Registrera ny städare</DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
           <DialogContent>
             <TextField
               name="custName"

@@ -18,7 +18,7 @@ export default function Header(props) {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, padding: 2,  background: "linear-gradient(to bottom, #207b38cd, #fbfbfbcc)",}}>
+    <Box sx={{ flexGrow: 1, padding: 2, background: "linear-gradient(to bottom,#6982db, #FBFBFB)",}}>
       <Toolbar sx={{ alignItems: "center", justifyContent: "space-between" }}>
         <Box
           sx={{

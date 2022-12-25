@@ -26,7 +26,6 @@ function AdminPage() {
       
       
       />
-     {/* <AllBookings  /> */}
       <BookingsTabs data={userData.user}/>
     </>
   );

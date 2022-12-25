@@ -5,7 +5,7 @@ import Tab from "@mui/material/Tab";
 
 import { Box, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import TableContent from "../../tables/TableContent";
+import TableContentBooking from "../../tables/TableContentBooking";
 import Title from "../../ui/Title";
 
 export default function BookingsTabs({ data }) {
@@ -27,42 +27,6 @@ const [historyServices, setHistoryServices] = useState([])
 const [errorMessage, setErrorMessage] = useState("");
 
 
-  
-
-  
-
-useLayoutEffect(() => {
-    
-   setConfirmedServices(
-      confirmedServices.filter(
-        (confirmed) => confirmed.status === "Bekräftad"
-      )
-    );
-
-    setBookedServices(
-        bookedServices.filter(
-            (booked) => booked.status === "Bokad"
-        )
-    )
-    setApprovedServices(
-        bookedServices.filter(
-            (booked) => booked.status ==="Bokad"
-        )
-    )
-    setFailedServices(
-        bookedServices.filter(
-            (booked) => booked.status ==="Bokad"
-        )
-    )
-
-    setHistoryServices(
-      bookings.filter(
-        (paid) => paid.status === "Betald"
-      )
-    )
-},[])
-    
-  
 
 const fetchBookings = async () => {
   try {
@@ -84,6 +48,43 @@ const fetchBookings = async () => {
   useEffect(() => {
     fetchBookings();
   }, []);
+
+  
+
+useLayoutEffect(() => {
+    
+   setConfirmedServices(
+      confirmedServices.filter(
+        (confirmed) => confirmed.status === "Bekräftad"
+      )
+    );
+
+    setBookedServices(
+        bookedServices.filter(
+            (booked) => booked.status === "Bokad"
+        )
+    )
+    setApprovedServices(
+        bookedServices.filter(
+            (booked) => booked.status ==="Utfört"
+        )
+    )
+    setFailedServices(
+        bookedServices.filter(
+            (booked) => booked.status ==="Underkänd"
+        )
+    )
+
+    setHistoryServices(
+      bookings.filter(
+        (paid) => paid.status === "Betald"
+      )
+    )
+},[bookings])
+    
+  
+
+
 
   const deleteBookingHandler = async (id) => {
     if (window.confirm("Är du säker att du vill ta bort denna bokning")) {
@@ -159,7 +160,7 @@ const fetchBookings = async () => {
         </Box>
 
         <TabPanel value={value} index={0}>
-          <TableContent
+          <TableContentBooking
           setConfirmedServices={setConfirmedServices}
           fetchBookings={fetchBookings}
             data={confirmedServices}
@@ -169,7 +170,7 @@ const fetchBookings = async () => {
         </TabPanel>
 
         <TabPanel value={value} index={1}>
-        <TableContent
+        <TableContentBooking
             data={bookedServices}
             dataUser={data}
             deleteBookingHandler={deleteBookingHandler}
@@ -177,7 +178,7 @@ const fetchBookings = async () => {
         </TabPanel>
 
         <TabPanel value={value} index={2}>
-        <TableContent
+        <TableContentBooking
             data={approvedServices}
             dataUser={data}
             deleteBookingHandler={deleteBookingHandler}
@@ -185,7 +186,7 @@ const fetchBookings = async () => {
         </TabPanel>
 
         <TabPanel value={value} index={3}>
-        <TableContent
+        <TableContentBooking
             data={failedServices}
             dataUser={data}
             deleteBookingHandler={deleteBookingHandler}
@@ -193,7 +194,7 @@ const fetchBookings = async () => {
         </TabPanel>
 
         <TabPanel value={value} index={4}>
-        <TableContent
+        <TableContentBooking
             data={historyServices}
             dataUser={data}
             deleteBookingHandler={deleteBookingHandler}

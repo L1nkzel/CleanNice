@@ -1,11 +1,12 @@
 import { Box, Paper, Toolbar, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import TableContent from "../tables/TableContent";
+import TableContentBooking from "../tables/TableContentBooking";
 import Title from "../ui/Title";
 
 const CurrentBookings = ({ data }) => {
   const [userBookings, setUserBookings] = useState();
   const [errorMessage, setErrorMessage] = useState("");
+  const [input, setInput] = useState("")
   useEffect(() => {
     const checkUser = async () => {
       if (!isNaN(data.customerId)) {
@@ -85,11 +86,11 @@ const CurrentBookings = ({ data }) => {
     <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
       <Box sx={{ flexGrow: 1, mx: 5 }}>
         <Title color={"darkgreen"}>Mina bokningar</Title>
-        <TableContent
-        
+        <TableContentBooking
+          input={input}
+          setInput={setInput}
           data={userBookings}
-          approveBooking={approveBooking}
-          failBooking={failBooking}
+          setUserBookings={setUserBookings}
           deleteBookingHandler={deleteBookingHandler}
         />
       </Box>

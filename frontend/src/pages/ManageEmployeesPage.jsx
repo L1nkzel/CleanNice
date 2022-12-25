@@ -3,7 +3,9 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import TableContentAdmin from "../components/tables/TableContentAdmin";
-import AlertDialog, { confirmDialog } from "../components/manageEmployees/AlertDialog";
+import AlertDialog, {
+  confirmDialog,
+} from "../components/manageCustomers/AlertDialogCustomer";
 import RegisterEmployeeModal from "../components/manageEmployees/RegisterEmployeeModal";
 import Header from "../components/ui/Header";
 import Title from "../components/ui/Title";
@@ -11,20 +13,19 @@ import Title from "../components/ui/Title";
 const ManageEmployeesPage = () => {
   const URL = "http://localhost:3500/api/employee/";
   const [employeeData, setEmployeeData] = useState([]);
+
   useEffect(() => {
     const fetchUsers = async () => {
-      const res = await fetch("http://localhost:3500/api/employee/", {
+      const res = await fetch(URL, {
         credentials: "include",
       });
 
       const data = await res.json();
-     
-      
+
       setEmployeeData(data);
-      console.log(employeeData)
+      console.log(employeeData);
     };
     fetchUsers();
-    
   }, []);
 
   for (let i = 0; i < employeeData.length; i++) {
@@ -36,27 +37,11 @@ const ManageEmployeesPage = () => {
       );
     }
   }
-  const deleteEmployeeHandler = (id) => {
-    if (confirmDialog("Ta bort anställd", 'Är du säker att du vill ta bort all data?', () => 
-    deleteEmployee(id))) 
-    return
-  }
 
-  const deleteEmployee = async (id) => {
 
-      await fetch(`http://localhost:3500/api/employee/${id}/deleteEmployee`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-      setEmployeeData(
-        employeeData.filter((employee) => employee.employeeId !== id)
-      );
-
-  };
 
   return (
     <>
-    <AlertDialog />
       <Header
         url1="/adminpage/"
         link1Name="Översikt"
@@ -75,8 +60,8 @@ const ManageEmployeesPage = () => {
           </Box>
 
           <TableContentAdmin
-            deleteEmployeeHandler={deleteEmployeeHandler}
-            data={employeeData}
+            employeeData={employeeData}
+            setEmployeeData={setEmployeeData}
           />
         </Box>
       </Box>
