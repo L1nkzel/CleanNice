@@ -122,19 +122,19 @@ export default function BookService({ data }) {
             aria-label="basic tabs example"
           >
             <Tab
-              sx={{ fontWeight: "bold" }}
+              sx={{ fontWeight: "bold", fontSize:18  }}
               disabled
               value={0}
               label="Välj tjänst"
             />
             <Tab
-              sx={{ fontWeight: "bold" }}
+              sx={{ fontWeight: "bold", fontSize:18 }}
               disabled
               value={1}
               label="Välj datum och tid"
             />
             <Tab
-              sx={{ fontWeight: "bold" }}
+              sx={{ fontWeight: "bold", fontSize:18  }}
               disabled
               value={2}
               label="Detaljer"
