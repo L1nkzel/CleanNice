@@ -7,9 +7,10 @@ function Title({children, color}) {
       sx={{
         textAlign: "center",
         mt:2,
-        mb: 2,
+        mb: 4,
         color: color,
-        fontSize: 22,
+        fontSize: 21,
+        fontFamily: "Poppins"
       }}
     >
       {children}

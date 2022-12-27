@@ -58,7 +58,7 @@ export default function TableContentBooking(props) {
         <TableHead>
           <TableRow>
             <StyledTableCell>Boknings Id</StyledTableCell>
-            <StyledTableCell>Kund Id</StyledTableCell>
+            {dataUser?.role === "Admin" ? ( <StyledTableCell>Kund Id</StyledTableCell>) : null}
             <StyledTableCell>Kontaktperson</StyledTableCell>
             <StyledTableCell>Telefonnummer</StyledTableCell>
             <StyledTableCell>Företagsnamn</StyledTableCell>
@@ -77,7 +77,7 @@ export default function TableContentBooking(props) {
               <StyledTableCell component="th" scope="row">
                 {row.bookingId}
               </StyledTableCell>
-              <StyledTableCell>{row.customerId}</StyledTableCell>
+              {dataUser?.role === "Admin" ? ( <StyledTableCell>{row.customerId}</StyledTableCell>) : null}
               <StyledTableCell>{row.customerName}</StyledTableCell>
               <StyledTableCell>{row.phoneNumber}</StyledTableCell>
               <StyledTableCell>{row.companyName}</StyledTableCell>
