@@ -7,37 +7,37 @@ const CurrentBookings = ({ data }) => {
   const [userBookings, setUserBookings] = useState();
   const [errorMessage, setErrorMessage] = useState("");
   const [input, setInput] = useState("")
-  useEffect(() => {
-    const checkUser = async () => {
-      if (!isNaN(data.customerId)) {
-        try {
-          const res = await fetch(
-            `http://localhost:3500/api/bookings/${data.customerId}/bookings`
-          );
-
+  const [isLoaded, setIsLoaded] = useState(false)
+  const checkUser = async () => {
+    if (!isNaN(data.customerId)) {
+      try {
+        const res = await fetch(
+          `http://localhost:3500/api/bookings/${data.customerId}/bookings`
+          ); 
           const result = await res.json();
           setUserBookings(result);
-          console.log(result);
+          setIsLoaded(true)
         } catch (err) {
           setErrorMessage(err);
         }
       }
     };
-    checkUser();
-  }, [data.customerId]);
+    useEffect(() => {
+    setInterval(checkUser,1000)
+  }, []);
 
-  const deleteBookingHandler = async (id) => {
-    if (window.confirm("Är du säker att du vill ta bort denna bokning")) {
-      await fetch(`http://localhost:3500/api/bookings/${id}/booking`, {
-        method: "DELETE",
-      });
-      setUserBookings(
-        userBookings.filter((booking) => booking.bookingId !== id)
-      );
-    } else {
-      return;
-    }
-  };
+  // const deleteBookingHandler = async (id) => {
+  //   if (window.confirm("Är du säker att du vill ta bort denna bokning")) {
+  //     await fetch(`http://localhost:3500/api/bookings/${id}/booking`, {
+  //       method: "DELETE",
+  //     });
+  //     setUserBookings(
+  //       userBookings.filter((booking) => booking.bookingId !== id)
+  //     );
+  //   } else {
+  //     return;
+  //   }
+  // };
 
   const approveBooking = async (id) => {
     const data = {
@@ -54,34 +54,33 @@ const CurrentBookings = ({ data }) => {
           body: JSON.stringify(data),
         }
       );
-      const data2 = await res.json();
-      console.log(data2);
-      return;
-    }
-  };
-  const failBooking = async (id) => {
-    const data = {
-      status: "Underkänd",
-    };
-    if (window.confirm("Vill du underkänna denna bokning")) {
-      const res = await fetch(
-        `http://localhost:3500/api/bookings/${id}/editBooking`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
-      const data2 = await res.json();
-      console.log(data2);
-      return;
-    }
-    
-  };
 
-  console.log("userbookings:", userBookings);
+      return;
+    }
+  };
+  // const failBooking = async (id) => {
+  //   const data = {
+  //     status: "Underkänd",
+  //   };
+  //   if (window.confirm("Vill du underkänna denna bokning")) {
+  //     const res = await fetch(
+  //       `http://localhost:3500/api/bookings/${id}/editBooking`,
+  //       {
+  //         method: "PATCH",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(data),
+  //       }
+  //     );
+  //     const data2 = await res.json();
+  //     console.log(data2);
+  //     return;
+  //   }
+    
+  // };
+
+
   return (
     <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
       <Box sx={{ flexGrow: 1, mx: 5 }}>
@@ -91,7 +90,7 @@ const CurrentBookings = ({ data }) => {
           setInput={setInput}
           data={userBookings}
           setUserBookings={setUserBookings}
-          deleteBookingHandler={deleteBookingHandler}
+          isLoaded={isLoaded}
         />
       </Box>
     </Box>

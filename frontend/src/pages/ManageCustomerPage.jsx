@@ -1,30 +1,43 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import TableContentCustomer from "../components/tables/TableContentCustomer";
+import TableContentCustomers from "../components/tables/TableContentCustomers";
 import Header from "../components/ui/Header";
 import Title from "../components/ui/Title";
 import RegisterCustomerModal from "../components/manageCustomers/RegisterCustomerModal";
-import AlertDialog from "../components/manageCustomers/AlertDialogCustomer";
+
 
 const ManageCustomerPage = () => {
+  const loggedInUser = JSON.parse(localStorage.getItem("userData"));
+  const [userData, setUserData] = useState(loggedInUser);
   const URL = "http://localhost:3500/api/customer/";
   const [customerData, setCustomerData] = useState([]);
   const [input, setInput] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false)
 
+  const fetchUsers = async () => {
+    const res = await fetch(URL, {
+      credentials: "include",
+    });
+
+    const data = await res.json();
+
+    setCustomerData(data);
+    setIsLoaded(true)
+  };
   useEffect(() => {
-    const fetchUsers = async () => {
-      const res = await fetch(URL, {
-        credentials: "include",
-      });
-
-      const data = await res.json();
-
-      setCustomerData(data);
-    };
-    fetchUsers();
+    setInterval(fetchUsers, 1000)
+    
   }, []);
+
+  if(userData?.role !== "Admin"){
+    return(
+      <Box>
+        <Typography>No</Typography>
+      </Box>
+    )
+  }
 
   return (
     <>
@@ -44,12 +57,13 @@ const ManageCustomerPage = () => {
           <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
             <RegisterCustomerModal title="Skapa en ny kund" />
           </Box>
-
-          <TableContentCustomer
+          
+          <TableContentCustomers
             customerData={customerData}
             setCustomerData={setCustomerData}
             input={input}
             setInput={setInput}
+            isLoaded={isLoaded}
           />
         </Box>
       </Box>

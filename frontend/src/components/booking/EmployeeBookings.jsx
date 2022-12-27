@@ -1,29 +1,30 @@
 import { Box} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
-import TableContentEmployee from "../tables/TableContentEmployee";
+import TableContentCleaner from "../tables/TableContentCleaner";
 
 const BookedEmployee = ({ data }) => {
   const [userBookings, setUserBookings] = useState();
   const [errorMessage, setErrorMessage] = useState("");
-  useEffect(() => {
-    const checkUser = async () => {
-      if (!isNaN(data.employeeId)) {
-        try {
-          const res = await fetch(
-            `http://localhost:3500/api/employee/${data.employeeId}/bookings`
+  const [isLoaded, setIsLoaded] = useState(false)
+  const checkUser = async () => {
+    if (!isNaN(data.employeeId)) {
+      try {
+        const res = await fetch(
+          `http://localhost:3500/api/employee/${data.employeeId}/bookings`
           , {credentials:'include'});
-
+          
           const result = await res.json();
           setUserBookings(result.bookings.filter((booking) => booking.status === "Bokad"));
-          console.log(result.bookings);
+          setIsLoaded(true)
         } catch (err) {
           setErrorMessage(err);
         }
       }
     };
-    checkUser();
-  }, [data.employeeId]);
+    useEffect(() => {
+    setInterval(checkUser,1000)
+  }, []);
 
   const cleaningDoneHandler = async (id) => {
 
@@ -31,15 +32,13 @@ const BookedEmployee = ({ data }) => {
       status:"Utfört"
     }
     if (window.confirm("Vill du klarmarkera denna bokning")) {
-     const res =  await fetch(`http://localhost:3500/api/bookings/${id}/editBooking`, {
+    await fetch(`http://localhost:3500/api/bookings/${id}/editBooking`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body:JSON.stringify(data)
       });
-      const data2 = await res.json()
-      console.log(data2)
       setUserBookings(
         userBookings.filter((booking) => booking.status === "Bokad")
       );
@@ -47,15 +46,14 @@ const BookedEmployee = ({ data }) => {
       return;
     }
   };
-  console.log("userbookings:",userBookings)
   return (
     <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
       <Box sx={{ flexGrow: 1, mx: 5 }}>
         <Title color={"darkgreen"}>Mina bokningar</Title>
-        <TableContentEmployee
+        <TableContentCleaner
           data={userBookings}
           cleaningDoneHandler={cleaningDoneHandler}
-         
+          isLoaded={isLoaded}
         />
       </Box>
     </Box>

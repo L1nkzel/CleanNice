@@ -4,7 +4,7 @@ import Header from "../components/ui/Header";
 
 function CustomerPage() {
   const loggedInUser = JSON.parse(localStorage.getItem("userData"));
-  const [userData, setUserData] = useState(loggedInUser);
+  const [userData] = useState(loggedInUser);
 
   console.log(userData);
   if (!userData?.isAuthenticated ) {

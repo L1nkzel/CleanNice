@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 
   import CheckIcon from '@mui/icons-material/Check';
 
-import { Button } from '@mui/material';
+import { Box, Button, CircularProgress } from '@mui/material';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -40,11 +40,14 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 
 
-export default function TableContentEmployee({data,dataUser, cleaningDoneHandler}) {
-
-  console.log(data)
+export default function TableContentCleaner(props) {
+const {data,dataUser, isLoaded,cleaningDoneHandler} = props
   return (
-    <TableContainer component={Paper}>
+    <>
+    {!isLoaded ? <Box sx={{mt:15,flexGrow:1, justifyContent:'center', display:'flex', alignItems:'center' }}>
+    <CircularProgress size="50px" />
+    
+  </Box> : <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
@@ -81,6 +84,7 @@ export default function TableContentEmployee({data,dataUser, cleaningDoneHandler
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </TableContainer>}
+  </>
   );
 }
