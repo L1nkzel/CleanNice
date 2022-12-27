@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -6,11 +7,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { DeleteOutline } from "@mui/icons-material";
-import { IconButton, Tooltip } from "@mui/material";
-import EditCustomer from "../manageCustomers/EditCustomer";
-import EditCustomerPass from "../manageCustomers/EditCustomerPass";
-import AlertDialogCustomer from "../manageCustomers/AlertDialogCustomer";
+import EditEmployee from "../manageEmployees/EditEmployee";
+import EditEmployeePass from "../manageEmployees/EditEmployeePass"; 
+import AlertDialogEmployee from "../manageEmployees/AlertDialogEmployee";
+import { Box, CircularProgress } from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -35,50 +35,49 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-export default function TableContentCustomer(props) {
-  const { customerData, setCustomerData, input, setInput } = props;
+export default function TableContentEmployees(props) {
+  const {employeeData, setEmployeeData } = props;
   return (
-    <TableContainer component={Paper}>
+    <>
+    {!props.isLoaded ? <Box sx={{mt:15,flexGrow:1, justifyContent:'center', display:'flex', alignItems:'center' }}>
+    <CircularProgress size="50px" />
+    
+  </Box> :  <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Kund id</StyledTableCell>
+            <StyledTableCell>Anställnings id</StyledTableCell>
             <StyledTableCell>Namn- och efternamn</StyledTableCell>
+            <StyledTableCell>Personnummer</StyledTableCell>
             <StyledTableCell>Telefonnummer</StyledTableCell>
-            <StyledTableCell>E-post</StyledTableCell>
             <StyledTableCell>Address</StyledTableCell>
-            <StyledTableCell>Företagsnamn</StyledTableCell>
-            <StyledTableCell>Org nummer</StyledTableCell>
+            <StyledTableCell>Konto nummer</StyledTableCell>
+            <StyledTableCell>E-post</StyledTableCell>
             <StyledTableCell>Hantera</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {customerData?.map((row) => (
-            <StyledTableRow key={row.customerId}>
+          {employeeData?.map((row) => (
+            <StyledTableRow key={row.employeeId}>
               <StyledTableCell component="th" scope="row">
-                {row.customerId}
+                {row.employeeId}
               </StyledTableCell>
-              <StyledTableCell>{row.custName}</StyledTableCell>
+              <StyledTableCell>{row.employeeName}</StyledTableCell>
+              <StyledTableCell>{row.personalNumber}</StyledTableCell>
               <StyledTableCell>{row.phoneNumber}</StyledTableCell>
-              <StyledTableCell>{row.email}</StyledTableCell>
               <StyledTableCell>{row.adress}</StyledTableCell>
-              <StyledTableCell>{row.companyName}</StyledTableCell>
-              <StyledTableCell>{row.orgNr}</StyledTableCell>
+              <StyledTableCell>{row.accountNumber}</StyledTableCell>
+              <StyledTableCell>{row.email}</StyledTableCell>
               <StyledTableCell>
-                <EditCustomer row={row} />
-                <EditCustomerPass row={row} />
-                <AlertDialogCustomer
-                  customerData={customerData}
-                  setCustomerData={setCustomerData}
-                  input={input}
-                  setInput={setInput}
-                  row={row}
-                />
+                <EditEmployee row={row} />
+                <EditEmployeePass row={row} />
+                <AlertDialogEmployee employeeData={employeeData} setEmployeeData={setEmployeeData} row={row}/>
               </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </TableContainer>}
+    </>
   );
 }

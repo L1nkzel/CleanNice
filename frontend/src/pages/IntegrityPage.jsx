@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import { fontSize } from "@mui/system";
 import React from "react";
 import Header from "../components/ui/Header";
 
@@ -25,12 +24,15 @@ const IntegrityPage = () => {
         >
           Integritetspolicy
         </Typography>
-        <Typography sx={{ mt: 2, textAlign: "end", fontSize: 18 }}>
-          25 Dec 2022
-        </Typography>
-        <Typography sx={{ mt: 2, fontSize: 18 }}>
+        <Box sx={{display:'flex',flexDirection:'row', justifyContent:'space-between'}}>
+
+        <Typography sx={{ mt: 2,fontWeight:'bold', fontSize: 18 }}>
           Behandling av personuppgifter på Städa Fint AB{" "}
         </Typography>
+        <Typography sx={{ mt: 2, fontSize: 18 }}>
+          25 Dec 2022
+        </Typography>
+        </Box>
 
         <Typography sx={{ whiteSpace: "pre-wrap" }}>
           {"\n"}
@@ -44,7 +46,7 @@ const IntegrityPage = () => {
           {"\n"}
         </Typography>
 
-        <Typography sx={{ whiteSpace: "pre-wrap" }}>
+        <Box sx={{ whiteSpace: "pre-wrap" }}>
           {"\n"}
           <Typography sx={{ fontWeight: "bold", fontSize: 20 }}>
             Vad är en personuppgift och vad är en behandling av personuppgifter?{" "}
@@ -60,8 +62,8 @@ const IntegrityPage = () => {
           register omfattas.
           {"\n"}
           {"\n"}
-        </Typography>
-        <Typography sx={{ whiteSpace: "pre-wrap" }}>
+        </Box>
+        <Box sx={{ whiteSpace: "pre-wrap" }}>
           {"\n"}
           <Typography sx={{ fontWeight: "bold", fontSize: 20 }}>
             Personuppgiftsansvarig{" "}
@@ -71,8 +73,8 @@ const IntegrityPage = () => {
           Mariedalsvägen 32a
           {"\n"}
           {"\n"}
-        </Typography>
-        <Typography sx={{ whiteSpace: "pre-wrap" }}>
+        </Box>
+        <Box sx={{ whiteSpace: "pre-wrap" }}>
           {"\n"}
           <Typography sx={{ fontWeight: "bold", fontSize: 20 }}>
             Vilka personuppgifter samlar vi in om dig och varför?
@@ -83,9 +85,9 @@ const IntegrityPage = () => {
           regler i lag och kollektivavtal.
           {"\n"}
           {"\n"}
-        </Typography>
+        </Box>
 
-        <Typography sx={{ whiteSpace: "pre-wrap" }}>
+        <Box sx={{ whiteSpace: "pre-wrap" }}>
           {"\n"}
           <Typography sx={{ fontWeight: "bold", fontSize: 20 }}>
           Personuppgiftsbiträden
@@ -93,8 +95,8 @@ const IntegrityPage = () => {
           {"\n"}I en del situationer är det nödvändigt för oss att anlita andra parter. Till exempel olika IT-leverantörer för HR-system eller elektroniska körjournaler. De är då personuppgiftsbiträden till oss. Vi kontrollerar personuppgiftsbiträden för att säkerställa att de garanterar säkerheten och sekretessen för personuppgifterna. När personuppgiftsbiträden anlitas sker det bara för de ändamål som är förenliga med de ändamål vi själva har för behandlingen. 
           {"\n"}
           {"\n"}
-        </Typography>
-        <Typography sx={{ whiteSpace: "pre-wrap" }}>
+        </Box>
+        <Box sx={{ whiteSpace: "pre-wrap" }}>
           {"\n"}
           <Typography sx={{ fontWeight: "bold", fontSize: 20 }}>
           Aktörer som är självständigt personuppgiftsansvariga 
@@ -102,8 +104,8 @@ const IntegrityPage = () => {
           {"\n"}Vi delar även dina personuppgifter med vissa andra aktörer som är självständigt personuppgiftsansvariga, till exempel myndigheter som Skatteverket, när vi är skyldiga att lämna ut sådana uppgifter med stöd av lag eller myndighetsbeslut. När dina personuppgifter delas med en aktör som är självständigt personuppgiftsansvarig gäller den organisationens integritetspolicy och personuppgiftshantering.
           {"\n"}
           {"\n"}
-        </Typography>
-        <Typography sx={{ whiteSpace: "pre-wrap" }}>
+        </Box>
+        <Box sx={{ whiteSpace: "pre-wrap" }}>
           {"\n"}
           <Typography sx={{ fontWeight: "bold", fontSize: 20 }}>
           Hur länge sparar vi dina personuppgifter? 
@@ -111,8 +113,8 @@ const IntegrityPage = () => {
           {"\n"}Vi sparar aldrig dina personuppgifter längre än vad som är nödvändigt för respektive ändamål. Vissa uppgifter i bokföringen behöver på grund av lagstiftning till exempel sparas minst sju år.
           {"\n"}
           {"\n"}
-        </Typography>
-        <Typography sx={{ whiteSpace: "pre-wrap" }}>
+        </Box>
+        <Box sx={{ whiteSpace: "pre-wrap" }}>
           {"\n"}
           <Typography sx={{ fontWeight: "bold", fontSize: 20 }}>
           Vad är dina rättigheter som registrerad? 
@@ -120,8 +122,8 @@ const IntegrityPage = () => {
           {"\n"}Som registrerad har du enligt gällande lagstiftning ett antal rättigheter. Du har rätt till att få ett utdrag som visar vilka personuppgifter vi har registrerade om dig. Du kan begära rättelse av felaktiga uppgifter och i vissa fall radering.
           {"\n"}
           {"\n"}
-        </Typography>
-        <Typography sx={{ whiteSpace: "pre-wrap" }}>
+        </Box>
+        <Box sx={{ whiteSpace: "pre-wrap" }}>
           {"\n"}
           <Typography sx={{ fontWeight: "bold", fontSize: 20 }}>
           Kontakta oss vid frågor om hur vi behandlar personuppgifter.
@@ -131,7 +133,7 @@ Vi kan komma att göra ändringar i vår integritetspolicy. Den senaste versione
 
           {"\n"}
           {"\n"}
-        </Typography>
+        </Box>
       </Box>
     </>
   );

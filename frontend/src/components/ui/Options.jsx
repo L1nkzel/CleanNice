@@ -24,8 +24,8 @@ export default function Options({ booking }) {
     filterEmployees()
   };
   useEffect(() => {
-    fetchUsers();
-  }, [employeeList.count?.bookings]);
+    setInterval(fetchUsers,1000);
+  }, []);
 
   const filterEmployees = () =>{
 
@@ -47,6 +47,7 @@ export default function Options({ booking }) {
               (employee) => employee.employeeId !== employeeList[i].employeeId
               )
               );
+              
             }
     }
   }
@@ -116,19 +117,20 @@ filterEmployees()
         onClose={handleClose}
         PaperProps={{
           style: {
+            textAlign:'center',
             maxHeight: ITEM_HEIGHT * 4.5,
-            width: "20ch",
+            width: "22ch",
           },
         }}
       >
-        {employeeList.map((option) => (
+        {employeeList.length !== 0 ? employeeList.map((option) => (
           <MenuItem
             key={option.employeeId}
             onClick={() => employeeChooseHandler(option)}
           >
             {option?.employeeName}
-          </MenuItem>
-        ))}
+                      </MenuItem>
+        )): "Inga tillgängliga städare"}
       </Menu>
     </div>
   );

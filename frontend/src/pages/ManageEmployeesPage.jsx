@@ -2,10 +2,7 @@ import { Box, Button } from "@mui/material";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import TableContentAdmin from "../components/tables/TableContentAdmin";
-import AlertDialog, {
-  confirmDialog,
-} from "../components/manageCustomers/AlertDialogCustomer";
+import TableContentEmployees from "../components/tables/TableContentEmployees";
 import RegisterEmployeeModal from "../components/manageEmployees/RegisterEmployeeModal";
 import Header from "../components/ui/Header";
 import Title from "../components/ui/Title";
@@ -13,19 +10,21 @@ import Title from "../components/ui/Title";
 const ManageEmployeesPage = () => {
   const URL = "http://localhost:3500/api/employee/";
   const [employeeData, setEmployeeData] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false)
 
+  const fetchUsers = async () => {
+    const res = await fetch(URL, {
+      credentials: "include",
+    });
+
+    const data = await res.json();
+
+    setEmployeeData(data);
+    setIsLoaded(true)
+   
+  };
   useEffect(() => {
-    const fetchUsers = async () => {
-      const res = await fetch(URL, {
-        credentials: "include",
-      });
-
-      const data = await res.json();
-
-      setEmployeeData(data);
-      console.log(employeeData);
-    };
-    fetchUsers();
+    setInterval(fetchUsers,1000)
   }, []);
 
   for (let i = 0; i < employeeData.length; i++) {
@@ -59,9 +58,10 @@ const ManageEmployeesPage = () => {
             <RegisterEmployeeModal />
           </Box>
 
-          <TableContentAdmin
+          <TableContentEmployees
             employeeData={employeeData}
             setEmployeeData={setEmployeeData}
+            isLoaded={isLoaded}
           />
         </Box>
       </Box>

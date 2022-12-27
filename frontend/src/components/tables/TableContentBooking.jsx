@@ -10,8 +10,9 @@ import Paper from "@mui/material/Paper";
 import { DeleteOutline, Done, Clear } from "@mui/icons-material";
 import FailedServiceModal from "../booking/FailedServiceModal";
 import FailedServiceMessage from "../booking/FailedServiceMessage"
-import { Button } from "@mui/material";
+import { Box, Button, CircularProgress } from "@mui/material";
 import Options from "../ui/Options";
+import DeleteBookingModal from "../DeleteBookingModal";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -48,7 +49,11 @@ export default function TableContentBooking(props) {
   } = props;
 
   return (
-    <TableContainer component={Paper}>
+    <>
+    {!props.isLoaded ? <Box sx={{mt:15,flexGrow:1, justifyContent:'center', display:'flex', alignItems:'center' }}>
+    <CircularProgress size="50px" />
+    
+  </Box> :<TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
@@ -87,7 +92,7 @@ export default function TableContentBooking(props) {
                 {row.cleanerName}
                 {dataUser?.role === "Admin" ? (
                   <Options booking={row} />
-                ) : null}
+                  ) : null}
               </StyledTableCell>}
             
               <StyledTableCell>{row.adress}</StyledTableCell>
@@ -103,27 +108,26 @@ export default function TableContentBooking(props) {
                 ) : null}
                 {row.status === "Utfört" ? (
                   <FailedServiceModal
-                    userBookings={data}
-                    setUserBookings={setUserBookings}
-                    input={input}
-                    setInput={setInput}
-                    row={row}
+                  userBookings={data}
+                  setUserBookings={setUserBookings}
+                  input={input}
+                  setInput={setInput}
+                  row={row}
                   />
-                ) : null}
+                  ) : null}
                 {dataUser?.role === "Admin" && row.comment !== "N/A" ? (
                   <FailedServiceMessage row={row}/>
-                ) : null
+                  ) : null
                 }
                 {!row.date === new Date() || row.status !== "Utfört" ? (
-                  <Button onClick={() => deleteBookingHandler(row.bookingId)}>
-                    <DeleteOutline sx={{ color: "black" }} />
-                  </Button>
-                ) : null}
+                  <DeleteBookingModal userBookings={data} setUserBookings={setUserBookings} row={row}/>
+                  ) : null}
               </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </TableContainer>}
+  </>
   );
 }
