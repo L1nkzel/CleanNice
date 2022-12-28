@@ -120,7 +120,8 @@ export default function TableContentBooking(props) {
                   ) : null
                 }
                 {!row.date === new Date() || row.status !== "Utfört" ? (
-                  <DeleteBookingModal userBookings={data} setUserBookings={setUserBookings} row={row}/>
+                  <DeleteBookingModal userBookings={data} setUserBookings={setUserBookings} row={row}
+                  user={dataUser}/>
                   ) : null}
               </StyledTableCell>
             </StyledTableRow>

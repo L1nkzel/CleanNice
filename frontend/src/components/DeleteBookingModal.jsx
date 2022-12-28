@@ -36,6 +36,22 @@ import {
           setUserBookings(
             userBookings.filter((booking) => booking.bookingId !== row.bookingId)
           );
+          console.log("user:", props?.user)
+          if(!isNaN(props?.user.customerId)){
+            const mailData = {
+              custName: props.user.custName,
+              email:props.user.email,
+              bookingId: row.bookingId
+    
+            }
+            await fetch(`http://localhost:3500/api/email/cancelBooking`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(mailData),
+            });
+          }
       };
   
     // function onHandleChange (e) {
