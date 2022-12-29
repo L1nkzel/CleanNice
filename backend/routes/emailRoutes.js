@@ -20,7 +20,7 @@ route.post("/newBooking", async (req, res) => {
     .sendTransacEmail({
       subject: "Tack för din bokning!",
       sender: { email: "no-reply@stadafint.se", name: "Städa Fint AB" },
-      to: [{ name: req.body.custName, email: "javalink@protonmail.com" }],
+      to: [{ name: req.body.custName, email: req.body.email }],
       htmlContent: htmlContent,
     })
     .then(
