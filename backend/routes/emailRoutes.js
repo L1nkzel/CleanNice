@@ -97,7 +97,7 @@ route.post("/assignCleaner", async (req, res) => {
     .sendTransacEmail({
       subject: "Städning tilldelad!",
       sender: { email: "no-reply@stadafint.se", name: "Städa Fint AB" },
-      to: [{ name: req.body.custName, email: req.body.email }],
+      to: [{ name: req.body.employeeName, email: req.body.email }],
       htmlContent: htmlContent,
     })
     .then(
