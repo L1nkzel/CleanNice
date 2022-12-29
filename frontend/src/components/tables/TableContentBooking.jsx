@@ -46,11 +46,12 @@ export default function TableContentBooking(props) {
     deleteBookingHandler,
     input,
     setInput,
+    isLoaded
   } = props;
 
   return (
     <>
-    {!props.isLoaded ? <Box sx={{mt:15,flexGrow:1, justifyContent:'center', display:'flex', alignItems:'center' }}>
+    {!isLoaded ? <Box sx={{mt:15,flexGrow:1, justifyContent:'center', display:'flex', alignItems:'center' }}>
     <CircularProgress size="50px" />
     
   </Box> :<TableContainer component={Paper}>
@@ -58,7 +59,7 @@ export default function TableContentBooking(props) {
         <TableHead>
           <TableRow>
             <StyledTableCell>Boknings Id</StyledTableCell>
-            <StyledTableCell>Kund Id</StyledTableCell>
+            {dataUser?.role === "Admin" ? ( <StyledTableCell>Kund Id</StyledTableCell>) : null}
             <StyledTableCell>Kontaktperson</StyledTableCell>
             <StyledTableCell>Telefonnummer</StyledTableCell>
             <StyledTableCell>Företagsnamn</StyledTableCell>
@@ -77,7 +78,7 @@ export default function TableContentBooking(props) {
               <StyledTableCell component="th" scope="row">
                 {row.bookingId}
               </StyledTableCell>
-              <StyledTableCell>{row.customerId}</StyledTableCell>
+              {dataUser?.role === "Admin" ? ( <StyledTableCell>{row.customerId}</StyledTableCell>) : null}
               <StyledTableCell>{row.customerName}</StyledTableCell>
               <StyledTableCell>{row.phoneNumber}</StyledTableCell>
               <StyledTableCell>{row.companyName}</StyledTableCell>
@@ -120,7 +121,8 @@ export default function TableContentBooking(props) {
                   ) : null
                 }
                 {!row.date === new Date() || row.status !== "Utfört" ? (
-                  <DeleteBookingModal userBookings={data} setUserBookings={setUserBookings} row={row}/>
+                  <DeleteBookingModal userBookings={data} setUserBookings={setUserBookings} row={row}
+                  user={dataUser}/>
                   ) : null}
               </StyledTableCell>
             </StyledTableRow>

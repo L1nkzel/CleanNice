@@ -60,8 +60,23 @@ export default function BasicModal() {
       },
       body: JSON.stringify(data),
     });
-    await res.json();
+   const newEmp = await res.json();
 
+   if(res.status === 200){
+    const mailData = {
+      employeeName: newEmp.employeeName,
+      email: newEmp.email,
+ 
+
+    }
+    await fetch(`http://localhost:3500/api/email/newEmployee`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(mailData),
+    });
+   }
     setFormData({
       employeeName: "",
       adress: "",
@@ -129,7 +144,7 @@ export default function BasicModal() {
               required
               variant="outlined"
               InputProps={{
-                disableUnderline: true,
+                disableunderline: true,
               }}
             />
             <TextField
@@ -142,7 +157,7 @@ export default function BasicModal() {
               placeholder="Adress"
               required
               InputProps={{
-                disableUnderline: true,
+                disableunderline: true,
               }}
             />
             <TextField
@@ -155,7 +170,7 @@ export default function BasicModal() {
               placeholder="Telefonnr"
               required
               InputProps={{
-                disableUnderline: true,
+                disableunderline: true,
               }}
             />
             <TextField
@@ -168,7 +183,7 @@ export default function BasicModal() {
               placeholder="Epost"
               required
               InputProps={{
-                disableUnderline: true,
+                disableunderline: true,
               }}
             />
             <TextField
@@ -181,7 +196,7 @@ export default function BasicModal() {
               placeholder="Personnr"
               required
               InputProps={{
-                disableUnderline: true,
+                disableunderline: true,
               }}
             />
             <TextField
@@ -194,7 +209,7 @@ export default function BasicModal() {
               placeholder="Kontonr"
               required
               InputProps={{
-                disableUnderline: true,
+                disableunderline: true,
               }}
             />
             <TextField
@@ -208,7 +223,7 @@ export default function BasicModal() {
               required
               autoFocus
               InputProps={{
-                disableUnderline: true,
+                disableunderline: true,
               }}
             />
             <DialogActions sx={{ display: "flex", justifyContent: "center" }}>

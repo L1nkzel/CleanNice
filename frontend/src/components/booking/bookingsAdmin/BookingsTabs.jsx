@@ -11,6 +11,7 @@ import Title from "../../ui/Title";
 export default function BookingsTabs({ data }) {
   const navigate = useNavigate();
   const [value, setValue] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false)
   const bookUrl = `http://localhost:3500/api/bookings/`;
 
   const handleChange = (event, newValue) => {
@@ -30,7 +31,7 @@ export default function BookingsTabs({ data }) {
       const res = await fetch(`http://localhost:3500/api/bookings/`, {
         credentials: "include",
       });
-
+      setIsLoaded(true)
       const result = await res.json();
 
       setBookings(result);
@@ -40,11 +41,13 @@ export default function BookingsTabs({ data }) {
   };
   useEffect(() => {
     setInterval(fetchBookings, 1000);
+
   }, [bookings.lenght]);
 
   useLayoutEffect(() => {
     setConfirmedServices(
       bookings.filter((confirmed) => confirmed.status === "Bekräftad")
+       
     );
 
     setBookedServices(bookings.filter((booked) => booked.status === "Bokad"));
@@ -56,6 +59,7 @@ export default function BookingsTabs({ data }) {
     );
 
     setHistoryServices(bookings.filter((paid) => paid.status === "Betald"));
+
   }, [bookings]);
 
   const deleteBookingHandler = async (id) => {
@@ -136,6 +140,7 @@ export default function BookingsTabs({ data }) {
               data={confirmedServices}
               dataUser={data}
               deleteBookingHandler={deleteBookingHandler}
+              isLoaded={isLoaded}
             />
           </TabPanel>
 
@@ -144,6 +149,7 @@ export default function BookingsTabs({ data }) {
               data={bookedServices}
               dataUser={data}
               deleteBookingHandler={deleteBookingHandler}
+              isLoaded={isLoaded}
             />
           </TabPanel>
 
@@ -152,6 +158,7 @@ export default function BookingsTabs({ data }) {
               data={approvedServices}
               dataUser={data}
               deleteBookingHandler={deleteBookingHandler}
+              isLoaded={isLoaded}
             />
           </TabPanel>
 
@@ -160,6 +167,7 @@ export default function BookingsTabs({ data }) {
               data={failedServices}
               dataUser={data}
               deleteBookingHandler={deleteBookingHandler}
+              isLoaded={isLoaded}
             />
           </TabPanel>
 
@@ -168,6 +176,7 @@ export default function BookingsTabs({ data }) {
               data={historyServices}
               dataUser={data}
               deleteBookingHandler={deleteBookingHandler}
+              isLoaded={isLoaded}
             />
           </TabPanel>
         </Box>

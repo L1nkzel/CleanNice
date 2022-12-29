@@ -10,7 +10,6 @@ export const strategy = (passport) => {
   });
 
   passport.deserializeUser(async (email, done) => {
-    console.log(email);
     const customer = await prisma.customer.findUnique({
       where: {
         email: email,

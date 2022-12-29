@@ -89,7 +89,21 @@ filterEmployees()
     );
     const body2 = await res.json();
     console.log(body2);
+    const mailData = {
+      employeeName: option?.employeeName,
+      time:booking?.time,
+      date:booking?.date,
+      email: option?.email,
+      
 
+    }
+    await fetch(`http://localhost:3500/api/email/assignCleaner`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(mailData),
+    });
   
     handleClose();
   };
