@@ -91,6 +91,7 @@ const CurrentBookings = ({ data }) => {
           data={userBookings}
           setUserBookings={setUserBookings}
           isLoaded={isLoaded}
+          dataUser={data}
         />
       </Box>
     </Box>

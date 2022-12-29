@@ -46,11 +46,12 @@ export default function TableContentBooking(props) {
     deleteBookingHandler,
     input,
     setInput,
+    isLoaded
   } = props;
 
   return (
     <>
-    {!props.isLoaded ? <Box sx={{mt:15,flexGrow:1, justifyContent:'center', display:'flex', alignItems:'center' }}>
+    {!isLoaded ? <Box sx={{mt:15,flexGrow:1, justifyContent:'center', display:'flex', alignItems:'center' }}>
     <CircularProgress size="50px" />
     
   </Box> :<TableContainer component={Paper}>
@@ -120,7 +121,8 @@ export default function TableContentBooking(props) {
                   ) : null
                 }
                 {!row.date === new Date() || row.status !== "Utfört" ? (
-                  <DeleteBookingModal userBookings={data} setUserBookings={setUserBookings} row={row}/>
+                  <DeleteBookingModal userBookings={data} setUserBookings={setUserBookings} row={row}
+                  user={dataUser}/>
                   ) : null}
               </StyledTableCell>
             </StyledTableRow>

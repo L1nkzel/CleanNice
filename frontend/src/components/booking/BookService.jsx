@@ -33,6 +33,7 @@ export default function BookService({ data }) {
       time: time,
       cleaningService: selected
     };
+
     if(!isNaN(data.customerId)){
 
       const res = await fetch(`${bookUrl}${data.customerId}/newBooking`, {
@@ -44,7 +45,7 @@ export default function BookService({ data }) {
       });
       const newBooking = await res.json();
       if(res.status === 200){
-        const data = {
+        const statusData = {
           status: 'Bekräftad',
         }
         const res = await fetch(`${bookUrl}${newBooking.bookingId}/editBooking`, {
@@ -52,10 +53,27 @@ export default function BookService({ data }) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify(statusData),
         });
-        const info = await res.json();
-        console.log(info)
+        const booking = await res.json();
+        console.log(booking)
+
+        const mailData = {
+          custName: data.custName,
+          cleaningService: booking?.cleaningService,
+          time:booking?.time,
+          date:booking?.date,
+          email: data.email,
+          bookingId: booking?.bookingId
+
+        }
+        await fetch(`http://localhost:3500/api/email/newBooking`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(mailData),
+        });
         navigate('/customer')
       }else{
         return

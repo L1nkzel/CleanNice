@@ -7,7 +7,7 @@ Sib.ApiClient.instance.authentications["api-key"].apiKey = process.env.API_KEY;
 
 route.post("/newBooking", async (req, res) => {
   const htmlContent = `<html><body>Hej ${req.body.custName}, <br/>
-  Vi har mottagit din bokning på en ${req.body.cleaningService} den ${req.body.date} kl ${req.body.time}. <br/>
+  Vi har mottagit din bokning med boknings nummer ${req.body.bookingId} på en ${req.body.cleaningService} den ${req.body.date} kl ${req.body.time}. <br/>
   Vill du avboka din bokning så måste detta göras 24h innan bokningen infaller.
   <br/> mvh <br/>
   Städa Fint AB
@@ -59,7 +59,7 @@ route.post("/newEmployee", async (req, res) => {
   const htmlContent = `<html><body>Hej ${req.body.employeeName}, <br/>
   Ditt konto i bokningsportalen har blivit skapat. 
   <br/> Du loggar in med följande uppgifter:<br/>
-  Användarnamn: ${req.body.email}
+  Användarnamn: ${req.body.email}<br/>
   Lösenord: 123 <br/>
   Vid första inloggningen så kommer du behöva byta lösenord till något eget.
   Har du några frågor om ditt konto så hör du av dig till administratören.
@@ -97,7 +97,7 @@ route.post("/assignCleaner", async (req, res) => {
     .sendTransacEmail({
       subject: "Städning tilldelad!",
       sender: { email: "no-reply@stadafint.se", name: "Städa Fint AB" },
-      to: [{ name: req.body.custName, email: req.body.email }],
+      to: [{ name: req.body.employeeName, email: req.body.email }],
       htmlContent: htmlContent,
     })
     .then(
