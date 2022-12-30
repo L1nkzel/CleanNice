@@ -18,7 +18,7 @@ import {
 } from "@mui/icons-material";
 import FormStyle from "./FormStyle";
 import Title from "../ui/Title";
-import { Form, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 
 function RegisterInputForm() {

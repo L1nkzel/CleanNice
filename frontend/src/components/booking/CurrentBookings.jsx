@@ -1,6 +1,6 @@
-import { Box, Paper, Toolbar, Typography } from "@mui/material";
+import { Box} from "@mui/material";
 import React, { useEffect, useState } from "react";
-import TableContentBooking from "../tables/TableContentBooking";
+import TableContentForCustomer from "../tables/TableContentForCustomer";
 import Title from "../ui/Title";
 
 const CurrentBookings = ({ data }) => {
@@ -85,7 +85,7 @@ const CurrentBookings = ({ data }) => {
     <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
       <Box sx={{ flexGrow: 1, mx: 5 }}>
         <Title color={"darkgreen"}>Mina bokningar</Title>
-        <TableContentBooking
+        <TableContentForCustomer
           input={input}
           setInput={setInput}
           data={userBookings}

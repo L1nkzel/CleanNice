@@ -1,10 +1,24 @@
 import React, { useState } from "react";
-import { Box, FormControl, Grid, Link, TextField, Typography } from "@mui/material";
+import { Box, createTheme, FormControl, Grid, Link, TextField, ThemeProvider, Typography } from "@mui/material";
 import CustomButton from "../ui/CustomButton";
 import FormStyle from "./FormStyle";
 import Title from "../ui/Title";
 import { useNavigate } from "react-router-dom";
 import { Email, Key } from "@mui/icons-material";
+
+const theme = createTheme({
+  breakpoints: {
+    values: {
+
+      xs: 400,
+      sm: 500,
+      md: 900,
+      mm: 1000,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
+});
 
 
 function LoginForm() {
@@ -55,6 +69,8 @@ function LoginForm() {
   };
 
   return (
+    <ThemeProvider theme={theme}>
+
     <Box sx={FormStyle.container}>
       <Grid container columnGap={1} sx={FormStyle.login}>
         <FormControl>
@@ -67,9 +83,9 @@ function LoginForm() {
               backgroundColor: "white",
               borderRadius: 1,
               my: 0.7,
-              width:350
+              width:{xs:'100%', sm:350}
             }}
-          >
+            >
             <Email
               sx={{
                 color: "grey",
@@ -79,7 +95,7 @@ function LoginForm() {
                 backgroundColor: "#CEFFDC",
                 borderRadius: "4px 0 0 4px",
               }}
-            />
+              />
             <TextField
               name="email"
               type="email"
@@ -102,7 +118,7 @@ function LoginForm() {
               borderRadius: 1,
               my: 1,
             }}
-          >
+            >
             <Key
               sx={{
                 color: "grey",
@@ -112,7 +128,7 @@ function LoginForm() {
                 backgroundColor: "#CEFFDC",
                 borderRadius: "4px 0 0 4px",
               }}
-            />
+              />
             <TextField
               name="password"
               value={loginData.password}
@@ -126,17 +142,17 @@ function LoginForm() {
               InputProps={{
                 disableUnderline: true,
               }}
-            />
+              />
           </Box>
               <Typography
               sx={{
                 mt: 1,
                 px: 0.5,
-               
+                
                 color: "#f59d9d",
                 
               }}
-            >
+              >
               {loginError}
             </Typography>
           <Box
@@ -147,7 +163,7 @@ function LoginForm() {
               my: 1,
               flexDirection:'column'
             }}
-          >
+            >
             <CustomButton onClick={handleSubmit}>Logga in</CustomButton>
 
           <Link href="/register" sx={{ textAlign: "center", color: "white" }}>
@@ -157,6 +173,7 @@ function LoginForm() {
         </FormControl>
       </Grid>
     </Box>
+            </ThemeProvider>
   );
 }
 

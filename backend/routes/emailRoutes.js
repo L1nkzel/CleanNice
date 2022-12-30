@@ -2,7 +2,7 @@ import Sib from "sib-api-v3-sdk";
 import "dotenv/config";
 import express from "express";
 import easyinvoice from "easyinvoice";
-import fs from "fs";
+
 
 
 const route = express.Router();
@@ -150,7 +150,7 @@ route.post("/invoice", async (req, res) => {
     client: {
       company: "Mottagare",
       address: req.body.custName,
-      zip: req.body.company,
+      zip: req.body.companyName,
       city: req.body,
       country: req.body.address,
       // "custom1": "custom value 1",
