@@ -27,7 +27,7 @@ function App() {
       <Route path="/customer/services/:id/" element={<ServicesPage />} />
       <Route path="/customer/support" element={<CustomerPage />} />
       <Route path="/employee/" element={<EmployeePage />} />
-      <Route path="/customer/integrity" element={<IntegrityPage />} />
+      <Route path="/integrity" element={<IntegrityPage />} />
           </Routes>
     </>
     

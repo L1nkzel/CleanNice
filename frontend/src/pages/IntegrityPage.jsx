@@ -1,8 +1,11 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import { useState } from "react";
 import Header from "../components/ui/Header";
 
 const IntegrityPage = () => {
+  const loggedInUser = JSON.parse(localStorage.getItem("userData"));
+  const [userData, setUserData] = useState(loggedInUser);
+
   return (
     <>
       <Header
@@ -79,12 +82,18 @@ const IntegrityPage = () => {
           <Typography sx={{ fontWeight: "bold", fontSize: 20 }}>
             Vilka personuppgifter samlar vi in om dig och varför?
           </Typography>
-          {"\n"}Vi behandlar i huvudsak ditt namn, företagsnamn, adress och
+            {"\n"}
+          {userData.user.customerId !== undefined?  <Typography>
+              Vi behandlar i huvudsak ditt namn, företagsnamn, adress och
           kontaktuppgifter. Vi behandlar dina personuppgifter för att kunna
           fullgöra våra tjänster enligt vår företagsmodell och för att uppfylla
           regler i lag och kollektivavtal.
-          {"\n"}
-          {"\n"}
+              </Typography> : <Typography>
+              Vi behandlar i huvudsak ditt namn, personnummer, adress och kontaktuppgifter, bankkonto för löneutbetalning. Vi behandlar dina personuppgifter för att kunna fullgöra våra skyldigheter enligt vårt anställningsavtal med dig och för att uppfylla regler i lag och kollektivavtal.
+              </Typography>
+        }
+        {"\n"}
+        {"\n"}
         </Box>
 
         <Box sx={{ whiteSpace: "pre-wrap" }}>
