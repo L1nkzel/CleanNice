@@ -103,6 +103,7 @@ filterEmployees()
         "Content-Type": "application/json",
       },
       body: JSON.stringify(mailData),
+      credentials: "include",
     });
   
     handleClose();
