@@ -129,8 +129,7 @@ export default function TableContentBooking(props) {
                     {dataUser?.role === "Admin" && row.comment !== "N/A" ? (
                       <FailedServiceMessage row={row} />
                     ) : null}
-                    {new Date(row.date) > new Date() &&
-                    row.status === "Bokad" ? (
+                    {new Date(row.date) > new Date() - 1 && (row.status === "Bekräftad" || row.status === "Bokad")? (
                       <DeleteBookingModal
                         userBookings={data}
                         setUserBookings={setUserBookings}
