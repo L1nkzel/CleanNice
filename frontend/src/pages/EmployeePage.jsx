@@ -20,6 +20,8 @@ function EmployeePage() {
       link2Name='Historik'
       url3='/employee/payments'
       link3Name='Mina utbetalningar'
+      url5='/integrity'
+      link5Name ='Integritetspolicy'
      
       />
       <CurrentBookings data={userData.user} />

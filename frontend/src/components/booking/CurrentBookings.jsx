@@ -9,18 +9,16 @@ const CurrentBookings = ({ data }) => {
   const [input, setInput] = useState("")
   const [isLoaded, setIsLoaded] = useState(false)
   const checkUser = async () => {
-    if (!isNaN(data.customerId)) {
-      try {
+
+     
         const res = await fetch(
-          `http://localhost:3500/api/bookings/${data.customerId}/bookings`
+          `http://localhost:3500/api/bookings/${data.customerId}/bookings`, {credentials:'include'}
           ); 
           const result = await res.json();
           setUserBookings(result);
           setIsLoaded(true)
-        } catch (err) {
-          setErrorMessage(err);
-        }
-      }
+        
+      
     };
     useEffect(() => {
     setInterval(checkUser,1000)
@@ -48,6 +46,7 @@ const CurrentBookings = ({ data }) => {
         `http://localhost:3500/api/bookings/${id}/editBooking`,
         {
           method: "PATCH",
+          credentials:'include',
           headers: {
             "Content-Type": "application/json",
           },
