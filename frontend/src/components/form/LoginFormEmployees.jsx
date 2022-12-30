@@ -10,7 +10,7 @@ import { Email, Key } from "@mui/icons-material";
 const theme = createTheme({
   breakpoints: {
     values: {
-
+xxs:0,
       xs: 400,
       sm: 500,
       md: 900,
@@ -98,7 +98,7 @@ function LoginFormEmployees() {
               backgroundColor: "white",
               borderRadius: 1,
               my: 0.7,
-              width:{xs:'100%',sm:350}
+              width:{xxs:'100%',sm:350}
             }}
             >
             <Email

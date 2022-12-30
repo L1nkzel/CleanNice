@@ -13,6 +13,7 @@ const FormStyle = {
     backgroundColor: "rgba(0, 0, 0, 0.4)",
     justifyContent: "center",
     alignItems: "center",
+    
   },
   login: {
     height: 360,
@@ -21,6 +22,7 @@ const FormStyle = {
     backgroundColor: "rgba(0, 0, 0, 0.4)",
     justifyContent: "center",
     alignItems: "center",
+    mx:{xxs:1,sm:0}
   },
   textInput: {
     borderRadius: 1,
