@@ -37,11 +37,14 @@ const BookedEmployee = ({ data }) => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body:JSON.stringify(data)
       });
      const bookingData = await res.json()
 
-     const res2 = await fetch(`http://localhost:3500/api/customer/${bookingData?.customerId}`)
+     const res2 = await fetch(`http://localhost:3500/api/customer/${bookingData?.customerId}`,{
+      credentials: "include",
+     })
      const customerData = await res2.json()
     console.log("customer:" ,customerData)
     console.log("bookinf:" ,bookingData)
@@ -63,6 +66,7 @@ const BookedEmployee = ({ data }) => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body:JSON.stringify(invoiceData)
      })
 

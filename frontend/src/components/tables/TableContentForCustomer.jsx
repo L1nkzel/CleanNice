@@ -77,9 +77,6 @@ export default function TableContentForCustomer(props) {
             <TableHead>
               <TableRow>
                 <StyledTableCell>Boknings Id</StyledTableCell>
-                {dataUser?.role === "Admin" ? (
-                  <StyledTableCell>Kund Id</StyledTableCell>
-                ) : null}
                 <StyledTableCell>Städtjänst</StyledTableCell>
                 <StyledTableCell>Datum</StyledTableCell>
                 <StyledTableCell>Tid</StyledTableCell>
@@ -92,7 +89,6 @@ export default function TableContentForCustomer(props) {
                   <StyledTableCell component="th" scope="row">
                     {row.bookingId}
                   </StyledTableCell>
-
                   <StyledTableCell>{row.cleaningService}</StyledTableCell>
                   <StyledTableCell>{row.date}</StyledTableCell>
                   <StyledTableCell>{row.time}</StyledTableCell>

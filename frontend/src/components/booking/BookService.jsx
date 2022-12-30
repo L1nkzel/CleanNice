@@ -41,6 +41,7 @@ export default function BookService({ data }) {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(dataValue),
       });
       const newBooking = await res.json();
@@ -53,6 +54,7 @@ export default function BookService({ data }) {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify(statusData),
         });
         const booking = await res.json();
@@ -72,6 +74,7 @@ export default function BookService({ data }) {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify(mailData),
         });
         navigate('/customer')

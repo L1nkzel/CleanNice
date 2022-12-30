@@ -29,6 +29,7 @@ const AllBookings = ({ data }) => {
     if (window.confirm("Är du säker att du vill ta bort denna bokning")) {
       await fetch(`http://localhost:3500/api/bookings/${id}/booking`, {
         method: "DELETE",
+        credentials: "include",
       });
       setBookings(bookings.filter((booking) => booking.bookingId !== id));
     } else {

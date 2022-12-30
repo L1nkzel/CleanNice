@@ -62,6 +62,7 @@ export default function BookingsTabs({ data }) {
   const deleteBookingHandler = async (id) => {
     if (window.confirm("Är du säker att du vill ta bort denna bokning")) {
       await fetch(`http://localhost:3500/api/bookings/${id}/booking`, {
+        credentials: "include",
         method: "DELETE",
       });
       setBookings(bookings.filter((booking) => booking.bookingId !== id));
@@ -82,6 +83,7 @@ export default function BookingsTabs({ data }) {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify(data),
         }
       );
