@@ -2,7 +2,24 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
-import { Typography } from "@mui/material";
+import { createTheme, ThemeProvider, Typography } from "@mui/material";
+import { NoEncryption } from "@mui/icons-material";
+import DropdownMenu from "./header/DropdownMenu";
+
+
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xxs:0,
+      xs: 400,
+      sm: 500,
+      md: 900,
+      mm: 1000,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
+});
 
 export default function Header(props) {
   const navigate = useNavigate();
@@ -18,12 +35,15 @@ export default function Header(props) {
   };
 
   return (
+    <ThemeProvider theme={theme}>
+
     <Box sx={{ flexGrow: 1, padding: 2, background: "linear-gradient(to bottom,#6982db, #FBFBFB)",}}>
       <Toolbar sx={{ alignItems: "center", justifyContent: "space-between" }}>
         <Box
           sx={{
+            
             flexGrow: 0.1,
-            display: "flex",
+            display:{xxs:'none', mm:'flex' } ,
             flexDirection: "row",
             justifyContent: "space-around",
           }}
@@ -44,10 +64,24 @@ export default function Header(props) {
           <Typography sx={{fontFamily: "Poppins", fontSize: 21, color: '#443f3f'}}>{props.link5Name}</Typography> 
           </Link>
         </Box>
+        <DropdownMenu 
+  url1={props.url1}
+  link1Name={props.link1Name}
+  url2={props.url2}
+  link2Name={props.link2Name}
+  url3={props.url3}
+  link3Name={props.link3Name}
+  url4={props.url4}
+  link4Name={props.link4Name}
+  url5={props.url5}
+  link5Name ={props.link5Name}
+  
+        />
         <Button onClick={handleLogOut} sx={{ color: "black", boxShadow: 3 }}>
           Logga ut
         </Button>
       </Toolbar>
     </Box>
+          </ThemeProvider>
   );
 }

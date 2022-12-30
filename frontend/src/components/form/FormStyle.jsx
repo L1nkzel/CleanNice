@@ -25,6 +25,7 @@ const FormStyle = {
   textInput: {
     borderRadius: 1,
     bgcolor: "transparent",
+    width:"85%"
     
   },
   dialogInput: {
