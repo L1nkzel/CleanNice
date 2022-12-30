@@ -119,16 +119,16 @@ route.post("/invoice", async (req, res) => {
   const date = new Date();
   const dueDate = new Date(new Date().setDate(date.getDate() + 30));
  
-  if(req.body.cleaningService === "Brons städning") {
+  if(req.body.cleaningService === "Brons Städning") {
    price = 2000;
-  } else if(req.body.cleaningService === "Silver städning") {
+  } else if(req.body.cleaningService === "Silver Städning") {
    price = 2800;
   } else {
    price = 4000;
 
   } 
 
-  const htmlContent = {
+  const data = {
     // Customize enables you to provide your own templates
     // Please review the documentation for instructions and examples
     customize: {
@@ -151,8 +151,8 @@ route.post("/invoice", async (req, res) => {
       company: "Mottagare",
       address: req.body.custName,
       zip: req.body.companyName,
-      city: req.body,
-      country: req.body.address,
+      city: req.body.orgNr,
+      country: req.body.adress,
       // "custom1": "custom value 1",
       // "custom2": "custom value 2",
       // "custom3": "custom value 3"
@@ -206,16 +206,21 @@ route.post("/invoice", async (req, res) => {
     },
   };
 
-  const htmlContent2 = await easyinvoice.createInvoice(htmlContent);
-  console.log(htmlContent2.pdf.toString(""));
+  const invoice = await easyinvoice.createInvoice(data);
+  const htmlContent = `<html><body>Hej ${req.body.custName}, <br/>
+  Här kommer en faktura på din städning med boknings id ${req.body.bookingId}.<br/>
+  Var god se bifogad fil.
+  <br/> mvh <br/>
+  Städa Fint AB
+  </body></html>`;
 
   const email = new Sib.TransactionalEmailsApi()
     .sendTransacEmail({
-      subject: "Städning tilldelad!",
+      subject: "Faktura Städa Fint",
       sender: { email: "no-reply@stadafint.se", name: "Städa Fint AB" },
       to: [{ name: req.body.custName, email: req.body.email }],
-      htmlContent: "Hej",
-      attachment: [{"name": "faktura.pdf", "content": htmlContent2.pdf}]
+      htmlContent: htmlContent ,
+      attachment: [{"name": "faktura.pdf", "content": invoice.pdf}]
     })
     .then(
       function (data) {

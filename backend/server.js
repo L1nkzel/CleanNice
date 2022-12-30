@@ -76,6 +76,10 @@ const isEmployeeAuthenticated = (req, res, next) => {
   req.isAuthenticated() && !isNaN(req.user.employeeId) ? next() : res.sendStatus(403);
 };
 
+const isAuthenticated = (req, res, next) => {
+  req.isAuthenticated() ? next() : res.sendStatus(403);
+};
+
 
 server.get("/", async (req, res) => {
   const customers = await prisma.customer.findMany({});
@@ -119,11 +123,11 @@ server.patch("/:id/changePass", async (req, res) => {
   }
 });
 
-server.use("/api/customer", isCustomerAuthenticated, customerRoutes);
+server.use("/api/customer",isAuthenticated , customerRoutes);
 
-server.use("/api/employee",  employeeRoutes);
-server.use("/api/bookings", bookingsRoutes);
-server.use("/api/email", emailRoutes);
+server.use("/api/employee",isAuthenticated,  employeeRoutes);
+server.use("/api/bookings",isAuthenticated ,bookingsRoutes);
+server.use("/api/email", isAuthenticated ,emailRoutes);
 
 server.listen(PORT, () => console.log(`Server started on ${PORT}`));
 

@@ -92,6 +92,7 @@ const CurrentBookings = ({ data }) => {
           setUserBookings={setUserBookings}
           isLoaded={isLoaded}
           dataUser={data}
+          approveBooking={approveBooking}
         />
       </Box>
     </Box>
