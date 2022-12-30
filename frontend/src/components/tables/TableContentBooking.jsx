@@ -7,10 +7,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { DeleteOutline, Done, Clear } from "@mui/icons-material";
+import {
+  DeleteOutline,
+  Done,
+  Clear,
+  AssignmentTurnedIn,
+} from "@mui/icons-material";
 import FailedServiceModal from "../booking/FailedServiceModal";
-import FailedServiceMessage from "../booking/FailedServiceMessage"
-import { Box, Button, CircularProgress } from "@mui/material";
+import FailedServiceMessage from "../booking/FailedServiceMessage";
+import { Box, Button, CircularProgress, Tooltip } from "@mui/material";
 import Options from "../ui/Options";
 import DeleteBookingModal from "../DeleteBookingModal";
 
@@ -38,7 +43,6 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 export default function TableContentBooking(props) {
-
   const {
     data,
     dataUser,
@@ -46,90 +50,108 @@ export default function TableContentBooking(props) {
     deleteBookingHandler,
     input,
     setInput,
-    isLoaded
+    isLoaded,
+    bookingCompleted,
   } = props;
 
   return (
     <>
-    {!isLoaded ? <Box sx={{mt:15,flexGrow:1, justifyContent:'center', display:'flex', alignItems:'center' }}>
-    <CircularProgress size="50px" />
-    
-  </Box> :<TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Boknings Id</StyledTableCell>
-            {dataUser?.role === "Admin" ? ( <StyledTableCell>Kund Id</StyledTableCell>) : null}
-            <StyledTableCell>Kontaktperson</StyledTableCell>
-            <StyledTableCell>Telefonnummer</StyledTableCell>
-            <StyledTableCell>Företagsnamn</StyledTableCell>
-            <StyledTableCell>Ansvarig städare</StyledTableCell>
-            <StyledTableCell>Adress</StyledTableCell>
-            <StyledTableCell>Städtjänst</StyledTableCell>
-            <StyledTableCell>Datum</StyledTableCell>
-            <StyledTableCell>Tid</StyledTableCell>
-            <StyledTableCell>Bokningsstatus</StyledTableCell>
-            <StyledTableCell></StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data?.map((row) => (
-            <StyledTableRow key={row.bookingId}>
-              <StyledTableCell component="th" scope="row">
-                {row.bookingId}
-              </StyledTableCell>
-              {dataUser?.role === "Admin" ? ( <StyledTableCell>{row.customerId}</StyledTableCell>) : null}
-              <StyledTableCell>{row.customerName}</StyledTableCell>
-              <StyledTableCell>{row.phoneNumber}</StyledTableCell>
-              <StyledTableCell>{row.companyName}</StyledTableCell>
-              {dataUser?.role === "Admin" ? (
-                <StyledTableCell sx={{display:"flex", alignItems:"center"}} align="center">
-                {row.cleanerName}
+      {!isLoaded ? (
+        <Box
+          sx={{
+            mt: 15,
+            flexGrow: 1,
+            justifyContent: "center",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <CircularProgress size="50px" />
+        </Box>
+      ) : (
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Boknings Id</StyledTableCell>
                 {dataUser?.role === "Admin" ? (
-                  <Options booking={row} />
+                  <StyledTableCell>Kund Id</StyledTableCell>
                 ) : null}
-              </StyledTableCell>
-                ) :   <StyledTableCell>
-                {row.cleanerName}
-                {dataUser?.role === "Admin" ? (
-                  <Options booking={row} />
+                <StyledTableCell>Kontaktperson</StyledTableCell>
+                <StyledTableCell>Telefonnummer</StyledTableCell>
+                <StyledTableCell>Företagsnamn</StyledTableCell>
+                <StyledTableCell>Ansvarig städare</StyledTableCell>
+                <StyledTableCell>Adress</StyledTableCell>
+                <StyledTableCell>Städtjänst</StyledTableCell>
+                <StyledTableCell>Datum</StyledTableCell>
+                <StyledTableCell>Tid</StyledTableCell>
+                <StyledTableCell>Bokningsstatus</StyledTableCell>
+                <StyledTableCell></StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data?.map((row) => (
+                <StyledTableRow key={row.bookingId}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.bookingId}
+                  </StyledTableCell>
+                  {dataUser?.role === "Admin" ? (
+                    <StyledTableCell>{row.customerId}</StyledTableCell>
                   ) : null}
-              </StyledTableCell>}
-            
-              <StyledTableCell>{row.adress}</StyledTableCell>
-              <StyledTableCell>{row.cleaningService}</StyledTableCell>
-              <StyledTableCell>{row.date}</StyledTableCell>
-              <StyledTableCell>{row.time}</StyledTableCell>
-              <StyledTableCell>{row.status}</StyledTableCell>
-              <StyledTableCell>
-                {row.status === "Utfört" ? (
-                  <Button onClick={() => props.approveBooking(row.bookingId)}>
-                    <Done sx={{ color: "green" }} />
-                  </Button>
-                ) : null}
-                {row.status === "Utfört" ? (
-                  <FailedServiceModal
-                  userBookings={data}
-                  setUserBookings={setUserBookings}
-                  input={input}
-                  setInput={setInput}
-                  row={row}
-                  />
-                  ) : null}
-                {dataUser?.role === "Admin" && row.comment !== "N/A" ? (
-                  <FailedServiceMessage row={row}/>
-                  ) : null
-                }
-                {!row.date === new Date() || row.status !== "Utfört" ? (
-                  <DeleteBookingModal userBookings={data} setUserBookings={setUserBookings} row={row}
-                  user={dataUser}/>
-                  ) : null}
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>}
-  </>
+                  <StyledTableCell>{row.customerName}</StyledTableCell>
+                  <StyledTableCell>{row.phoneNumber}</StyledTableCell>
+                  <StyledTableCell>{row.companyName}</StyledTableCell>
+                  {dataUser?.role === "Admin" ? (
+                    <StyledTableCell
+                      sx={{ display: "flex", alignItems: "center" }}
+                      align="center"
+                    >
+                      {row.cleanerName}
+                      {dataUser?.role === "Admin" ? (
+                        <Options booking={row} />
+                      ) : null}
+                    </StyledTableCell>
+                  ) : (
+                    <StyledTableCell>
+                      {row.cleanerName}
+                      {dataUser?.role === "Admin" ? (
+                        <Options booking={row} />
+                      ) : null}
+                    </StyledTableCell>
+                  )}
+
+                  <StyledTableCell>{row.adress}</StyledTableCell>
+                  <StyledTableCell>{row.cleaningService}</StyledTableCell>
+                  <StyledTableCell>{row.date}</StyledTableCell>
+                  <StyledTableCell>{row.time}</StyledTableCell>
+                  <StyledTableCell>{row.status}</StyledTableCell>
+                  <StyledTableCell>
+                    {dataUser?.role === "Admin" && row.comment !== "N/A" ? (
+                      <FailedServiceMessage row={row} />
+                    ) : null}
+                    {new Date(row.date) > new Date() &&
+                    row.status === "Bokad" ? (
+                      <DeleteBookingModal
+                        userBookings={data}
+                        setUserBookings={setUserBookings}
+                        row={row}
+                        user={dataUser}
+                      />
+                    ) : null}
+                    {row.status === "Godkänd" ? (
+                      <Tooltip title="Klarmarkera">
+                        <Button onClick={() => bookingCompleted(row.bookingId)}>
+                          <AssignmentTurnedIn sx={{ color: "green" }} />
+                        </Button>
+                      </Tooltip>
+                    ) : null}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+    </>
   );
 }

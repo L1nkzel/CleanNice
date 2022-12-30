@@ -6,13 +6,10 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { DeleteOutline, Done, Clear } from "@mui/icons-material";
 import FailedServiceModal from "../booking/FailedServiceModal";
-import FailedServiceMessage from "../booking/FailedServiceMessage";
-import { Box, Button, CircularProgress } from "@mui/material";
-import Options from "../ui/Options";
+import { Box, Button, CircularProgress} from "@mui/material";
 import DeleteBookingModal from "../DeleteBookingModal";
+import { Done } from "@mui/icons-material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -103,8 +100,8 @@ export default function TableContentForCustomer(props) {
                     {row.status === "Utfört" ? (
                       <Button
                         onClick={() => props.approveBooking(row.bookingId)}
-                      >
-                        <Done sx={{ color: "green" }} />
+                        >
+                        <Done  sx={{ color: "green" }} />
                       </Button>
                     ) : null}
                     {row.status === "Utfört" ? (
@@ -117,7 +114,7 @@ export default function TableContentForCustomer(props) {
                       />
                     ) : null}
 
-                    {!row.date === new Date() || row.status !== "Utfört" ? (
+                    {new Date(row.date) > new Date() && row.status === "Bokad" ? (
                       <DeleteBookingModal
                         userBookings={data}
                         setUserBookings={setUserBookings}

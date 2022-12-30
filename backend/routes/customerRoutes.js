@@ -14,6 +14,21 @@ route.get("/", async (req, res) => {
   }
 });
 
+
+route.get("/:id", async (req, res) => {
+  try {
+    const customer = await prisma.customer.findUnique({
+      where:{
+        customerId: parseInt(req.params.id)
+      }
+    });
+    res.json(customer);
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+
 route.post("/register", async (req, res) => {
   try {
     const customer = await prisma.customer.create({

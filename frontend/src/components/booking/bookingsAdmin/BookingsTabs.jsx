@@ -2,14 +2,11 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-
-import { Box, Grid } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Box} from "@mui/material";
 import TableContentBooking from "../../tables/TableContentBooking";
 import Title from "../../ui/Title";
 
-export default function BookingsTabs({ data }) {
-  const navigate = useNavigate();
+export default function BookingsTabs({ data }) { 
   const [value, setValue] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false)
   const bookUrl = `http://localhost:3500/api/bookings/`;
@@ -52,7 +49,7 @@ export default function BookingsTabs({ data }) {
 
     setBookedServices(bookings.filter((booked) => booked.status === "Bokad"));
     setApprovedServices(
-      bookings.filter((booked) => booked.status === "Utfört")
+      bookings.filter((booked) => booked.status === "Godkänd")
     );
     setFailedServices(
       bookings.filter((booked) => booked.status === "Underkänd")
@@ -69,6 +66,26 @@ export default function BookingsTabs({ data }) {
       });
       setBookings(bookings.filter((booking) => booking.bookingId !== id));
     } else {
+      return;
+    }
+  };
+
+  const bookingCompleted = async (id) => {
+    const data = {
+      status: "Betald",
+    };
+    if (window.confirm("Vill du klarmarkera denna bokning")) {
+      const res = await fetch(
+        `http://localhost:3500/api/bookings/${id}/editBooking`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
       return;
     }
   };
@@ -159,6 +176,8 @@ export default function BookingsTabs({ data }) {
               dataUser={data}
               deleteBookingHandler={deleteBookingHandler}
               isLoaded={isLoaded}
+              bookingCompleted={bookingCompleted}
+
             />
           </TabPanel>
 
