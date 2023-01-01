@@ -11,6 +11,7 @@ import ChangePasswordPage from "./pages/ChangePasswordPage";
 import EmployeePage from "./pages/EmployeePage";
 import IntegrityPage from "./pages/IntegrityPage";
 import PaymentsPage from "./pages/PaymentsPage";
+import CustomerHistoryPage from "./pages/CustomerHistoryPage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
       <Route path="/employee/" element={<EmployeePage />} />
       <Route path="/integrity" element={<IntegrityPage />} />
       <Route path="/employee/payments" element={<PaymentsPage/>}/>
+      <Route path="/customer/history" element={<CustomerHistoryPage/>}/>
           </Routes>
     </>
     
