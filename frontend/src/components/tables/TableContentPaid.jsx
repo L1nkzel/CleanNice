@@ -40,8 +40,8 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 
 
-export default function TableContentCleaner(props) {
-const {data, dataUser, isLoaded, cleaningDoneHandler} = props
+export default function TableContentPaid(props) {
+const {data, isLoaded} = props
   return (
     <>
     {!isLoaded ? <Box sx={{mt:15,flexGrow:1, justifyContent:'center', display:'flex', alignItems:'center' }}>
@@ -61,7 +61,6 @@ const {data, dataUser, isLoaded, cleaningDoneHandler} = props
             <StyledTableCell >Datum</StyledTableCell>
             <StyledTableCell >Tid</StyledTableCell>
             <StyledTableCell >Bokningsstatus</StyledTableCell>
-            <StyledTableCell ></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -79,7 +78,6 @@ const {data, dataUser, isLoaded, cleaningDoneHandler} = props
               <StyledTableCell >{row.date}</StyledTableCell>
               <StyledTableCell >{row.time}</StyledTableCell>
               <StyledTableCell >{row.status}</StyledTableCell>
-              <StyledTableCell ><Button onClick={()=>cleaningDoneHandler(row.bookingId)}><CheckIcon sx={{color:'#62926C'}}/></Button></StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

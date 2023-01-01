@@ -10,6 +10,7 @@ import ManageCostumerPage from "./pages/ManageCustomerPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
 import EmployeePage from "./pages/EmployeePage";
 import IntegrityPage from "./pages/IntegrityPage";
+import PaymentsPage from "./pages/PaymentsPage";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       <Route path="/customer/support" element={<CustomerPage />} />
       <Route path="/employee/" element={<EmployeePage />} />
       <Route path="/integrity" element={<IntegrityPage />} />
+      <Route path="/employee/payments" element={<PaymentsPage/>}/>
           </Routes>
     </>
     
