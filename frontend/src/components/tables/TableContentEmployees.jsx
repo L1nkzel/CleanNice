@@ -17,9 +17,8 @@ import {
   TextField,
 } from "@mui/material";
 import Colors from "../../Colors";
-import {useState } from "react";
-import RegisterEmployeeModal from "../manageEmployees/RegisterEmployeeModal"
-
+import { useState } from "react";
+import RegisterEmployeeModal from "../manageEmployees/RegisterEmployeeModal";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -27,12 +26,12 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.common.white,
     fontSize: 16,
     padding: 20,
-    whiteSpace: 'nowrap'
+    whiteSpace: "nowrap",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
     paddingLeft: 20,
-    whiteSpace: 'nowrap'
+    whiteSpace: "nowrap",
   },
 }));
 
@@ -50,9 +49,6 @@ export default function TableContentEmployees(props) {
   const { employeeData, setEmployeeData } = props;
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [rowData, setRowData] = useState(employeeData);
-  const [orderDirection, setOrderDirection] = useState("asc");
-  const [orderBy, setOrderBy] = useState("");
   const [searchedData, setSearchedData] = useState(employeeData);
   const [active, isActive] = useState(false);
 
@@ -76,11 +72,10 @@ export default function TableContentEmployees(props) {
 
   //Hoppa inte till nästa sida om den är tom
   const emptyRows =
-  page > 0 ? Math.max(0, (1 + page) * rowsPerPage - employeeData.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - employeeData.length) : 0;
 
   return (
-    <Box sx={{mb:2}}>
-
+    <Box sx={{ mb: 2 }}>
       {!props.isLoaded ? (
         <Box
           sx={{
@@ -94,96 +89,113 @@ export default function TableContentEmployees(props) {
           <CircularProgress size="50px" />
         </Box>
       ) : (
-        <TableContainer component={Paper}>
-            <TableRow sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
-      <TextField
-        variant="outlined"
-        placeholder="search..."
-        type="search"
-        onChange={(e) => requestSearch(e.target.value)}
-      />
-            <RegisterEmployeeModal />
-          </TableRow>
-          <Table sx={{ minWidth: 700 }} aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>Anställnings id</StyledTableCell>
+        <>
+          <TableContainer component={Paper}>
+            <TableRow
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <TextField
+                variant="outlined"
+                placeholder="search..."
+                type="search"
+                onChange={(e) => requestSearch(e.target.value)}
+              />
+              <RegisterEmployeeModal />
+            </TableRow>
+            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>Anställnings id</StyledTableCell>
 
-                <StyledTableCell>
-                    Namn- och efternamn
-                </StyledTableCell>
-                <StyledTableCell>Personnummer</StyledTableCell>
-                <StyledTableCell>Telefonnummer</StyledTableCell>
-                <StyledTableCell>Address</StyledTableCell>
-                <StyledTableCell>Konto nummer</StyledTableCell>
-                <StyledTableCell>E-post</StyledTableCell>
-                <StyledTableCell>Hantera</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-            {!active ? employeeData
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => (
-                    <StyledTableRow key={row.employeeId}>
-                      <StyledTableCell component="th" scope="row">
-                        {row.employeeId}
-                      </StyledTableCell>
-                      <StyledTableCell>{row.employeeName}</StyledTableCell>
-                      <StyledTableCell>{row.personalNumber}</StyledTableCell>
-                      <StyledTableCell>{row.phoneNumber}</StyledTableCell>
-                      <StyledTableCell>{row.adress}</StyledTableCell>
-                      <StyledTableCell>{row.accountNumber}</StyledTableCell>
-                      <StyledTableCell>{row.email}</StyledTableCell>
-                      <StyledTableCell>
-                        <EditEmployee row={row} />
-                        <EditEmployeePass row={row} />
-                        <DeleteDialogEmployee
-                          employeeData={employeeData}
-                          setEmployeeData={setEmployeeData}
-                          row={row}
-                        />
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  ))
-                :  searchedData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => (
-                    <StyledTableRow key={row.employeeId}>
-                      <StyledTableCell component="th" scope="row">
-                        {row.employeeId}
-                      </StyledTableCell>
-                      <StyledTableCell>{row.employeeName}</StyledTableCell>
-                      <StyledTableCell>{row.personalNumber}</StyledTableCell>
-                      <StyledTableCell>{row.phoneNumber}</StyledTableCell>
-                      <StyledTableCell>{row.adress}</StyledTableCell>
-                      <StyledTableCell>{row.accountNumber}</StyledTableCell>
-                      <StyledTableCell>{row.email}</StyledTableCell>
-                      <StyledTableCell>
-                        <EditEmployee row={row} />
-                        <EditEmployeePass row={row} />
-                        <DeleteDialogEmployee
-                          employeeData={employeeData}
-                          setEmployeeData={setEmployeeData}
-                          row={row}
-                        />
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  ))}
-            </TableBody>
-  
-          </Table>
-         
-        </TableContainer>
+                  <StyledTableCell>Namn- och efternamn</StyledTableCell>
+                  <StyledTableCell>Personnummer</StyledTableCell>
+                  <StyledTableCell>Telefonnummer</StyledTableCell>
+                  <StyledTableCell>Address</StyledTableCell>
+                  <StyledTableCell>Konto nummer</StyledTableCell>
+                  <StyledTableCell>E-post</StyledTableCell>
+                  <StyledTableCell>Hantera</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {!active
+                  ? employeeData
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((row) => (
+                        <StyledTableRow key={row.employeeId}>
+                          <StyledTableCell component="th" scope="row">
+                            {row.employeeId}
+                          </StyledTableCell>
+                          <StyledTableCell>{row.employeeName}</StyledTableCell>
+                          <StyledTableCell>
+                            {row.personalNumber}
+                          </StyledTableCell>
+                          <StyledTableCell>{row.phoneNumber}</StyledTableCell>
+                          <StyledTableCell>{row.adress}</StyledTableCell>
+                          <StyledTableCell>{row.accountNumber}</StyledTableCell>
+                          <StyledTableCell>{row.email}</StyledTableCell>
+                          <StyledTableCell>
+                            <EditEmployee row={row} />
+                            <EditEmployeePass row={row} />
+                            <DeleteDialogEmployee
+                              employeeData={employeeData}
+                              setEmployeeData={setEmployeeData}
+                              row={row}
+                            />
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      ))
+                  : searchedData
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((row) => (
+                        <StyledTableRow key={row.employeeId}>
+                          <StyledTableCell component="th" scope="row">
+                            {row.employeeId}
+                          </StyledTableCell>
+                          <StyledTableCell>{row.employeeName}</StyledTableCell>
+                          <StyledTableCell>
+                            {row.personalNumber}
+                          </StyledTableCell>
+                          <StyledTableCell>{row.phoneNumber}</StyledTableCell>
+                          <StyledTableCell>{row.adress}</StyledTableCell>
+                          <StyledTableCell>{row.accountNumber}</StyledTableCell>
+                          <StyledTableCell>{row.email}</StyledTableCell>
+                          <StyledTableCell>
+                            <EditEmployee row={row} />
+                            <EditEmployeePass row={row} />
+                            <DeleteDialogEmployee
+                              employeeData={employeeData}
+                              setEmployeeData={setEmployeeData}
+                              row={row}
+                            />
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
+          <TablePagination
+            sx={{ backgroundColor: Colors.header200, color: "white" }}
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={employeeData.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </>
       )}
-      <TablePagination
-      sx={{backgroundColor:Colors.header200, color:"white"}}
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={employeeData.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </Box>
   );
 }

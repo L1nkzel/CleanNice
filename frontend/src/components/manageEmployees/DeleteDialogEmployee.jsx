@@ -52,7 +52,7 @@ import Colors from "../../Colors";
       <Dialog
         PaperProps={{
           sx: {
-            background: `linear-gradient(to bottom, ${Colors.header100}, #FBFBFB)`,
+            background: `linear-gradient(to top, ${Colors.modal100}, #FBFBFB)`,
           },
         }}
         sx={{
