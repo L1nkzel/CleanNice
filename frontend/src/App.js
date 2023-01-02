@@ -101,8 +101,8 @@ function App() {
             </ProtectedCustomer>
           }
         />
-        <Footer />
       </Routes>
+      <Footer />
     </>
   );
 }
