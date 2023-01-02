@@ -2,14 +2,30 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { Box} from "@mui/material";
+import { Box, createTheme, ThemeProvider} from "@mui/material";
 import TableContentBooking from "../../tables/TableContentBooking";
 import Title from "../../ui/Title";
+import Colors from "../../../Colors";
 
 export default function BookingsTabs({ data }) { 
   const [value, setValue] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false)
   const bookUrl = `http://localhost:3500/api/bookings/`;
+
+  const theme = createTheme({
+    breakpoints: {
+      values: {
+        xxs: 0,
+        xs: 400,
+        sm: 600,
+        smm: 810,
+        md: 900,
+        mm: 1000,
+        lg: 1200,
+        xl: 1536,
+      },
+    },
+  });
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -93,7 +109,7 @@ export default function BookingsTabs({ data }) {
   };
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Title color={"darkgreen"}>Administrera bookningar</Title>
       <Box
         sx={{
@@ -107,12 +123,12 @@ export default function BookingsTabs({ data }) {
           sx={{
             display: "flex",
             flexDirection: "column",
-            width: 1500,
+            width: {lg:1500, mm:980, md:800, smm:700, sm:580, xs:520},
             minheight: 600,
             borderColor: "black",
             borderRadius: 2,
             boxShadow: 10,
-            background: "linear-gradient(to top,#6982db, #FBFBFB)",
+            background: `linear-gradient(to top, ${Colors.header100}, #FBFBFB)`,
           }}
         >
           <Box
@@ -129,26 +145,29 @@ export default function BookingsTabs({ data }) {
               aria-label="basic tabs example"
             >
               <Tab
-                sx={{ fontWeight: "bold" }}
+                sx={{ fontWeight: "bold", fontSize:{lg: 14, md:12, xs:11} }}
                 value={0}
-                label="Bekräftade Städningar"
+                label="Bekräftade"
               />
               <Tab
-                sx={{ fontWeight: "bold" }}
+                sx={{ fontWeight: "bold", fontSize:{lg: 14, md:12, xs:11} }}
                 value={1}
-                label="Bookade Städningar"
+                label="Bookade"
               />
               <Tab
-                sx={{ fontWeight: "bold" }}
+                sx={{ fontWeight: "bold", fontSize:{lg: 14, md:12, xs:11} }}
                 value={2}
-                label="Godkända Städningar"
+                label="Godkända"
               />
               <Tab
-                sx={{ fontWeight: "bold" }}
+                sx={{ fontWeight: "bold", fontSize:{lg: 14, md:12, xs:11} }}
                 value={3}
-                label="Icke godkända Städningar"
+                label="Icke godkända"
               />
-              <Tab sx={{ fontWeight: "bold" }} value={4} label="Historik" />
+              <Tab 
+              sx={{ fontWeight: "bold", fontSize:{lg: 14, md:12, xs:11} }} 
+              value={4} 
+              label="Historik" />
             </Tabs>
           </Box>
 
@@ -202,7 +221,7 @@ export default function BookingsTabs({ data }) {
           </TabPanel>
         </Box>
       </Box>
-    </>
+      </ThemeProvider>
   );
 }
 

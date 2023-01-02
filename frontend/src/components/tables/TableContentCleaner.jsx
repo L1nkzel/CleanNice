@@ -11,26 +11,28 @@ import Paper from '@mui/material/Paper';
   import CheckIcon from '@mui/icons-material/Check';
 
 import { Box, Button, CircularProgress } from '@mui/material';
+import Colors from '../../Colors';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#6982db",
+    backgroundColor: Colors.header200,
     color: theme.palette.common.white,
     fontSize:16,
     padding:20,
-  
-    
+    whiteSpace: 'nowrap'
   },
+  
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
     paddingLeft:20,
+    whiteSpace: 'nowrap'
   },
 }));
 
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: 'rgba(105, 130, 219, 0.3)',
+    backgroundColor: Colors.cell100,
   },
   // hide last border
   '&:last-child td, &:last-child th': {

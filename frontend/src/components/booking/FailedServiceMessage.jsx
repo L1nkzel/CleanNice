@@ -13,6 +13,7 @@ import {
   import { Clear, Close, DeleteOutline, Edit, Message, Remove } from "@mui/icons-material";
   import create from 'zustand';
   import { useEffect, useState } from "react";
+import Colors from "../../Colors";
   
   
   
@@ -45,7 +46,7 @@ import {
       <Dialog
         PaperProps={{
           sx: {
-            background: "linear-gradient(to left top,#5e92ce, #ffffff)",
+            background: `linear-gradient(to bottom, ${Colors.header100}, #FBFBFB)`,
           },
         }}
         sx={{

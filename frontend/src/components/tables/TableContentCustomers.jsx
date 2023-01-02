@@ -6,29 +6,32 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { DeleteOutline } from "@mui/icons-material";
-import { Box, CircularProgress, IconButton, LinearProgress, Tooltip } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import EditCustomer from "../manageCustomers/EditCustomer";
 import EditCustomerPass from "../manageCustomers/EditCustomerPass";
-import AlertDialogCustomer from "../manageCustomers/AlertDialogCustomer";
+import DeleteDialogCustomer from "../manageCustomers/DeleteDialogCustomer";
+import Colors from "../../Colors";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#6982db",
+    backgroundColor: Colors.header200,
     color: theme.palette.common.white,
     fontSize: 16,
     padding: 20,
+    whiteSpace: 'nowrap'
+
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
     paddingLeft: 20,
+    whiteSpace: 'nowrap'
   },
 }));
 
 const StyledTableRow = styled(TableRow)(() => ({
   "&:nth-of-type(odd)": {
-    backgroundColor: "rgba(105, 130, 219, 0.3)",
+    backgroundColor: Colors.cell100,
   },
   // hide last border
   "&:last-child td, &:last-child th": {
@@ -46,7 +49,7 @@ export default function TableContentCustomers(props) {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Kund id</StyledTableCell>
+            <StyledTableCell >Kund id</StyledTableCell>
             <StyledTableCell>Namn- och efternamn</StyledTableCell>
             <StyledTableCell>Telefonnummer</StyledTableCell>
             <StyledTableCell>E-post</StyledTableCell>
@@ -71,7 +74,7 @@ export default function TableContentCustomers(props) {
               <StyledTableCell>
                 <EditCustomer row={row} />
                 <EditCustomerPass row={row} />
-                <AlertDialogCustomer
+                <DeleteDialogCustomer
                   customerData={customerData}
                   setCustomerData={setCustomerData}
                   input={input}

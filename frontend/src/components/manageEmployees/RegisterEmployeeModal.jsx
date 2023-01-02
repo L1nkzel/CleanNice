@@ -6,10 +6,14 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  IconButton,
   TextField,
+  Tooltip,
 } from "@mui/material";
 import FormStyle from "../form/FormStyle";
 import { useState } from "react";
+import Colors from "../../Colors";
+import { Add, DeleteOutline} from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -102,19 +106,15 @@ export default function BasicModal() {
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
-      <Button
-        sx={{
-          background: "linear-gradient(to left top,#CEFFDC, #cfcfcf)",
-          borderStyle: "none",
-        }}
-        onClick={handleOpen}
-      >
-        Skapa användare
-      </Button>
+      <Tooltip title="Skapa användare">
+      <IconButton onClick={handleOpen}>
+          <Add sx={{color: "#62926C" }} />
+        </IconButton>
+        </Tooltip>
       <Dialog
         PaperProps={{
           sx: {
-            background: "linear-gradient(to left top,#5e92ce, #ffffff)",
+            background: `linear-gradient(to bottom, ${Colors.header200}, #FBFBFB)`,
           },
         }}
         sx={{

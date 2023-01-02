@@ -9,6 +9,7 @@ import CustomButton from "../ui/CustomButton";
 import RadioButtonsGroup from "../ui/RadioButtonsGroup";
 import CalenderComponent from "./calender/CalenderComponent";
 import Title from "../ui/Title";
+import Colors from "../../Colors";
 
 export default function BookService({ data }) {
   const navigate = useNavigate();
@@ -20,8 +21,8 @@ export default function BookService({ data }) {
   const [error, setError] = useState("");
   const bookUrl = `http://localhost:3500/api/bookings/`;
   const dateNumbers = `${date.getFullYear()}-${
-    date.getMonth() + 1
-  }-${date.getDate()}`;
+    ("0" + (date.getMonth() +1)).slice(-2)
+  }-${ ("0" + date.getDate()).slice(-2)}`;
 
   const handleChange = (newValue) => {
     setValue({ value: newValue });
@@ -126,7 +127,7 @@ export default function BookService({ data }) {
           borderColor: "black",
           borderRadius: 2,
           boxShadow: 10,
-          background: "linear-gradient(to top,#6982db, #FBFBFB)",
+          background: `linear-gradient(to top, ${Colors.header200}, #FBFBFB)`,
         }}
       >
         <Box

@@ -8,33 +8,32 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import {
-  DeleteOutline,
-  Done,
-  Clear,
   AssignmentTurnedIn,
 } from "@mui/icons-material";
-import FailedServiceModal from "../booking/FailedServiceModal";
 import FailedServiceMessage from "../booking/FailedServiceMessage";
 import { Box, Button, CircularProgress, Tooltip } from "@mui/material";
 import Options from "../ui/Options";
 import DeleteBookingModal from "../DeleteBookingModal";
+import Colors from "../../Colors";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#6982db",
+    backgroundColor: Colors.header200,
     color: theme.palette.common.white,
     fontSize: 14,
     padding: 20,
+    whiteSpace: 'nowrap'
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 13,
     paddingLeft: 20,
+    whiteSpace: 'nowrap'
   },
 }));
 
 const StyledTableRow = styled(TableRow)(() => ({
   "&:nth-of-type(odd)": {
-    backgroundColor: "rgba(105, 130, 219, 0.3)",
+    backgroundColor: Colors.cell100,
   },
   // hide last border
   "&:last-child td, &:last-child th": {
@@ -79,8 +78,8 @@ export default function TableContentBooking(props) {
                 ) : null}
                 <StyledTableCell>Kontaktperson</StyledTableCell>
                 <StyledTableCell>Telefonnummer</StyledTableCell>
-                <StyledTableCell>Företagsnamn</StyledTableCell>
-                <StyledTableCell>Ansvarig städare</StyledTableCell>
+                <StyledTableCell>Företag</StyledTableCell>
+                <StyledTableCell>Städare</StyledTableCell>
                 <StyledTableCell>Adress</StyledTableCell>
                 <StyledTableCell>Städtjänst</StyledTableCell>
                 <StyledTableCell>Datum</StyledTableCell>

@@ -19,7 +19,7 @@ export default function DropdownMenu(props) {
 
   return (
    
-      <Box sx={{display:{xxs:'flex', mm:'none'}}}>
+      <Box sx={{display:{xxs:'flex', smm:'none'}}}>
 
       <Button
         id="basic-button"

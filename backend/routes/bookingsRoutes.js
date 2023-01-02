@@ -65,7 +65,7 @@ route.post("/:id/newBooking", async (req, res) => {
         },
         customerName: customer.custName,
         companyName: customer.companyName,
-        cleanerName: "Ej tildelad ännu",
+        cleanerName: "Ej tilldelad",
         date: req.body.date,
         time: req.body.time,
         cleaningService: req.body.cleaningService,

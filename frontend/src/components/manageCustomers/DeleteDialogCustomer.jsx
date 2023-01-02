@@ -8,14 +8,16 @@ import {
   IconButton,
   TextField,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import {DeleteOutline} from "@mui/icons-material";
 import { useState } from "react";
+import Colors from "../../Colors";
 
 
 
 
-const AlertDialogCustomer = ({customerData, setCustomerData, input, setInput, row}) => {
+const DeleteDialogCustomer = ({customerData, setCustomerData, input, setInput, row}) => {
   const URL = "http://localhost:3500/api/customer"
 
   const [open, setOpen] = useState(false);
@@ -44,7 +46,7 @@ const AlertDialogCustomer = ({customerData, setCustomerData, input, setInput, ro
 
   return (
     <>
-    <Tooltip title="Edit">
+    <Tooltip title="Remove">
       <IconButton onClick={handleOpen}>
         <DeleteOutline sx={{ color: "#62926C" }} />
       </IconButton>
@@ -52,7 +54,7 @@ const AlertDialogCustomer = ({customerData, setCustomerData, input, setInput, ro
     <Dialog
       PaperProps={{
         sx: {
-          background: "linear-gradient(to left top,#5e92ce, #ffffff)",
+          background: `linear-gradient(to bottom, ${Colors.header100}, #FBFBFB)`,
         },
       }}
       sx={{
@@ -69,9 +71,9 @@ const AlertDialogCustomer = ({customerData, setCustomerData, input, setInput, ro
           alignItems: "center",
         }}
       >
-        <DialogTitle>Synpunkter</DialogTitle>
+        <DialogTitle>Vill du verkligen radera?</DialogTitle>
         <DialogContent>
-          <TextField
+          {/* <TextField
             value={input}
             onChange={onHandleChange}
             fullWidth
@@ -80,13 +82,14 @@ const AlertDialogCustomer = ({customerData, setCustomerData, input, setInput, ro
             InputProps={{
               disableunderline: "true",
             }}
-          />
+          /> */}
+          <Typography>All data kommer att rensas ur systemet</Typography>
           <DialogActions sx={{ display: "flex", justifyContent: "center" }}>
             <Button variant="outlined" onClick={handleClose}>
-              Avbryt
+              Nej
             </Button>
             <Button variant="outlined" onClick={deleteCustomer}>
-              Skicka
+              Ja
             </Button>
           </DialogActions>
         </DialogContent>
@@ -96,5 +99,5 @@ const AlertDialogCustomer = ({customerData, setCustomerData, input, setInput, ro
   );
 };
 
-export default AlertDialogCustomer;
+export default DeleteDialogCustomer;
 
