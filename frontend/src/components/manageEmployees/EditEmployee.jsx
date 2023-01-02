@@ -11,6 +11,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import React, { useState } from "react";
+import Colors from "../../Colors";
 import FormStyle from "../form/FormStyle";
 
 function EditEmployee({ row }) {
@@ -71,7 +72,7 @@ function EditEmployee({ row }) {
       <Dialog
         PaperProps={{
           sx: {
-            background: "linear-gradient(to left top,#5e92ce, #ffffff)",
+            background: `linear-gradient(to top, ${Colors.modal100}, #FBFBFB)`,
           },
         }}
         sx={{

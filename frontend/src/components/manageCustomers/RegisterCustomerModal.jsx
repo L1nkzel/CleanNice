@@ -6,11 +6,14 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  IconButton,
   TextField,
+  Tooltip,
 } from "@mui/material";
 import FormStyle from "../form/FormStyle";
 import { useState } from "react";
 import Colors from "../../Colors";
+import { Add } from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -26,7 +29,7 @@ const style = {
 
 const url = `http://localhost:3500/register`;
 
-export default function BasicModal({title}) {
+export default function BasicModal({ title }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -49,7 +52,7 @@ export default function BasicModal({title}) {
       companyName: formData.companyName,
       orgNr: formData.orgNr,
       password: formData.password,
-      forceChangePass: "yes"
+      forceChangePass: "yes",
     };
 
     const res = await fetch(url, {
@@ -71,12 +74,11 @@ export default function BasicModal({title}) {
       orgNr: "",
       password: "",
     });
-   
+
     setOpen(false);
   };
 
   const onHandleChange = (e) => {
-    
     const { name, value } = e.target;
 
     setFormData({
@@ -87,19 +89,15 @@ export default function BasicModal({title}) {
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
-      <Button
-        sx={{
-          background: "linear-gradient(to left top,#CEFFDC, #cfcfcf)",
-          borderStyle: "none",
-        }}
-        onClick={handleOpen}
-      >
-        Skapa användare
-      </Button>
+      <Tooltip title="Skapa användare">
+        <IconButton onClick={handleOpen} sx={{ my: 1 }}>
+          <Add sx={{ color: "#62926C" }} />
+        </IconButton>
+      </Tooltip>
       <Dialog
         PaperProps={{
           sx: {
-            background: `linear-gradient(to bottom, ${Colors.header100}, #FBFBFB)`,
+            background: `linear-gradient(to top, ${Colors.modal100}, #FBFBFB)`,
           },
         }}
         sx={{
@@ -224,22 +222,4 @@ export default function BasicModal({title}) {
       </Dialog>
     </Box>
   );
-}
-
-{
-  /* <Box sx={{display: "flex", justifyContent:"center"}}>
-<Button onClick={handleOpen}>Open modal</Button>
-<Dialog
-  open={open}
->
-<DialogContent sx={style}>  
- 
-
-  <DialogActions>
-  <Button variant='contained' size='medium' onClick={handleClose} >Avbryt</Button>
-  <Button variant='contained' size='medium' onClick={handleClick}>Register</Button>
-  </DialogActions>
-  </DialogContent>
-</Dialog>
-</Box> */
 }

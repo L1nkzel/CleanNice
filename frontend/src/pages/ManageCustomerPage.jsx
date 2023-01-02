@@ -46,9 +46,7 @@ const ManageCustomerPage = () => {
       <Box sx={{  mt: 4 }}>
         <Box sx={{ mx: 5 }}>
           <Title color={"darkgreen"}>Kunder</Title>
-          <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
-            <RegisterCustomerModal title="Skapa en ny kund" />
-          </Box>
+   
           
           <TableContentCustomers
             customerData={customerData}

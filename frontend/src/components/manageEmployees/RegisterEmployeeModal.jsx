@@ -106,7 +106,7 @@ export default function BasicModal() {
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
-      <Tooltip title="Skapa användare">
+      <Tooltip title="Skapa anställd">
       <IconButton onClick={handleOpen}>
           <Add sx={{color: "#62926C" }} />
         </IconButton>
@@ -114,7 +114,7 @@ export default function BasicModal() {
       <Dialog
         PaperProps={{
           sx: {
-            background: `linear-gradient(to bottom, ${Colors.header200}, #FBFBFB)`,
+            background: `linear-gradient(to top, ${Colors.modal100}, #FBFBFB)`,
           },
         }}
         sx={{
