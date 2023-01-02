@@ -16,11 +16,9 @@ import ProtectedCustomer from "./components/protected/ProtectedCustomer";
 import ProtectedEmployee from "./components/protected/ProtectedEmployee";
 import ProtectedAdmin from "./components/protected/ProtectedAdmin";
 import Error401Page from "./pages/Error401Page";
+import Footer from "./components/ui/Footer";
 
 function App() {
- 
-
-
   return (
     <>
       <Routes>
@@ -40,7 +38,7 @@ function App() {
         <Route
           path="/adminpage/"
           element={
-            <ProtectedAdmin >
+            <ProtectedAdmin>
               <AdminPage />
             </ProtectedAdmin>
           }
@@ -48,7 +46,7 @@ function App() {
         <Route
           path="/adminpage/employees"
           element={
-            <ProtectedAdmin >
+            <ProtectedAdmin>
               <ManageEmployeesPage />
             </ProtectedAdmin>
           }
@@ -56,7 +54,7 @@ function App() {
         <Route
           path="/adminpage/customer"
           element={
-            <ProtectedAdmin >
+            <ProtectedAdmin>
               <ManageCostumerPage />
             </ProtectedAdmin>
           }
@@ -64,7 +62,7 @@ function App() {
         <Route
           path="/customer/services"
           element={
-            <ProtectedCustomer >
+            <ProtectedCustomer>
               <ServicesPage />
             </ProtectedCustomer>
           }
@@ -72,7 +70,7 @@ function App() {
         <Route
           path="/customer/services/:id/"
           element={
-            <ProtectedCustomer >
+            <ProtectedCustomer>
               <ServicesPage />
             </ProtectedCustomer>
           }
@@ -90,7 +88,7 @@ function App() {
         <Route
           path="/employee/history"
           element={
-            <ProtectedEmployee >
+            <ProtectedEmployee>
               <EmployeeHistoryPage />
             </ProtectedEmployee>
           }
@@ -98,11 +96,12 @@ function App() {
         <Route
           path="/customer/history"
           element={
-            <ProtectedCustomer >
+            <ProtectedCustomer>
               <CustomerHistoryPage />
             </ProtectedCustomer>
           }
         />
+        <Footer />
       </Routes>
     </>
   );
