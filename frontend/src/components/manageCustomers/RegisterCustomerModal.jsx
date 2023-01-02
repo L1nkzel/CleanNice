@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import FormStyle from "../form/FormStyle";
 import { useState } from "react";
+import Colors from "../../Colors";
 
 const style = {
   position: "absolute",
@@ -98,7 +99,7 @@ export default function BasicModal({title}) {
       <Dialog
         PaperProps={{
           sx: {
-            background: "linear-gradient(to left top,#5e92ce, #ffffff)",
+            background: `linear-gradient(to bottom, ${Colors.header100}, #FBFBFB)`,
           },
         }}
         sx={{

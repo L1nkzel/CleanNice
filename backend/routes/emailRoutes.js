@@ -2,6 +2,7 @@ import Sib from "sib-api-v3-sdk";
 import "dotenv/config";
 import express from "express";
 import easyinvoice from "easyinvoice";
+import fs from "fs";
 
 
 
@@ -134,7 +135,7 @@ route.post("/invoice", async (req, res) => {
     customize: {
       //  "template": fs.readFileSync('template.html', 'base64') // Must be base64 encoded html
     },
-
+    
     // Your own data
     sender: {
       company: "Städa Fint AB",
@@ -157,6 +158,10 @@ route.post("/invoice", async (req, res) => {
       // "custom2": "custom value 2",
       // "custom3": "custom value 3"
     },
+    "images": {
+      // The logo on top of your invoice
+      "logo": fs.readFileSync('images/logo.png', 'base64')
+  },
     information: {
       // Invoice number
       number: req.body.bookingId,
@@ -176,7 +181,7 @@ route.post("/invoice", async (req, res) => {
       }
     ],
     // The message you would like to display on the bottom of your invoice
-    "bottom-notice": "Vänligen betala fakturan inom 30 dagar.",
+    "bottom-notice": "Vänligen betala fakturan inom 30 dagar till bankgiro: 999-0001.",
     // Settings to customize your invoice
     settings: {
       currency: "SEK", // See documentation 'Locales and Currency' for more info. Leave empty for no currency.

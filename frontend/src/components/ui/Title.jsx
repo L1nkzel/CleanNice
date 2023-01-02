@@ -10,7 +10,8 @@ function Title({children, color}) {
         mb: 4,
         color: color,
         fontSize: 21,
-        fontFamily: "Poppins"
+        fontFamily: "Poppins",
+        textDecoration: 'underline'
       }}
     >
       {children}

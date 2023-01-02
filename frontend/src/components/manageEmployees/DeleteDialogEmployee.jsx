@@ -11,11 +11,12 @@ import {
   } from "@mui/material";
   import { DeleteOutline} from "@mui/icons-material";
   import { useState } from "react";
+import Colors from "../../Colors";
   
   
   
   
-  const AlertDialogEmployee = (props) => {
+  const DeleteDialogEmployee = (props) => {
     const {employeeData, setEmployeeData, row} = props
     const URL = "http://localhost:3500/api/employee"
   
@@ -43,7 +44,7 @@ import {
   
     return (
       <>
-      <Tooltip title="Edit">
+      <Tooltip title="Remove">
         <IconButton onClick={handleOpen}>
           <DeleteOutline sx={{ color: "#62926C" }} />
         </IconButton>
@@ -51,7 +52,7 @@ import {
       <Dialog
         PaperProps={{
           sx: {
-            background: "linear-gradient(to left top,#5e92ce, #ffffff)",
+            background: `linear-gradient(to bottom, ${Colors.header100}, #FBFBFB)`,
           },
         }}
         sx={{
@@ -96,6 +97,6 @@ import {
     );
   };
   
-  export default AlertDialogEmployee;
+  export default DeleteDialogEmployee;
   
   

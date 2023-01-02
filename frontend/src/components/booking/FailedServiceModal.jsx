@@ -6,13 +6,12 @@ import {
     Button,
     Box,
     IconButton,
-    Typography,
     TextField,
     Tooltip,
   } from "@mui/material";
-  import { Clear, Close, DeleteOutline, Edit, Remove } from "@mui/icons-material";
-  import create from 'zustand';
+  import { Clear} from "@mui/icons-material";
   import { useState } from "react";
+import Colors from "../../Colors";
   
   
   
@@ -65,7 +64,7 @@ import {
       <Dialog
         PaperProps={{
           sx: {
-            background: "linear-gradient(to left top,#5e92ce, #ffffff)",
+            background: `linear-gradient(to bottom, ${Colors.header100}, #FBFBFB)`,
           },
         }}
         sx={{

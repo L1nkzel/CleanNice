@@ -43,20 +43,18 @@ const ManageEmployeesPage = () => {
     <>
       <Header
         url1="/adminpage/"
-        link1Name="Översikt"
+        link1Name="Bokningar"
         url2="/adminpage/employees"
-        link2Name="Administrera anställda"
+        link2Name="Anställda"
         url3="/adminpage/customer"
-        link3Name="Administrera kunder"
+        link3Name="Kunder"
         url4="#"
         link4Name="Faktura"
       />
-      <Box sx={{ display: "flex", mt: 4 }}>
+      <Box sx={{ mt: 4 }}>
         <Box sx={{ flexGrow: 1, mx: 5 }}>
-          <Title color={"darkgreen"}>Anställda</Title>
-          <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
-            <RegisterEmployeeModal />
-          </Box>
+          <Title textAlign={"center"} color={"darkgreen"}>Anställda</Title>
+  
 
           <TableContentEmployees
             employeeData={employeeData}

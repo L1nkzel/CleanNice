@@ -10,23 +10,26 @@ import FailedServiceModal from "../booking/FailedServiceModal";
 import { Box, Button, CircularProgress} from "@mui/material";
 import DeleteBookingModal from "../DeleteBookingModal";
 import { Done } from "@mui/icons-material";
+import Colors from "../../Colors";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#6982db",
+    backgroundColor: Colors.header200,
     color: theme.palette.common.white,
     fontSize: 14,
     padding: 20,
+    whiteSpace: 'nowrap'
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 13,
     paddingLeft: 20,
+    whiteSpace: 'nowrap'
   },
 }));
 
 const StyledTableRow = styled(TableRow)(() => ({
   "&:nth-of-type(odd)": {
-    backgroundColor: "rgba(105, 130, 219, 0.3)",
+    backgroundColor: Colors.cell100,
   },
   // hide last border
   "&:last-child td, &:last-child th": {
