@@ -6,7 +6,7 @@ import { createTheme, ThemeProvider, Typography } from "@mui/material";
 import { NoEncryption } from "@mui/icons-material";
 import DropdownMenu from "./header/DropdownMenu";
 import Colors from "../../Colors";
-import logo from "./logo.png";
+import logo from "./logo1.png";
 
 const theme = createTheme({
   breakpoints: {
@@ -61,6 +61,7 @@ export default function Header(props) {
               alt="Logo Städa Fint AB"
               src={logo}
               marginRight={4}
+              marginY={1}
             />
             <Box
               sx={{
