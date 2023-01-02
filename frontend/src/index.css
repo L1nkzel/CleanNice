@@ -15,7 +15,7 @@ body {
   background-size: cover;
   overflow: hidden;
 }
-
+  
 .Reg-component-emp {
   background-image: url(../src/components/images/cowomen-1hlFqUdFv1s-unsplash.jpg);
   background-position: center;
@@ -23,6 +23,17 @@ body {
   background-size: cover;
   overflow: hidden;
 }
+
+.Error401-background {
+  background-image: url(../src/components/images/401_Error_Unauthorized.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+}
+
 
 
 .foreground {

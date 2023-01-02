@@ -6,10 +6,7 @@ function CustomerPage() {
   const loggedInUser = JSON.parse(localStorage.getItem("userData"));
   const [userData] = useState(loggedInUser);
 
-  if (!userData?.isAuthenticated ) {
-    return <div>You are not authorized to log in to this page</div>;
-  }
-
+  
   return (
     <>
       <Header 

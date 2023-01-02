@@ -1,9 +1,9 @@
 import { Box} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
-import TableContentPaid from "../tables/TableContentPaid";
+import TableContentCleaner from "../tables/TableContentCleaner";
 
-const EmployeePaid = ({ data }) => {
+const EmployeeHistory = ({ data }) => {
   const [paid, setPaid] = useState();
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoaded, setIsLoaded] = useState(false)
@@ -31,7 +31,7 @@ const EmployeePaid = ({ data }) => {
     <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
       <Box sx={{ flexGrow: 1, mx: 5 }}>
         <Title color={"darkgreen"}>Mina betalningar</Title>
-        <TableContentPaid
+        <TableContentCleaner
           data={paid}
           isLoaded={isLoaded}
         />
@@ -40,4 +40,4 @@ const EmployeePaid = ({ data }) => {
   );
 };
 
-export default EmployeePaid;
+export default EmployeeHistory;
