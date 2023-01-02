@@ -1,7 +1,7 @@
 import { Box} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
-import TableContentCustomerHistory from "../tables/TableContentCustomerHistory";
+import TableContentForCustomer from "../tables/TableContentForCustomer";
 
 const CustomerHistory = ({ data }) => {
   const [history, setHistory] = useState();
@@ -26,7 +26,7 @@ setInterval(checkUser,1000)
     <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
       <Box sx={{ flexGrow: 1, mx: 5 }}>
         <Title color={"darkgreen"}>Historik</Title>
-        <TableContentCustomerHistory
+        <TableContentForCustomer
           data={history}
           isLoaded={isLoaded}
         />
