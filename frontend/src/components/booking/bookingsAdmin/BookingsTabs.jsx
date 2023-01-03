@@ -116,7 +116,8 @@ export default function BookingsTabs({ data }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          my: 8,
+          mt:8, 
+          mb:4,
         }}
       >
         <Box
