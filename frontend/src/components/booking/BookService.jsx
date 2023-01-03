@@ -115,7 +115,8 @@ export default function BookService({ data }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        my: 20,
+        mt:4
+        
       }}
     >
       <Box
@@ -123,7 +124,7 @@ export default function BookService({ data }) {
           display: "flex",
           flexDirection: "column",
           width: 700,
-          height: 600,
+          height: 550,
           borderColor: "black",
           borderRadius: 2,
           boxShadow: 10,
@@ -144,19 +145,19 @@ export default function BookService({ data }) {
             aria-label="basic tabs example"
           >
             <Tab
-              sx={{ fontWeight: "bold", fontSize:18  }}
+              sx={{ fontWeight: "bold", fontSize:16  }}
               disabled
               value={0}
               label="Välj tjänst"
             />
             <Tab
-              sx={{ fontWeight: "bold", fontSize:18 }}
+              sx={{ fontWeight: "bold", fontSize:16 }}
               disabled
               value={1}
               label="Välj datum och tid"
             />
             <Tab
-              sx={{ fontWeight: "bold", fontSize:18  }}
+              sx={{ fontWeight: "bold", fontSize:16  }}
               disabled
               value={2}
               label="Detaljer"

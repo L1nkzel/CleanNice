@@ -16,7 +16,7 @@ export default function RadioButtonsGroup({ selected, setSelected }) {
 
   return (
     <FormControl>
-      <FormLabel sx={{textAlign:'center', fontSize:20, fontWeight:'bold', mb:5}} id="demo-radio-buttons-group-label">Välj en tjänst:</FormLabel>
+      <FormLabel sx={{textAlign:'center', fontSize:18, fontWeight:'bold', mb:2}} id="demo-radio-buttons-group-label">Välj en tjänst:</FormLabel>
       <RadioGroup
         aria-labelledby="demo-radio-buttons-group-label"
         name="radio-buttons-group"
@@ -41,7 +41,7 @@ export default function RadioButtonsGroup({ selected, setSelected }) {
           control={<Radio />}
           label={<Typography sx={{color:"#CD7F32", py:0.5, px:1, borderRadius:2, fontSize:18, fontWeight:"bold", fontFamily:"poppins"}} >Brons Städning</Typography>}
           />
-        <Typography sx={{ ml: 9.5, mb: 4, mr:2 }}>
+        <Typography sx={{ ml: 9.5, mb: 2, mr:2 }}>
           Dammsugning, moppning, städ av toaletter och tömning av papperskorgar.
         </Typography>
         <FormControlLabel
@@ -50,7 +50,7 @@ export default function RadioButtonsGroup({ selected, setSelected }) {
           control={<Radio />}
           label={<Typography sx={{color:"#aaa9ad", py:0.5, px:1, borderRadius:2,  fontSize:18, fontWeight:"bold", fontFamily:"poppins"}} >Silver Städning</Typography>}
           />
-        <Typography sx={{ ml: 9.5, mb: 4, mr:2 }}>
+        <Typography sx={{ ml: 9.5, mb: 2, mr:2 }}>
           Allt som erbjuds i brons städning samt avdamning och skrivbords
           städning.
         </Typography>
