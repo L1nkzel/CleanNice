@@ -3,7 +3,6 @@ import Toolbar from "@mui/material/Toolbar";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider, Typography } from "@mui/material";
-import { NoEncryption } from "@mui/icons-material";
 import DropdownMenu from "./header/DropdownMenu";
 import Colors from "../../Colors";
 import logo from "./logo.png";
@@ -29,7 +28,7 @@ export default function Header(props) {
     localStorage.removeItem("userData");
     navigate("/");
     window.location.reload();
-    const res = await fetch(`http://localhost:3500/logout`, {
+    const res = await fetch(`http://localhost:3500/auth/logout`, {
       credentials: "include",
       method: "POST",
     });
