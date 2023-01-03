@@ -45,7 +45,7 @@ function LoginForm() {
       password: loginData.password
     };
 
-    const res = await fetch("http://localhost:3500/login", {
+    const res = await fetch("http://localhost:3500/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials:'include',
