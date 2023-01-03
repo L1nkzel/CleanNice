@@ -12,7 +12,6 @@ import DeleteDialogEmployee from "../manageEmployees/DeleteDialogEmployee";
 import {
   Box,
   CircularProgress,
-  TableFooter,
   TablePagination,
   TextField,
 } from "@mui/material";

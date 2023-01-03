@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CurrentBookings from "../components/booking/EmployeeBookings";
+import EmployeeBookings from "../components/booking/EmployeeBookings";
 import Header from "../components/ui/Header";
 
 function EmployeePage() {
@@ -20,7 +20,7 @@ function EmployeePage() {
       link5Name ='Integritetspolicy'
      
       />
-      <CurrentBookings data={userData.user} />
+      <EmployeeBookings data={userData.user} />
     </>
   );
 }
