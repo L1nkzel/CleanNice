@@ -6,6 +6,7 @@ import TableContentCustomers from "../components/tables/TableContentCustomers";
 import Header from "../components/ui/Header";
 import Title from "../components/ui/Title";
 import RegisterCustomerModal from "../components/manageCustomers/RegisterCustomerModal";
+import Footer from "../components/ui/Footer";
 
 
 const ManageCustomerPage = () => {
@@ -43,7 +44,7 @@ const ManageCustomerPage = () => {
         url4="#"
         link4Name="Faktura"
       />
-      <Box sx={{  mt: 4 }}>
+      <Box sx={{  mt: 4, mb:4 }}>
         <Box sx={{ mx: 5 }}>
           <Title color={"darkgreen"}>Kunder</Title>
    
@@ -57,6 +58,7 @@ const ManageCustomerPage = () => {
           />
         </Box>
       </Box>
+      <Footer />
     </>
   );
 };

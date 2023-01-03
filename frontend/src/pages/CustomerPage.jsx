@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CurrentBookings from "../components/booking/CurrentBookings";
+import Footer from "../components/ui/Footer";
 import Header from "../components/ui/Header";
 
 function CustomerPage() {
@@ -22,6 +23,7 @@ function CustomerPage() {
       link5Name ='Integritetspolicy'
       />
       <CurrentBookings data={userData.user} />
+      <Footer />
     </>
   );
 }

@@ -6,6 +6,7 @@ import TableContentEmployees from "../components/tables/TableContentEmployees";
 import RegisterEmployeeModal from "../components/manageEmployees/RegisterEmployeeModal";
 import Header from "../components/ui/Header";
 import Title from "../components/ui/Title";
+import Footer from "../components/ui/Footer";
 
 const ManageEmployeesPage = () => {
   const URL = "http://localhost:3500/api/employee/";
@@ -40,7 +41,8 @@ const ManageEmployeesPage = () => {
 
 
   return (
-    <>
+    <Box sx={{display: "flex",
+    flexDirection: "column"}}>
       <Header
         url1="/adminpage/"
         link1Name="Bokningar"
@@ -51,10 +53,11 @@ const ManageEmployeesPage = () => {
         url4="#"
         link4Name="Faktura"
       />
-      <Box sx={{ mt: 4 }}>
+      <Box sx={{ mt: 4, mb:4 }}>
         <Box sx={{ flexGrow: 1, mx: 5 }}>
           <Title textAlign={"center"} color={"darkgreen"}>Anställda</Title>
   
+
 
           <TableContentEmployees
             employeeData={employeeData}
@@ -63,7 +66,8 @@ const ManageEmployeesPage = () => {
           />
         </Box>
       </Box>
-    </>
+      <Footer />
+    </Box>
   );
 };
 

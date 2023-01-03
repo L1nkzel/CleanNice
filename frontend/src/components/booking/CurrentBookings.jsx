@@ -44,7 +44,7 @@ const CurrentBookings = ({ data }) => {
   };
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+    <Box sx={{ display: "flex", justifyContent: "center", mt: 4, mb:4 }}>
       <Box sx={{ flexGrow: 1, mx: 5 }}>
         <Title color={"darkgreen"}>Mina bokningar</Title>
         <TableContentForCustomer

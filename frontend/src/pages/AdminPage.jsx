@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BookingsTabs from "../components/booking/bookingsAdmin/BookingsTabs";
+import Footer from "../components/ui/Footer";
 import Header from "../components/ui/Header";
 
 function AdminPage() {
@@ -19,6 +20,7 @@ function AdminPage() {
         link4Name="Faktura"
       />
       <BookingsTabs data={userData.user} />
+    <Footer/>
     </>
   );
 }
