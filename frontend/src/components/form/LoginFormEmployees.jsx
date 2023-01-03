@@ -46,7 +46,7 @@ function LoginFormEmployees() {
       email: loginData.email,
       password: loginData.password
     };
-    const res = await fetch("http://localhost:3500/employee/login", {
+    const res = await fetch("http://localhost:3500/auth/employee/login", {
       method: "POST",
       credentials:'include',
       headers: { "Content-Type": "application/json",
