@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
 import TableContentCleaner from "../tables/TableContentCleaner";
 
-const BookedEmployee = ({ data }) => {
+const EmployeeBookings = ({ data }) => {
   const [userBookings, setUserBookings] = useState();
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoaded, setIsLoaded] = useState(false)
@@ -78,8 +78,8 @@ const BookedEmployee = ({ data }) => {
     }
   };
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
-      <Box sx={{ flexGrow: 1, mx: 5 }}>
+    <Box sx={{justifyContent: "center", mt: 4 }}>
+      <Box sx={{mx: 5 }}>
         <Title color={"darkgreen"}>Mina bokningar</Title>
         <TableContentCleaner
           data={userBookings}
@@ -91,4 +91,4 @@ const BookedEmployee = ({ data }) => {
   );
 };
 
-export default BookedEmployee;
+export default EmployeeBookings;

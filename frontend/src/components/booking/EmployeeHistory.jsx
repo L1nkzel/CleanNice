@@ -28,8 +28,8 @@ const EmployeeHistory = ({ data }) => {
   }, []);
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
-      <Box sx={{ flexGrow: 1, mx: 5 }}>
+    <Box sx={{justifyContent: "center", mt: 4 }}>
+      <Box sx={{mx: 5 }}>
         <Title color={"darkgreen"}>Mina betalningar</Title>
         <TableContentCleaner
           data={paid}

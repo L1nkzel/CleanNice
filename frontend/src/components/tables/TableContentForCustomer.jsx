@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,7 +7,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import FailedServiceModal from "../booking/FailedServiceModal";
-import { Box, Button, CircularProgress} from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Paper,
+  TablePagination,
+} from "@mui/material";
 import DeleteBookingModal from "../DeleteBookingModal";
 import { Done } from "@mui/icons-material";
 import Colors from "../../Colors";
@@ -18,12 +24,13 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.common.white,
     fontSize: 14,
     padding: 20,
-    whiteSpace: 'nowrap'
+    whiteSpace: "nowrap",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 13,
     paddingLeft: 20,
-    whiteSpace: 'nowrap'
+    paddingRight: 10,
+    whiteSpace: "nowrap",
   },
 }));
 
@@ -38,15 +45,19 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 export default function TableContentForCustomer(props) {
-  const {
-    data,
-    dataUser,
-    setUserBookings,
-    deleteBookingHandler,
-    input,
-    setInput,
-    isLoaded,
-  } = props;
+  const { data, dataUser, setUserBookings, input, setInput, isLoaded } = props;
+
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   return (
     <>
@@ -63,70 +74,85 @@ export default function TableContentForCustomer(props) {
           <CircularProgress size="50px" />
         </Box>
       ) : (
-        <TableContainer
-          sx={{
-            flexGrow: 1,
-            justifyContent: "center",
-            display: "flex",
-            alignItems: "center",
-           
-          }}
-          
-        >
-          <Table sx={{ maxWidth: 700,
-              
-          
-          }} aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>Boknings Id</StyledTableCell>
-                <StyledTableCell>Städtjänst</StyledTableCell>
-                <StyledTableCell>Datum</StyledTableCell>
-                <StyledTableCell>Tid</StyledTableCell>
-                <StyledTableCell></StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {data?.map((row) => (
-                <StyledTableRow key={row.bookingId}>
-                  <StyledTableCell component="th" scope="row">
-                    {row.bookingId}
-                  </StyledTableCell>
-                  <StyledTableCell>{row.cleaningService}</StyledTableCell>
-                  <StyledTableCell>{row.date}</StyledTableCell>
-                  <StyledTableCell>{row.time}</StyledTableCell>
-                  <StyledTableCell>
-                    {row.status === "Utfört" ? (
-                      <Button
-                        onClick={() => props.approveBooking(row.bookingId)}
-                        >
-                        <Done  sx={{ color: "green" }} />
-                      </Button>
-                    ) : null}
-                    {row.status === "Utfört" ? (
-                      <FailedServiceModal
-                        userBookings={data}
-                        setUserBookings={setUserBookings}
-                        input={input}
-                        setInput={setInput}
-                        row={row}
-                      />
-                    ) : null}
+        <>
+          <TableContainer
+            component={Paper}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>Boknings Id</StyledTableCell>
+                  <StyledTableCell>Städtjänst</StyledTableCell>
+                  <StyledTableCell>Datum</StyledTableCell>
+                  <StyledTableCell>Tid</StyledTableCell>
+                  <StyledTableCell></StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  ?.map((row) => (
+                    <StyledTableRow key={row.bookingId}>
+                      <StyledTableCell component="th" scope="row">
+                        {row.bookingId}
+                      </StyledTableCell>
+                      <StyledTableCell>{row.cleaningService}</StyledTableCell>
+                      <StyledTableCell>{row.date}</StyledTableCell>
+                      <StyledTableCell>{row.time}</StyledTableCell>
+                      <StyledTableCell>
+                        {row.status === "Utfört" ? (
+                          <Button
+                            onClick={() => props.approveBooking(row.bookingId)}
+                          >
+                            <Done sx={{ color: "green" }} />
+                          </Button>
+                        ) : null}
+                        {row.status === "Utfört" ? (
+                          <FailedServiceModal
+                            userBookings={data}
+                            setUserBookings={setUserBookings}
+                            input={input}
+                            setInput={setInput}
+                            row={row}
+                          />
+                        ) : null}
 
-                    {new Date(row.date) > new Date() - 1 && (row.status === "Bekräftad" || row.status === "Bokad")? (
-                      <DeleteBookingModal
-                        userBookings={data}
-                        setUserBookings={setUserBookings}
-                        row={row}
-                        user={dataUser}
-                      />
-                    ) : null}
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+                        {new Date(row.date) > new Date() - 1 &&
+                        (row.status === "Bekräftad" ||
+                          row.status === "Bokad") ? (
+                          <DeleteBookingModal
+                            userBookings={data}
+                            setUserBookings={setUserBookings}
+                            row={row}
+                            user={dataUser}
+                          />
+                        ) : null}
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            sx={{
+              backgroundColor: Colors.header200,
+              color: "white",
+            }}
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={data.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </>
       )}
     </>
   );

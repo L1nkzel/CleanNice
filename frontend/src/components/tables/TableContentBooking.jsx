@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,11 +7,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import {
-  AssignmentTurnedIn,
-} from "@mui/icons-material";
+import { AssignmentTurnedIn } from "@mui/icons-material";
 import FailedServiceMessage from "../booking/FailedServiceMessage";
-import { Box, Button, CircularProgress, Tooltip } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  TablePagination,
+  Tooltip,
+} from "@mui/material";
 import Options from "../ui/Options";
 import DeleteBookingModal from "../DeleteBookingModal";
 import Colors from "../../Colors";
@@ -22,12 +26,12 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.common.white,
     fontSize: 14,
     padding: 20,
-    whiteSpace: 'nowrap'
+    whiteSpace: "nowrap",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 13,
     paddingLeft: 20,
-    whiteSpace: 'nowrap'
+    whiteSpace: "nowrap",
   },
 }));
 
@@ -42,16 +46,18 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 export default function TableContentBooking(props) {
-  const {
-    data,
-    dataUser,
-    setUserBookings,
-    deleteBookingHandler,
-    input,
-    setInput,
-    isLoaded,
-    bookingCompleted,
-  } = props;
+  const { data, dataUser, setUserBookings, isLoaded, bookingCompleted } = props;
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   return (
     <>
@@ -89,67 +95,86 @@ export default function TableContentBooking(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data?.map((row) => (
-                <StyledTableRow key={row.bookingId}>
-                  <StyledTableCell component="th" scope="row">
-                    {row.bookingId}
-                  </StyledTableCell>
-                  {dataUser?.role === "Admin" ? (
-                    <StyledTableCell>{row.customerId}</StyledTableCell>
-                  ) : null}
-                  <StyledTableCell>{row.customerName}</StyledTableCell>
-                  <StyledTableCell>{row.phoneNumber}</StyledTableCell>
-                  <StyledTableCell>{row.companyName}</StyledTableCell>
-                  {dataUser?.role === "Admin" ? (
-                    <StyledTableCell
-                      sx={{ display: "flex", alignItems: "center" }}
-                      align="center"
-                    >
-                      {row.cleanerName}
-                      {dataUser?.role === "Admin" ? (
-                        <Options booking={row} />
-                      ) : null}
+              {data
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                ?.map((row) => (
+                  <StyledTableRow key={row.bookingId}>
+                    <StyledTableCell component="th" scope="row">
+                      {row.bookingId}
                     </StyledTableCell>
-                  ) : (
-                    <StyledTableCell>
-                      {row.cleanerName}
-                      {dataUser?.role === "Admin" ? (
-                        <Options booking={row} />
-                      ) : null}
-                    </StyledTableCell>
-                  )}
+                    {dataUser?.role === "Admin" ? (
+                      <StyledTableCell>{row.customerId}</StyledTableCell>
+                    ) : null}
+                    <StyledTableCell>{row.customerName}</StyledTableCell>
+                    <StyledTableCell>{row.phoneNumber}</StyledTableCell>
+                    <StyledTableCell>{row.companyName}</StyledTableCell>
+                    {dataUser?.role === "Admin" ? (
+                      <StyledTableCell
+                        sx={{ display: "flex", alignItems: "center" }}
+                        align="center"
+                      >
+                        {row.cleanerName}
+                        {dataUser?.role === "Admin" ? (
+                          <Options booking={row} />
+                        ) : null}
+                      </StyledTableCell>
+                    ) : (
+                      <StyledTableCell>
+                        {row.cleanerName}
+                        {dataUser?.role === "Admin" ? (
+                          <Options booking={row} />
+                        ) : null}
+                      </StyledTableCell>
+                    )}
 
-                  <StyledTableCell>{row.adress}</StyledTableCell>
-                  <StyledTableCell>{row.cleaningService}</StyledTableCell>
-                  <StyledTableCell>{row.date}</StyledTableCell>
-                  <StyledTableCell>{row.time}</StyledTableCell>
-                  <StyledTableCell>{row.status}</StyledTableCell>
-                  <StyledTableCell>
-                    {dataUser?.role === "Admin" && row.comment !== "N/A" ? (
-                      <FailedServiceMessage row={row} />
-                    ) : null}
-                    {new Date(row.date) > new Date() - 1 && (row.status === "Bekräftad" || row.status === "Bokad")? (
-                      <DeleteBookingModal
-                        userBookings={data}
-                        setUserBookings={setUserBookings}
-                        row={row}
-                        user={dataUser}
-                      />
-                    ) : null}
-                    {row.status === "Godkänd" ? (
-                      <Tooltip title="Klarmarkera">
-                        <Button onClick={() => bookingCompleted(row.bookingId)}>
-                          <AssignmentTurnedIn sx={{ color: "green" }} />
-                        </Button>
-                      </Tooltip>
-                    ) : null}
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))}
+                    <StyledTableCell>{row.adress}</StyledTableCell>
+                    <StyledTableCell>{row.cleaningService}</StyledTableCell>
+                    <StyledTableCell>{row.date}</StyledTableCell>
+                    <StyledTableCell>{row.time}</StyledTableCell>
+                    <StyledTableCell>{row.status}</StyledTableCell>
+                    <StyledTableCell>
+                      {dataUser?.role === "Admin" && row.comment !== "N/A" ? (
+                        <FailedServiceMessage row={row} />
+                      ) : null}
+                      {new Date(row.date) > new Date() - 1 &&
+                      (row.status === "Bekräftad" || row.status === "Bokad") ? (
+                        <DeleteBookingModal
+                          userBookings={data}
+                          setUserBookings={setUserBookings}
+                          row={row}
+                          user={dataUser}
+                        />
+                      ) : null}
+                      {row.status === "Godkänd" ? (
+                        <Tooltip title="Klarmarkera">
+                          <Button
+                            onClick={() => bookingCompleted(row.bookingId)}
+                          >
+                            <AssignmentTurnedIn sx={{ color: "green" }} />
+                          </Button>
+                        </Tooltip>
+                      ) : null}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>
       )}
+      <TablePagination
+        sx={{
+          width: "100%",
+          backgroundColor: Colors.header200,
+          color: "white",
+        }}
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={data.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </>
   );
 }
