@@ -17,7 +17,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import Options from "../ui/Options";
-import DeleteBookingModal from "../DeleteBookingModal";
+import DeleteBookingModal from "../booking/DeleteBookingModal";
 import Colors from "../../Colors";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({

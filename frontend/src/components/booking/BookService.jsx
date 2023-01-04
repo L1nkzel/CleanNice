@@ -115,8 +115,8 @@ export default function BookService({ data }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        mt:4
-        
+        mt:4,
+        mb:8
       }}
     >
       <Box
@@ -124,7 +124,7 @@ export default function BookService({ data }) {
           display: "flex",
           flexDirection: "column",
           width: 700,
-          height: 550,
+          height: 600,
           borderColor: "black",
           borderRadius: 2,
           boxShadow: 10,
@@ -287,10 +287,3 @@ TabPanel.propTypes = {
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
-
-// function a11yProps(index) {
-//   return {
-//     id: `simple-tab-${index}`,
-//     'aria-controls': `simple-tabpanel-${index}`,
-//   };
-// }

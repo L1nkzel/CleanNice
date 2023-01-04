@@ -6,52 +6,41 @@ import {
   Button,
   Box,
   IconButton,
-  TextField,
   Tooltip,
-  Typography,
 } from "@mui/material";
-import { Clear } from "@mui/icons-material";
+import { Done } from "@mui/icons-material";
 import { useState } from "react";
 import Colors from "../../Colors";
 
-const FailedServiceModal = ({ input, setInput, row }) => {
+const ApproveServiceModal = ({ row }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
 
-  function onHandleChange(e) {
-    setInput(() => e.target.value);
-    console.log(e.target.value);
-  }
-
-  const failedServiceHandler = async () => {
+  const approveBooking = async () => {
     const data = {
-      status: "Underkänd",
-      comment: input,
+      status: "Godkänd",
     };
-
-    const res = await fetch(
+    await fetch(
       `http://localhost:3500/api/bookings/${row.bookingId}/editBooking`,
       {
         method: "PATCH",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include",
         body: JSON.stringify(data),
       }
     );
-    const data2 = await res.json();
-    console.log(data2);
   };
 
   return (
     <>
-      <Tooltip title="Underkänn städning">
+      <Tooltip title="Godkänn städning">
         <IconButton onClick={handleOpen}>
-          <Clear sx={{ color: "#cd3112" }} />
+          <Done sx={{ color: "green" }} />
         </IconButton>
       </Tooltip>
       <Dialog
@@ -74,26 +63,14 @@ const FailedServiceModal = ({ input, setInput, row }) => {
             alignItems: "center",
           }}
         >
-          <DialogTitle>Underkänn städning</DialogTitle>
-          <Typography sx={{mx:2}}>Vänligen skriv ner vad du är missnöjd med</Typography>
+          <DialogTitle>Vill du godkänna denna bokning?</DialogTitle>
           <DialogContent>
-            <TextField
-              value={input}
-              onChange={onHandleChange}
-              fullWidth
-              multiline
-              required
-              variant="outlined"
-              InputProps={{
-                disableunderline: "true",
-              }}
-            />
             <DialogActions sx={{ display: "flex", justifyContent: "center" }}>
               <Button variant="outlined" onClick={handleClose}>
-                Avbryt
+                Nej
               </Button>
-              <Button variant="outlined" onClick={failedServiceHandler}>
-                Skicka
+              <Button variant="outlined" onClick={approveBooking}>
+                Ja
               </Button>
             </DialogActions>
           </DialogContent>
@@ -103,4 +80,4 @@ const FailedServiceModal = ({ input, setInput, row }) => {
   );
 };
 
-export default FailedServiceModal;
+export default ApproveServiceModal;

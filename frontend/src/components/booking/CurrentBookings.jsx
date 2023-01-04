@@ -5,7 +5,6 @@ import Title from "../ui/Title";
 
 const CurrentBookings = ({ data }) => {
   const [userBookings, setUserBookings] = useState();
-  const [errorMessage, setErrorMessage] = useState("");
   const [input, setInput] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -22,26 +21,6 @@ const CurrentBookings = ({ data }) => {
     setInterval(checkUser, 1000);
   }, []);
 
-  const approveBooking = async (id) => {
-    const data = {
-      status: "Godkänd",
-    };
-    if (window.confirm("Vill du godkänna denna bokning")) {
-      const res = await fetch(
-        `http://localhost:3500/api/bookings/${id}/editBooking`,
-        {
-          method: "PATCH",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
-
-      return;
-    }
-  };
 
   return (
     <Box sx={{ mt: 4, mb:4 }}>
@@ -54,7 +33,6 @@ const CurrentBookings = ({ data }) => {
           setUserBookings={setUserBookings}
           isLoaded={isLoaded}
           dataUser={data}
-          approveBooking={approveBooking}
         />
       </Box>
     </Box>

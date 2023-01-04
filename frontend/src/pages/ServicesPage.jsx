@@ -1,5 +1,6 @@
 import { useState } from "react";
 import BookService from "../components/booking/BookService";
+import Footer from "../components/ui/Footer";
 import Header from "../components/ui/Header";
 
 function ServicesPage() {
@@ -21,6 +22,7 @@ function ServicesPage() {
       link5Name='Integritetspolicy'
       />
       <BookService data={userData?.user} />
+      <Footer />
     </>
   );
 }

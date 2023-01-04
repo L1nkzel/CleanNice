@@ -21,7 +21,7 @@ function CustomButton({children, onClick}) {
 export default CustomButton;
 
 const buttonStyle = {
-  width: 250,
+  width: {xs:150, md:200},
   fontSize: { xs: 13, sm: 14, md: 15 },
   color: "black",
   

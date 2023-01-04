@@ -46,8 +46,6 @@ const EmployeeBookings = ({ data }) => {
       credentials: "include",
      })
      const customerData = await res2.json()
-    console.log("customer:" ,customerData)
-    console.log("bookinf:" ,bookingData)
 
 
      const invoiceData ={
@@ -82,8 +80,8 @@ const EmployeeBookings = ({ data }) => {
       <Box sx={{mx: 5 }}>
         <Title color={"darkgreen"}>Mina bokningar</Title>
         <TableContentCleaner
-          data={userBookings}
-          cleaningDoneHandler={cleaningDoneHandler}
+          userBookings={userBookings}
+          setUserBookings={setUserBookings}
           isLoaded={isLoaded}
         />
       </Box>

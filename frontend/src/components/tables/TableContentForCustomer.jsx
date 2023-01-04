@@ -14,9 +14,10 @@ import {
   Paper,
   TablePagination,
 } from "@mui/material";
-import DeleteBookingModal from "../DeleteBookingModal";
+import DeleteBookingModal from "../booking/DeleteBookingModal";
 import { Done } from "@mui/icons-material";
 import Colors from "../../Colors";
+import ApproveServiceModal from "../booking/ApproveServiceModal";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -107,11 +108,7 @@ export default function TableContentForCustomer(props) {
                       <StyledTableCell>{row.time}</StyledTableCell>
                       <StyledTableCell>
                         {row.status === "Utfört" ? (
-                          <Button
-                            onClick={() => props.approveBooking(row.bookingId)}
-                          >
-                            <Done sx={{ color: "green" }} />
-                          </Button>
+                       <ApproveServiceModal row={row}/>
                         ) : null}
                         {row.status === "Utfört" ? (
                           <FailedServiceModal

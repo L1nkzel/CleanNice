@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CustomerHistory from "../components/booking/CustomerHistory";
+import Footer from "../components/ui/Footer";
 import Header from "../components/ui/Header";
 
 function CustomerHistoryPage() {
@@ -21,6 +22,7 @@ function CustomerHistoryPage() {
         link5Name="Integritetspolicy"
       />
       <CustomerHistory data={userData.user} />
+      <Footer />
     </>
   );
 }
