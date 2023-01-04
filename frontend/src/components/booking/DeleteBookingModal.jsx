@@ -6,19 +6,16 @@ import {
   Button,
   Box,
   IconButton,
-  Tooltip,
   Typography,
+  Tooltip,
 } from "@mui/material";
 import { DeleteOutline } from "@mui/icons-material";
 import { useState } from "react";
 import Colors from "../../Colors";
 
-const DeleteDialogCustomer = ({
-  customerData,
-  setCustomerData,
-  row,
-}) => {
-  const URL = "http://localhost:3500/api/customer";
+const DeleteBookingModal = (props) => {
+  const { userBookings, setUserBookings, row } = props;
+  const URL = "http://localhost:3500/api/bookings";
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
@@ -26,19 +23,35 @@ const DeleteDialogCustomer = ({
   };
   const handleClose = () => setOpen(false);
 
-  const deleteCustomer = async () => {
-    await fetch(`${URL}/${row.customerId}/deleteCustomer`, {
+  const deleteBookingHandler = async () => {
+    await fetch(`${URL}/${row.bookingId}/booking`, {
       method: "DELETE",
       credentials: "include",
     });
-    setCustomerData(
-      customerData.filter((customer) => customer.customerId !== row.customerId)
+    setUserBookings(
+      userBookings.filter((booking) => booking.bookingId !== row.bookingId)
     );
+    console.log("user:", props?.user);
+    if (!isNaN(props?.user.customerId)) {
+      const mailData = {
+        custName: props.user.custName,
+        email: props.user.email,
+        bookingId: row.bookingId,
+      };
+      await fetch(`http://localhost:3500/api/email/cancelBooking`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(mailData),
+      });
+    }
   };
 
   return (
     <>
-      <Tooltip title="Remove">
+      <Tooltip title="Radera">
         <IconButton onClick={handleOpen}>
           <DeleteOutline sx={{ color: "#62926C" }} />
         </IconButton>
@@ -63,14 +76,14 @@ const DeleteDialogCustomer = ({
             alignItems: "center",
           }}
         >
-          <DialogTitle>Vill du verkligen radera?</DialogTitle>
+          <DialogTitle>Vill du verkligen radera denna bokning?</DialogTitle>
           <DialogContent>
             <Typography>All data kommer att rensas ur systemet</Typography>
             <DialogActions sx={{ display: "flex", justifyContent: "center" }}>
               <Button variant="outlined" onClick={handleClose}>
                 Nej
               </Button>
-              <Button variant="outlined" onClick={deleteCustomer}>
+              <Button variant="outlined" onClick={deleteBookingHandler}>
                 Ja
               </Button>
             </DialogActions>
@@ -81,4 +94,4 @@ const DeleteDialogCustomer = ({
   );
 };
 
-export default DeleteDialogCustomer;
+export default DeleteBookingModal;

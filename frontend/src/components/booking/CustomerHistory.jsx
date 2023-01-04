@@ -5,7 +5,6 @@ import TableContentForCustomer from "../tables/TableContentForCustomer";
 
 const CustomerHistory = ({ data }) => {
   const [history, setHistory] = useState();
-  const [errorMessage, setErrorMessage] = useState("");
   const [isLoaded, setIsLoaded] = useState(false)
 
   console.log(history);

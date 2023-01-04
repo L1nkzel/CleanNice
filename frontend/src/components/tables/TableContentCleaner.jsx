@@ -12,6 +12,7 @@ import CheckIcon from "@mui/icons-material/Check";
 
 import { Box, Button, CircularProgress, TablePagination } from "@mui/material";
 import Colors from "../../Colors";
+import CleaningDoneModal from "../booking/CleaningDoneModal";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,7 +41,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 export default function TableContentCleaner(props) {
-  const { data, isLoaded, cleaningDoneHandler } = props;
+  const { userBookings, setUserBookings, isLoaded } = props;
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -87,7 +88,7 @@ export default function TableContentCleaner(props) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data
+                {userBookings
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   ?.map((row) => (
                     <StyledTableRow key={row.bookingId}>
@@ -104,11 +105,7 @@ export default function TableContentCleaner(props) {
                       <StyledTableCell>{row.time}</StyledTableCell>
                       <StyledTableCell>{row.status}</StyledTableCell>
                       <StyledTableCell>
-                        <Button
-                          onClick={() => cleaningDoneHandler(row.bookingId)}
-                        >
-                          <CheckIcon sx={{ color: "#62926C" }} />
-                        </Button>
+                      <CleaningDoneModal row={row} setUserBookings={setUserBookings} userBookings={userBookings} />
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}
@@ -122,7 +119,7 @@ export default function TableContentCleaner(props) {
             }}
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={data.length}
+            count={userBookings.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
