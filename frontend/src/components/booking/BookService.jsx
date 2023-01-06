@@ -87,9 +87,10 @@ export default function BookService({ data }) {
   }
 
   function handleCalenderOnPress() {
-    if (time !== "" && date !== new Date()) {
+    if (time.length !== 0) {
       setValue(value + 1);
       setError("");
+      console.log(time, date);
     } else {
       setError(
         "Du måste välja ett datum och en tid för att gå vidare"
@@ -194,7 +195,6 @@ export default function BookService({ data }) {
             time={time}
             setTime={setTime}
           />
-          <Box></Box>
           <Grid
             container
             columnGap={1}
@@ -208,7 +208,7 @@ export default function BookService({ data }) {
               mt: 1,
               px: 0.5,
               borderRadius: 1,
-              color: "#f59d9d",
+              color: "#a60a0a",
             }}
           >
             {error}
