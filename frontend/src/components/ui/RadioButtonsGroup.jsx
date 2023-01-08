@@ -58,7 +58,7 @@ export default function RadioButtonsGroup({ selected, setSelected }) {
           sx={{ ml: 4}}
           value="Guld Städning"
           control={<Radio />}
-          label={<Typography sx={{color:"goldenRod", py:0.5, px:1.5, borderRadius:2, fontSize:18, fontWeight:"bold", fontFamily:"poppins",}} >Guld Städning</Typography>}
+          label={<Typography sx={{color:"goldenRod", py:0.5, px:1, borderRadius:2, fontSize:18, fontWeight:"bold", fontFamily:"poppins",}} >Guld Städning</Typography>}
         />
         <Typography sx={{ ml: 9.5, mb: 4 , mr:2 }}>
           Allt som erbjuds i brons och silver städning samt fönsterputsning.
