@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import CustomButton from "../ui/CustomButton";
 import RadioButtonsGroup from "../ui/RadioButtonsGroup";
 import CalenderComponent from "./calender/CalenderComponent";
-import Title from "../ui/Title";
 import Colors from "../../Colors";
 
 export default function BookService({ data }) {
@@ -107,7 +106,7 @@ export default function BookService({ data }) {
   }
 
   function handleBackTab() {
-    setValue(value - 1);
+    setValue(value - 1); 
   }
 
   return (
@@ -194,6 +193,8 @@ export default function BookService({ data }) {
             showTime={showTime}
             time={time}
             setTime={setTime}
+            error={error}
+            handleCalenderOnPress={handleCalenderOnPress}
           />
           <Grid
             container
@@ -201,18 +202,9 @@ export default function BookService({ data }) {
             sx={{ display: "flex", justifyContent: "center" }}
           >
             <CustomButton onClick={handleBackTab}>Bakåt</CustomButton>
-            <CustomButton onClick={handleCalenderOnPress}>Nästa</CustomButton>
+            {/* <CustomButton onClick={handleCalenderOnPress}>Nästa</CustomButton> */}
           </Grid>
-          <Typography
-            sx={{
-              mt: 1,
-              px: 0.5,
-              borderRadius: 1,
-              color: "#a60a0a",
-            }}
-          >
-            {error}
-          </Typography>
+      
         </TabPanel>
 
         <TabPanel value={value} index={2}>
@@ -232,7 +224,7 @@ export default function BookService({ data }) {
               backgroundColor: "white",
             }}
           >
-            <Title>Bokningsöversikt</Title>
+            <Typography sx={{fontSize: 22, my:1}}>Bokningsöversikt</Typography>
             <Typography sx={{ fontSize: 18 }}>Val av tjänst: </Typography>
             {selected}
             <Typography sx={{ fontSize: 18 }}>Datum: </Typography>
