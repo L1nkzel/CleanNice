@@ -3,37 +3,37 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model customer {
-  customerId  Int        @id @default(autoincrement())
-  companyName String
-  orgNr       String
-  phoneNumber String
-  email       String     @unique
-  adress      String
-  custName    String
-  password    String
+  customerId      Int        @id @default(autoincrement())
+  companyName     String
+  orgNr           String
+  phoneNumber     String
+  email           String     @unique
+  adress          String
+  custName        String
+  password        String
   forceChangePass String
-  bookings    bookings[]
-  history     history[]
+  bookings        bookings[]
+  history         history[]
 }
 
 model employee {
-  employeeId     Int        @id @default(autoincrement())
-  personalNumber String
-  accountNumber  String
-  phoneNumber    String
-  email          String     @unique
-  adress         String
-  role           String
-  employeeName   String
-  password       String
+  employeeId      Int        @id @default(autoincrement())
+  personalNumber  String
+  accountNumber   String
+  phoneNumber     String
+  email           String     @unique
+  adress          String
+  role            String
+  employeeName    String
+  password        String
   forceChangePass String
-  bookings       bookings[] @relation("bookingstoemployee")
-  history        history[]  @relation("employeetohistory")
+  bookings        bookings[] @relation("bookingstoemployee")
+  history         history[]  @relation("employeetohistory")
 }
 
 model bookings {
@@ -51,8 +51,6 @@ model bookings {
   comment         String
   customer        customer   @relation(fields: [customerId], references: [customerId])
   employee        employee[] @relation("bookingstoemployee")
-
-  @@index([customerId], map: "bookings_customerId_fkey")
 }
 
 model history {
@@ -66,6 +64,4 @@ model history {
   status       String
   customer     customer   @relation(fields: [customerId], references: [customerId])
   employee     employee[] @relation("employeetohistory")
-
-  @@index([customerId], map: "history_customerId_fkey")
 }
