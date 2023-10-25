@@ -18,7 +18,7 @@ export default function BookService({ data }) {
   const [showTime, setShowTime] = useState(false);
   const [time, setTime] = useState([]);
   const [error, setError] = useState("");
-  const bookUrl = `http://localhost:3500/api/bookings/`;
+  const bookUrl = `https://clean-nice.vercel.app/api/bookings/`;
   const dateNumbers = `${date.getFullYear()}-${
     ("0" + (date.getMonth() +1)).slice(-2)
   }-${ ("0" + date.getDate()).slice(-2)}`;
@@ -69,7 +69,7 @@ export default function BookService({ data }) {
           bookingId: booking?.bookingId
 
         }
-        await fetch(`http://localhost:3500/api/email/newBooking`, {
+        await fetch(`https://clean-nice.vercel.app/api/email/newBooking`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -15,7 +15,7 @@ import Colors from "../../Colors";
 
 const DeleteBookingModal = (props) => {
   const { userBookings, setUserBookings, row } = props;
-  const URL = "http://localhost:3500/api/bookings";
+  const URL = "https://clean-nice.vercel.app/api/bookings";
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
@@ -38,7 +38,7 @@ const DeleteBookingModal = (props) => {
         email: props.user.email,
         bookingId: row.bookingId,
       };
-      await fetch(`http://localhost:3500/api/email/cancelBooking`, {
+      await fetch(`https://clean-nice.vercel.app/api/email/cancelBooking`, {
         method: "POST",
         credentials: "include",
         headers: {

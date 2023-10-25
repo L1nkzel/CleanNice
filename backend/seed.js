@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import * as bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
@@ -14,8 +15,8 @@ async function seedData() {
           email: 'kund1@example.com',
           adress: 'Storgatan 1',
           custName: 'Anna Andersson',
-          password: '123', // Replace with a hashed password
-          forceChangePass: 'false',
+          password: await bcrypt.hash("123", 10),  
+          forceChangePass: 'no',
         },
         {
           companyName: 'Firma Sverige AB',
@@ -24,8 +25,8 @@ async function seedData() {
           email: 'kund2@example.com',
           adress: 'Lillgatan 5',
           custName: 'Erik Eriksson',
-          password: '123', // Replace with a hashed password
-          forceChangePass: 'false',
+          password: await bcrypt.hash("123", 10), 
+          forceChangePass: 'no',
         },
       ],
     });
@@ -41,7 +42,7 @@ async function seedData() {
           adress: 'Bokvägen 7',
           role: 'Admin',
           employeeName: 'Maria Karlsson',
-          password: '123', 
+          password:  await bcrypt.hash("123", 10),  
           forceChangePass: 'no',
         },
         {
@@ -52,7 +53,7 @@ async function seedData() {
           adress: 'Ekbacken 3',
           role: 'Employee',
           employeeName: 'Jonas Nilsson',
-          password: '123', 
+          password: await bcrypt.hash("123", 10),  
           forceChangePass: 'no',
         },
       ],

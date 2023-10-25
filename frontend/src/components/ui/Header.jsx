@@ -28,7 +28,7 @@ export default function Header(props) {
     localStorage.removeItem("userData");
     navigate("/");
     window.location.reload();
-    const res = await fetch(`http://localhost:3500/auth/logout`, {
+    const res = await fetch(`https://clean-nice.vercel.app/auth/logout`, {
       credentials: "include",
       method: "POST",
     });

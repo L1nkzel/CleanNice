@@ -14,7 +14,7 @@ export default function Options({ booking }) {
   const [employee, setEmployee] = useState({});
 
   const fetchUsers = async () => {
-    const res = await fetch("http://localhost:3500/api/employee/", {
+    const res = await fetch("https://clean-nice.vercel.app/api/employee/", {
       credentials: "include",
     });
 
@@ -84,7 +84,7 @@ filterEmployees()
     };
 
     const res = await fetch(
-      `http://localhost:3500/api/bookings/${booking.bookingId}/editBookingCleaner`,
+      `https://clean-nice.vercel.app/api/bookings/${booking.bookingId}/editBookingCleaner`,
       fetchConfig
     );
     const body2 = await res.json();
@@ -97,7 +97,7 @@ filterEmployees()
       
 
     }
-    await fetch(`http://localhost:3500/api/email/assignCleaner`, {
+    await fetch(`https://clean-nice.vercel.app/api/email/assignCleaner`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

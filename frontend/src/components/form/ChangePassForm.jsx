@@ -67,7 +67,7 @@ function ChangePassForm() {
 
  console.log('loggedInUser', loggedInUser)
 
-    const URL = `http://localhost:3500/${loggedInUser.user.employeeId}/changePass`;
+    const URL = `https://clean-nice.vercel.app/${loggedInUser.user.employeeId}/changePass`;
     const res = await fetch(URL, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },

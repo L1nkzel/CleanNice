@@ -10,7 +10,7 @@ const CurrentBookings = ({ data }) => {
 
   const checkUser = async () => {
     const res = await fetch(
-      `http://localhost:3500/api/bookings/${data.customerId}/bookings`,
+      `https://clean-nice.vercel.app/api/bookings/${data.customerId}/bookings`,
       { credentials: "include" }
     );
     const result = await res.json();

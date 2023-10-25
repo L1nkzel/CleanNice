@@ -12,7 +12,7 @@ const EmployeeHistory = ({ data }) => {
     if (!isNaN(data.employeeId)) {
       try {
         const res = await fetch(
-          `http://localhost:3500/api/employee/${data.employeeId}/bookings`
+          `https://clean-nice.vercel.app/api/employee/${data.employeeId}/bookings`
           , {credentials:'include'});
           
           const result = await res.json();

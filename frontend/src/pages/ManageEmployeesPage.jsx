@@ -9,7 +9,7 @@ import Title from "../components/ui/Title";
 import Footer from "../components/ui/Footer";
 
 const ManageEmployeesPage = () => {
-  const URL = "http://localhost:3500/api/employee/";
+  const URL = "https://clean-nice.vercel.app/api/employee/";
   const [employeeData, setEmployeeData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false)
 

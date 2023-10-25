@@ -18,7 +18,7 @@ const DeleteDialogCustomer = ({
   setCustomerData,
   row,
 }) => {
-  const URL = "http://localhost:3500/api/customer";
+  const URL = "https://clean-nice.vercel.app/api/customer";
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => {

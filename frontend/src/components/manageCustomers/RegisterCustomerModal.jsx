@@ -27,7 +27,7 @@ const style = {
   p: 4,
 };
 
-const url = `http://localhost:3500/register`;
+const url = `https://clean-nice.vercel.app/register`;
 
 export default function BasicModal({ title }) {
   const [open, setOpen] = useState(false);

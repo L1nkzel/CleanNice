@@ -24,7 +24,7 @@ import {
         const data={
           status:"Utfört"
         }
-       const res =  await fetch(`http://localhost:3500/api/bookings/${row.bookingId}/editBooking`, {
+       const res =  await fetch(`https://clean-nice.vercel.app/api/bookings/${row.bookingId}/editBooking`, {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",
@@ -34,7 +34,7 @@ import {
           });
          const bookingData = await res.json()
     
-         const res2 = await fetch(`http://localhost:3500/api/customer/${bookingData?.customerId}`,{
+         const res2 = await fetch(`https://clean-nice.vercel.app/api/customer/${bookingData?.customerId}`,{
           credentials: "include",
          })
          const customerData = await res2.json()
@@ -51,7 +51,7 @@ import {
             orgNr: customerData?.orgNr
         
          }
-         await fetch(`http://localhost:3500/api/email/invoice`, {
+         await fetch(`https://clean-nice.vercel.app/api/email/invoice`, {
           method:'POST',
           headers: {
             "Content-Type": "application/json",

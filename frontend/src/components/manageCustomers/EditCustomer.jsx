@@ -20,7 +20,7 @@ function EditCustomer({ row }) {
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
-  const URL = "http://localhost:3500/api/customer";
+  const URL = "https://clean-nice.vercel.app/api/customer";
   const [formData, setFormData] = useState({
     custName: row.custName,
     companyName: row.companyName,

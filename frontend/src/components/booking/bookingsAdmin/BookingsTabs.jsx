@@ -10,7 +10,7 @@ import Colors from "../../../Colors";
 export default function BookingsTabs({ data }) { 
   const [value, setValue] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false)
-  const bookUrl = `http://localhost:3500/api/bookings/`;
+  const bookUrl = `https://clean-nice.vercel.app/api/bookings/`;
 
   const theme = createTheme({
     breakpoints: {
@@ -41,7 +41,7 @@ export default function BookingsTabs({ data }) {
 
   const fetchBookings = async () => {
     try {
-      const res = await fetch(`http://localhost:3500/api/bookings/`, {
+      const res = await fetch(`${bookUrl}`, {
         credentials: "include",
       });
       setIsLoaded(true)
@@ -55,7 +55,7 @@ export default function BookingsTabs({ data }) {
   useEffect(() => {
     setInterval(fetchBookings, 1000);
 
-  }, [bookings.lenght]);
+  }, [bookings.length]);
 
   useLayoutEffect(() => {
     setConfirmedServices(
@@ -77,7 +77,7 @@ export default function BookingsTabs({ data }) {
 
   const deleteBookingHandler = async (id) => {
     if (window.confirm("Är du säker att du vill ta bort denna bokning")) {
-      await fetch(`http://localhost:3500/api/bookings/${id}/booking`, {
+      await fetch(`${bookUrl}${id}/booking`, {
         credentials: "include",
         method: "DELETE",
       });
@@ -93,7 +93,7 @@ export default function BookingsTabs({ data }) {
     };
     if (window.confirm("Vill du klarmarkera denna bokning")) {
       const res = await fetch(
-        `http://localhost:3500/api/bookings/${id}/editBooking`,
+        `${bookUrl}${id}/editBooking`,
         {
           method: "PATCH",
           headers: {

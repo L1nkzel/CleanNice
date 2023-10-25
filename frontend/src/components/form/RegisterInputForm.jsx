@@ -22,7 +22,7 @@ import {useNavigate } from "react-router-dom";
 
 
 function RegisterInputForm() {
-  const regUrl = `http://localhost:3500/auth/register/`;
+  const regUrl = `https://clean-nice.vercel.app/auth/register/`;
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",

@@ -18,7 +18,7 @@ import Colors from "../../Colors";
   
   const DeleteDialogEmployee = (props) => {
     const {employeeData, setEmployeeData, row} = props
-    const URL = "http://localhost:3500/api/employee"
+    const URL = "https://clean-nice.vercel.app/api/employee"
   
     const [open, setOpen] = useState(false);
     const handleOpen = () => {

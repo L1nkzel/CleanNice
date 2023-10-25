@@ -20,7 +20,7 @@ function EditEmployee({ row }) {
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
-  const URL = "http://localhost:3500/api/employee";
+  const URL = "https://clean-nice.vercel.app/api/employee";
   const [formData, setFormData] = useState({
     employeeName: row.employeeName,
     adress: row.adress,

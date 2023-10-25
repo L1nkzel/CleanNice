@@ -12,7 +12,7 @@ import Footer from "../components/ui/Footer";
 const ManageCustomerPage = () => {
   const loggedInUser = JSON.parse(localStorage.getItem("userData"));
   const [userData, setUserData] = useState(loggedInUser);
-  const URL = "http://localhost:3500/api/customer/";
+  const URL = "https://clean-nice.vercel.app/api/customer/";
   const [customerData, setCustomerData] = useState([]);
   const [input, setInput] = useState("");
   const [isLoaded, setIsLoaded] = useState(false)

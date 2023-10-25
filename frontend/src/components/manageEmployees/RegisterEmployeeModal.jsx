@@ -27,7 +27,7 @@ const style = {
   p: 4,
 };
 
-const url = `http://localhost:3500/api/employee/newEmployee`;
+const url = `https://clean-nice.vercel.app/api/employee/newEmployee`;
 
 export default function BasicModal() {
   const [open, setOpen] = useState(false);
@@ -73,7 +73,7 @@ export default function BasicModal() {
  
 
     }
-    await fetch(`http://localhost:3500/api/email/newEmployee`, {
+    await fetch(`https://clean-nice.vercel.app/api/email/newEmployee`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
