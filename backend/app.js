@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 5000;
 
 server.use(express.json());
 const corsConfig = {
-  origin: "http://localhost:3000",
+  origin: "https://clean-nice-nll1-nylyh5tsc-semir-pecars-projects.vercel.app/",
   credentials: true,
 };
 
