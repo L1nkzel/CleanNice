@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 5000;
 
 server.use(express.json());
 const corsConfig = {
-  origin: "https://clean-nice-nll1.vercel.app/",
+  origin: "https://clean-nice-nll1.vercel.app",
   credentials: true,
   allowedHeaders: '*'
 };
