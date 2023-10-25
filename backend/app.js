@@ -40,6 +40,7 @@ server.use(passport.session());
 server.use(passport.initialize());
 
 const isAuthenticated = (req, res, next) => {
+  console.log(req.isAuthenticated())
   req.isAuthenticated() ? next() : res.sendStatus(403);
 };
 
