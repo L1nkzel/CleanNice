@@ -10,6 +10,8 @@ import bookingsRoutes from "./routes/bookingsRoutes.js";
 import emailRoutes from "./routes/emailRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import { PrismaClient } from "@prisma/client";
+import connectRedis from "connect-redis"; 
+import Redis from "ioredis"; 
 
 
 
@@ -17,6 +19,21 @@ const prisma = new PrismaClient();
 const server = express();
 
 const PORT = process.env.PORT || 5000;
+
+const redis = new Redis({
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
+ 
+});
+
+const RedisStore = connectRedis(session);
+
+redis.on('error', function (err) {
+  console.log('Could not establish a connection with redis. ' + err);
+});
+redis.on('connect', function (err) {
+  console.log('Connected to redis successfully');
+});
 
 server.use(express.json());
 const corsConfig = {
@@ -29,6 +46,7 @@ server.use(cors(corsConfig));
 
 server.use(
   session({
+    store: new RedisStore({ client: redis }), 
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
