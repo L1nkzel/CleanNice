@@ -22,6 +22,7 @@ server.use(express.json());
 const corsConfig = {
   origin: "https://clean-nice-nll1.vercel.app/",
   credentials: true,
+  allowedHeaders: '*'
 };
 
 server.use(cors(corsConfig));
