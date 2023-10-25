@@ -77,7 +77,7 @@ filterEmployees()
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        "Access-Control-Allow-Origin": "https://clean-nice-nll1-nylyh5tsc-semir-pecars-projects.vercel.app/",
+        "Access-Control-Allow-Origin": "https://clean-nice-nll1.vercel.app/",
       },
       credentials: "include",
       body: JSON.stringify(body),
