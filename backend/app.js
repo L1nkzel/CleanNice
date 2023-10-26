@@ -77,7 +77,7 @@ const isAuthenticated = (req, res, next) => {
 };
 
 server.use("/auth", authRoutes);
-server.use("/api/customer", isAuthenticated, customerRoutes);
+server.use("/api/customer",  customerRoutes);
 server.use("/api/employee", isAuthenticated, employeeRoutes);
 server.use("/api/bookings", isAuthenticated, bookingsRoutes);
 
