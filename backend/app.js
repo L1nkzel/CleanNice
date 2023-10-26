@@ -82,15 +82,3 @@ server.use("/api/bookings", isAuthenticated, bookingsRoutes);
 
 server.listen(PORT, () => console.log(`Server started on ${PORT}`));
 
-async function main() {
-  await prisma.$connect();
-  await prisma.$disconnect();
-}
-
-main()
-  .catch((e) => {
-    throw e;
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
