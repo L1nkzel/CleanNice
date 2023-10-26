@@ -42,6 +42,8 @@ strategy(passport);
 
 server.use(passport.initialize());
 
+server.use(passport.session());
+
 const isAuthenticated = (req, res, next) => {
   console.log(req.isAuthenticated())
   req.isAuthenticated() ? next() : res.sendStatus(403);
