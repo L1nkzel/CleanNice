@@ -11,29 +11,39 @@ import emailRoutes from "./routes/emailRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import { PrismaClient } from "@prisma/client";
 import connectRedis from "connect-redis"; 
-import Redis from "ioredis"; 
 
-
+import { createClient } from 'redis';
 
 const prisma = new PrismaClient();
 const server = express();
 
 const PORT = process.env.PORT || 5000;
 
-const redis = new Redis({
-  host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT,
+
+// Ping the Redis server
+
+
+const client = createClient({
+  socket: {
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+  },
+  password: process.env.REDIS_PASSWORD,
+  
+})
+
+client.connect().catch(console.error);
+client.on('connect', () => {
+  console.log('Connected to Redis server');
  
 });
-
-const RedisStore = connectRedis(session);
-
-redis.on('error', function (err) {
-  console.log('Could not establish a connection with redis. ' + err);
+client.on("error", (err) => {
+  console.error("Redis Error: " + err);
 });
-redis.on('connect', function (err) {
-  console.log('Connected to redis successfully');
-});
+
+const redisStore = new connectRedis({client: client});
+
+
 
 server.use(express.json());
 const corsConfig = {
@@ -46,7 +56,7 @@ server.use(cors(corsConfig));
 
 server.use(
   session({
-    store: new RedisStore({ client: redis }), 
+    store: redisStore, 
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
@@ -64,16 +74,13 @@ const isAuthenticated = (req, res, next) => {
 
 server.use("/auth", authRoutes);
 server.use("/api/customer", isAuthenticated, customerRoutes);
-
 server.use("/api/employee", isAuthenticated, employeeRoutes);
 server.use("/api/bookings", isAuthenticated, bookingsRoutes);
-//server.use("/api/email", isAuthenticated, emailRoutes);
 
 server.listen(PORT, () => console.log(`Server started on ${PORT}`));
 
 async function main() {
   await prisma.$connect();
-
   await prisma.$disconnect();
 }
 
