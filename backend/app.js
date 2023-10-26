@@ -51,7 +51,7 @@ const corsConfig = {
   credentials: true,
   allowedHeaders: 'Authorization, Content-Type',
 };
-app.set('trust proxy', 1)
+server.set('trust proxy', 1)
 server.use(cors(corsConfig));
 
 server.use(
