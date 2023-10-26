@@ -7,6 +7,7 @@ const prisma = new PrismaClient();
 export const strategy = (passport) => {
   passport.serializeUser((user, done) => {
     done(null, user.email);
+    console.log("serialized",user)
   });
 
   passport.deserializeUser(async (email, done) => {

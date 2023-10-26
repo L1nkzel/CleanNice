@@ -61,7 +61,8 @@ server.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: true, // Make sure your production environment uses HTTPS
+      secure: true,
+      path: '/',  
     },
   })
 );
