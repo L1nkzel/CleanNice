@@ -56,16 +56,16 @@ server.use(cors(corsConfig));
 
 server.use(
   session({
-    store: redisStore, 
+    store: redisStore,
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: true,
-      path: '/',  
+      secure: true, 
+      path: '/', 
+      maxAge: 30 * 60 * 1000, 
     },
-  })
-);
+  }))
 strategy(passport);
 
 server.use(passport.initialize());
