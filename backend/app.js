@@ -2,7 +2,6 @@ import express from "express";
 import "dotenv/config";
 import passport from "passport";
 import { strategy } from "./passport/strategies.js";
-import session from "express-session";
 import cors from "cors";
 import customerRoutes from "./routes/customerRoutes.js";
 import employeeRoutes from "./routes/employeeRoutes.js";
@@ -10,67 +9,38 @@ import bookingsRoutes from "./routes/bookingsRoutes.js";
 import emailRoutes from "./routes/emailRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import { PrismaClient } from "@prisma/client";
-import connectRedis from "connect-redis"; 
-
-import { createClient } from 'redis';
+import cookieSession from 'cookie-session';
 
 const prisma = new PrismaClient();
 const server = express();
 
 const PORT = process.env.PORT || 5000;
 
-
-// Ping the Redis server
-
-
-const client = createClient({
-  socket: {
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT,
-  },
-  password: process.env.REDIS_PASSWORD,
-  
-})
-
-client.connect().catch(console.error);
-client.on('connect', () => {
-  console.log('Connected to Redis server');
- 
-});
-client.on("error", (err) => {
-  console.error("Redis Error: " + err);
-});
-
-const redisStore = new connectRedis({client: client});
-
-
-
 server.use(express.json());
 const corsConfig = {
-  origin: "*",
+  origin: "https://clean-nice-nll1.vercel.app",
   credentials: true,
   allowedHeaders: 'Authorization, Content-Type',
-  methods: "GET,PUT,PATCH,POST,DELETE",
 };
-server.set('trust proxy', 1)
+
+server.set("trust proxy", 1);
 server.use(cors(corsConfig));
 
+
 server.use(
-  session({
-    store: redisStore,
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      secure: true, 
-      path: '/', 
-      maxAge: 30 * 60 * 1000, 
-    },
-  }))
+  cookieSession({
+    name: 'session', 
+    keys: [process.env.SESSION_SECRET], 
+    maxAge: 24 * 60 * 60 * 1000, 
+    secure: true, 
+    httpOnly: true, 
+    sameSite: 'strict', 
+  })
+);
+
 strategy(passport);
 
 server.use(passport.initialize());
-server.use(passport.session());
 
 const isAuthenticated = (req, res, next) => {
   console.log(req.isAuthenticated())
@@ -78,9 +48,20 @@ const isAuthenticated = (req, res, next) => {
 };
 
 server.use("/auth", authRoutes);
-server.use("/api/customer",  customerRoutes);
+server.use("/api/customer", isAuthenticated, customerRoutes);
 server.use("/api/employee", isAuthenticated, employeeRoutes);
 server.use("/api/bookings", isAuthenticated, bookingsRoutes);
 
 server.listen(PORT, () => console.log(`Server started on ${PORT}`));
+async function main() {
+  await prisma.$connect();
+  await prisma.$disconnect();
+}
 
+main()
+  .catch((e) => {
+    throw e;
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
