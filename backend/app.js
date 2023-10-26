@@ -50,6 +50,7 @@ const corsConfig = {
   origin: "https://clean-nice-nll1.vercel.app",
   credentials: true,
   allowedHeaders: 'Authorization, Content-Type',
+  methods: "GET,PUT,PATCH,POST,DELETE",
 };
 server.set('trust proxy', 1)
 server.use(cors(corsConfig));
