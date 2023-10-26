@@ -51,7 +51,7 @@ const corsConfig = {
   credentials: true,
   allowedHeaders: 'Authorization, Content-Type',
 };
-
+app.set('trust proxy', 1)
 server.use(cors(corsConfig));
 
 server.use(
@@ -67,8 +67,8 @@ server.use(
 );
 strategy(passport);
 
-server.use(passport.session());
 server.use(passport.initialize());
+server.use(passport.session());
 
 const isAuthenticated = (req, res, next) => {
   console.log(req.isAuthenticated())
