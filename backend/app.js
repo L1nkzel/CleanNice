@@ -47,7 +47,7 @@ const redisStore = new connectRedis({client: client});
 
 server.use(express.json());
 const corsConfig = {
-  origin: "https://clean-nice-nll1.vercel.app",
+  origin: "*",
   credentials: true,
   allowedHeaders: 'Authorization, Content-Type',
   methods: "GET,PUT,PATCH,POST,DELETE",
