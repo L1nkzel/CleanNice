@@ -60,6 +60,9 @@ server.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
+    cookie: {
+      secure: true, // Make sure your production environment uses HTTPS
+    },
   })
 );
 strategy(passport);
