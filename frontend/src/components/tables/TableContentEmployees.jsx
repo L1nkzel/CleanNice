@@ -120,65 +120,30 @@ export default function TableContentEmployees(props) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {!active
-                  ? employeeData
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((row) => (
-                        <StyledTableRow key={row.employeeId}>
-                          <StyledTableCell component="th" scope="row">
-                            {row.employeeId}
-                          </StyledTableCell>
-                          <StyledTableCell>{row.employeeName}</StyledTableCell>
-                          <StyledTableCell>
-                            {row.personalNumber}
-                          </StyledTableCell>
-                          <StyledTableCell>{row.phoneNumber}</StyledTableCell>
-                          <StyledTableCell>{row.adress}</StyledTableCell>
-                          <StyledTableCell>{row.accountNumber}</StyledTableCell>
-                          <StyledTableCell>{row.email}</StyledTableCell>
-                          <StyledTableCell>
-                            <EditEmployee row={row} />
-                            <EditEmployeePass row={row} />
-                            <DeleteDialogEmployee
-                              employeeData={employeeData}
-                              setEmployeeData={setEmployeeData}
-                              row={row}
-                            />
-                          </StyledTableCell>
-                        </StyledTableRow>
-                      ))
-                  : searchedData
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((row) => (
-                        <StyledTableRow key={row.employeeId}>
-                          <StyledTableCell component="th" scope="row">
-                            {row.employeeId}
-                          </StyledTableCell>
-                          <StyledTableCell>{row.employeeName}</StyledTableCell>
-                          <StyledTableCell>
-                            {row.personalNumber}
-                          </StyledTableCell>
-                          <StyledTableCell>{row.phoneNumber}</StyledTableCell>
-                          <StyledTableCell>{row.adress}</StyledTableCell>
-                          <StyledTableCell>{row.accountNumber}</StyledTableCell>
-                          <StyledTableCell>{row.email}</StyledTableCell>
-                          <StyledTableCell>
-                            <EditEmployee row={row} />
-                            <EditEmployeePass row={row} />
-                            <DeleteDialogEmployee
-                              employeeData={employeeData}
-                              setEmployeeData={setEmployeeData}
-                              row={row}
-                            />
-                          </StyledTableCell>
-                        </StyledTableRow>
-                      ))}
+                {(!active ? employeeData : searchedData)
+                     ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => (
+                      <StyledTableRow key={row.employeeId}>
+                        <StyledTableCell component="th" scope="row">
+                          {row.employeeId}
+                        </StyledTableCell>
+                        <StyledTableCell>{row.employeeName}</StyledTableCell>
+                        <StyledTableCell>{row.personalNumber}</StyledTableCell>
+                        <StyledTableCell>{row.phoneNumber}</StyledTableCell>
+                        <StyledTableCell>{row.adress}</StyledTableCell>
+                        <StyledTableCell>{row.accountNumber}</StyledTableCell>
+                        <StyledTableCell>{row.email}</StyledTableCell>
+                        <StyledTableCell>
+                          <EditEmployee row={row} />
+                          <EditEmployeePass row={row} />
+                          <DeleteDialogEmployee
+                            employeeData={employeeData}
+                            setEmployeeData={setEmployeeData}
+                            row={row}
+                          />
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    ))}
               </TableBody>
             </Table>
           </TableContainer>

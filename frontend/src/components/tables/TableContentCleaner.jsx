@@ -89,7 +89,7 @@ export default function TableContentCleaner(props) {
               </TableHead>
               <TableBody>
                 {userBookings
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   ?.map((row) => (
                     <StyledTableRow key={row.bookingId}>
                       <StyledTableCell component="th" scope="row">
