@@ -55,10 +55,13 @@ server.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      path: '/', 
-      maxAge: 30 * 60 * 1000, 
+      path: '/',
+      maxAge: 30 * 60 * 1000,
+      secure: true, 
+      sameSite: 'none', 
     },
-  }))
+  })
+);
 strategy(passport);
 
 server.use(passport.initialize());
