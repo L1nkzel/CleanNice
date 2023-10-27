@@ -14,7 +14,7 @@ import React, { useState } from "react";
 import Colors from "../../Colors";
 import FormStyle from "../form/FormStyle";
 
-function EditEmployee({ row }) {
+function EditEmployee({ row, employeeData, setEmployeeData }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -49,7 +49,7 @@ function EditEmployee({ row }) {
       accountNumber: formData.accountNumber,
     };
 
-    const res = await fetch(`${URL}/${row.employeeId}/editEmployee`, {
+    const res = await fetch(`${URL}/${row?.employeeId}/editEmployee`, {
       method: "PATCH",
       credentials: "include",
       headers: {
@@ -59,6 +59,15 @@ function EditEmployee({ row }) {
     });
 
     const dataF = await res.json();
+    const updatedIndex = employeeData?.findIndex((employee) => employee.employeeId === dataF.employeeId);
+
+    if (updatedIndex !== -1) {
+      const updatedData = [...employeeData];
+      updatedData[updatedIndex] = dataF;
+      setEmployeeData(updatedData);
+    }
+
+    handleClose()
     console.log(dataF);
   };
 
