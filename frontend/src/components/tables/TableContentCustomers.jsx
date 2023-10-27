@@ -148,7 +148,7 @@ export default function TableContentCustomers(props) {
             sx={{ backgroundColor: Colors.header200, color: "white" }}
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={customerData.length}
+            count={customerData?.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

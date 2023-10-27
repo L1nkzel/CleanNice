@@ -119,7 +119,7 @@ export default function TableContentCleaner(props) {
             }}
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={userBookings.length}
+            count={userBookings?.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

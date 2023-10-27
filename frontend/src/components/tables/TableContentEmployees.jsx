@@ -152,7 +152,7 @@ export default function TableContentEmployees(props) {
             sx={{ backgroundColor: Colors.header200, color: "white" }}
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={employeeData.length}
+            count={employeeData?.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
