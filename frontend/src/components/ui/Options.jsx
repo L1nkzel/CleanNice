@@ -24,7 +24,7 @@ export default function Options({ booking }) {
     filterEmployees()
   };
   useEffect(() => {
-    setInterval(fetchUsers,1000);
+    fetchUsers();
   }, []);
 
   const filterEmployees = () =>{

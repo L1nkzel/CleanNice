@@ -24,7 +24,7 @@ const EmployeeHistory = ({ data }) => {
       }
     };
     useEffect(() => {
-    setInterval(checkUser,1000)
+    checkUser();
   }, []);
 
   return (

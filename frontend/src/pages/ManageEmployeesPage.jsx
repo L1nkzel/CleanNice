@@ -25,7 +25,7 @@ const ManageEmployeesPage = () => {
    
   };
   useEffect(() => {
-    setInterval(fetchUsers,1000)
+    fetchUsers();
   }, []);
 
   for (let i = 0; i < employeeData.length; i++) {

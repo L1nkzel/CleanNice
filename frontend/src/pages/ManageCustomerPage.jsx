@@ -28,7 +28,7 @@ const ManageCustomerPage = () => {
     setIsLoaded(true)
   };
   useEffect(() => {
-    setInterval(fetchUsers, 1000)
+   fetchUsers();
     
   }, []);
 

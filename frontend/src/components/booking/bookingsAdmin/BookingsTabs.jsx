@@ -53,7 +53,7 @@ export default function BookingsTabs({ data }) {
     }
   };
   useEffect(() => {
-    setInterval(fetchBookings, 1000);
+    fetchBookings();
 
   }, [bookings.length]);
 

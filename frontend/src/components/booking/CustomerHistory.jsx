@@ -18,7 +18,7 @@ const CustomerHistory = ({ data }) => {
       setIsLoaded(true)
 };
 useEffect(() => {
-setInterval(checkUser,1000)
+checkUser();
 }, []);
 
   return (

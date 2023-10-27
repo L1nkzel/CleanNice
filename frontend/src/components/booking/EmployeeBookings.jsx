@@ -23,7 +23,7 @@ const EmployeeBookings = ({ data }) => {
       }
     };
     useEffect(() => {
-    setInterval(checkUser,1000)
+   checkUser();
   }, []);
 
   const cleaningDoneHandler = async (id) => {
