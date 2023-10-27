@@ -29,7 +29,7 @@ const style = {
 
 const url = `https://clean-nice.vercel.app/register`;
 
-export default function BasicModal({ title }) {
+export default function BasicModal({ title, setEmployeeData, employeeData}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -64,7 +64,7 @@ export default function BasicModal({ title }) {
       body: JSON.stringify(data),
     });
     await res.json();
-
+    setEmployeeData([...employeeData, data]);
     setFormData({
       custName: "",
       adress: "",

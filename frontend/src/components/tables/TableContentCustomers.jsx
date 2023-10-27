@@ -99,7 +99,11 @@ export default function TableContentCustomers(props) {
                 type="search"
                 onChange={(e) => requestSearch(e.target.value)}
               />
-              <RegisterCustomerModal title="Skapa en ny kund" />
+              <RegisterCustomerModal
+                customerData={customerData}
+                setCustomerData={setCustomerData}
+                title="Skapa en ny kund"
+              />
             </TableRow>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
@@ -115,33 +119,33 @@ export default function TableContentCustomers(props) {
                 </TableRow>
               </TableHead>
               <TableBody>
-  {(!active ? customerData : searchedData)
-    ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-    .map((row) => (
-      <StyledTableRow key={row.customerId}>
-        <StyledTableCell component="th" scope="row">
-          {row.customerId}
-        </StyledTableCell>
-        <StyledTableCell>{row.custName}</StyledTableCell>
-        <StyledTableCell>{row.phoneNumber}</StyledTableCell>
-        <StyledTableCell>{row.email}</StyledTableCell>
-        <StyledTableCell>{row.adress}</StyledTableCell>
-        <StyledTableCell>{row.companyName}</StyledTableCell>
-        <StyledTableCell>{row.orgNr}</StyledTableCell>
-        <StyledTableCell>
-          <EditCustomer row={row} />
-          <EditCustomerPass row={row} />
-          <DeleteDialogCustomer
-            customerData={customerData}
-            setCustomerData={setCustomerData}
-            input={input}
-            setInput={setInput}
-            row={row}
-          />
-        </StyledTableCell>
-      </StyledTableRow>
-    ))}
-</TableBody>
+                {(!active ? customerData : searchedData)
+                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => (
+                    <StyledTableRow key={row.customerId}>
+                      <StyledTableCell component="th" scope="row">
+                        {row.customerId}
+                      </StyledTableCell>
+                      <StyledTableCell>{row.custName}</StyledTableCell>
+                      <StyledTableCell>{row.phoneNumber}</StyledTableCell>
+                      <StyledTableCell>{row.email}</StyledTableCell>
+                      <StyledTableCell>{row.adress}</StyledTableCell>
+                      <StyledTableCell>{row.companyName}</StyledTableCell>
+                      <StyledTableCell>{row.orgNr}</StyledTableCell>
+                      <StyledTableCell>
+                        <EditCustomer row={row} />
+                        <EditCustomerPass row={row} />
+                        <DeleteDialogCustomer
+                          customerData={customerData}
+                          setCustomerData={setCustomerData}
+                          input={input}
+                          setInput={setInput}
+                          row={row}
+                        />
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+              </TableBody>
             </Table>
           </TableContainer>
           <TablePagination

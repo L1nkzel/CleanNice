@@ -29,7 +29,7 @@ const style = {
 
 const url = `https://clean-nice.vercel.app/api/employee/newEmployee`;
 
-export default function BasicModal() {
+export default function BasicModal({setEmployeeData, employeeData}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -67,6 +67,7 @@ export default function BasicModal() {
    const newEmp = await res.json();
 
    if(res.status === 200){
+    setEmployeeData([...employeeData, newEmp]);
     const mailData = {
       employeeName: newEmp.employeeName,
       email: newEmp.email,

@@ -24,7 +24,7 @@ const ApproveServiceModal = ({ row }) => {
       status: "Godkänd",
     };
     await fetch(
-      `https://clean-nice.vercel.app/api/bookings/${row.bookingId}/editBooking`,
+      `https://clean-nice.vercel.app/api/bookings/${row?.bookingId}/editBooking`,
       {
         method: "PATCH",
         credentials: "include",

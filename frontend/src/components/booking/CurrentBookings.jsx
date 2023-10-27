@@ -9,9 +9,8 @@ const CurrentBookings = ({ data }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const checkUser = async () => {
-    console.log(data.customerId)
     const res = await fetch(
-      `https://clean-nice.vercel.app/api/bookings/${data.customerId}/bookings`,
+      `https://clean-nice.vercel.app/api/bookings/${data?.customerId}/bookings`,
       { credentials: "include" }
     );
     const result = await res.json();

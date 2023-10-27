@@ -11,11 +11,11 @@ const EmployeeBookings = ({ data }) => {
     if (!isNaN(data.employeeId)) {
       try {
         const res = await fetch(
-          `https://clean-nice.vercel.app/api/employee/${data.employeeId}/bookings`
+          `https://clean-nice.vercel.app/api/employee/${data?.employeeId}/bookings`
           , {credentials:'include'});
           
           const result = await res.json();
-          setUserBookings(result.bookings.filter((booking) => booking.status === "Bokad"));
+          setUserBookings(result?.bookings.filter((booking) => booking.status === "Bokad"));
           setIsLoaded(true)
         } catch (err) {
           setErrorMessage(err);

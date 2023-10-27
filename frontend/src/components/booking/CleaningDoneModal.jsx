@@ -24,7 +24,7 @@ import {
         const data={
           status:"Utfört"
         }
-       const res =  await fetch(`https://clean-nice.vercel.app/api/bookings/${row.bookingId}/editBooking`, {
+       const res =  await fetch(`https://clean-nice.vercel.app/api/bookings/${row?.bookingId}/editBooking`, {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",
@@ -61,7 +61,7 @@ import {
          })
     
           setUserBookings(
-            userBookings.filter((booking) => booking.status === "Bokad")
+            userBookings?.filter((booking) => booking.status === "Bokad")
           );
       };
   

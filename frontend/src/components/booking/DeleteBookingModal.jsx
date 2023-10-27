@@ -24,19 +24,19 @@ const DeleteBookingModal = (props) => {
   const handleClose = () => setOpen(false);
 
   const deleteBookingHandler = async () => {
-    await fetch(`${URL}/${row.bookingId}/booking`, {
+    await fetch(`${URL}/${row?.bookingId}/booking`, {
       method: "DELETE",
       credentials: "include",
     });
     setUserBookings(
-      userBookings.filter((booking) => booking.bookingId !== row.bookingId)
+      userBookings?.filter((booking) => booking.bookingId !== row.bookingId)
     );
     console.log("user:", props?.user);
-    if (!isNaN(props?.user.customerId)) {
+    if (!isNaN(props?.user?.customerId)) {
       const mailData = {
-        custName: props.user.custName,
-        email: props.user.email,
-        bookingId: row.bookingId,
+        custName: props?.user?.custName,
+        email: props?.user?.email,
+        bookingId: row?.bookingId,
       };
       await fetch(`https://clean-nice.vercel.app/api/email/cancelBooking`, {
         method: "POST",

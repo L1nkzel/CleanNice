@@ -34,9 +34,9 @@ export default function BookService({ data }) {
       cleaningService: selected
     };
 
-    if(!isNaN(data.customerId)){
+    if(!isNaN(data?.customerId)){
 
-      const res = await fetch(`${bookUrl}${data.customerId}/newBooking`, {
+      const res = await fetch(`${bookUrl}${data?.customerId}/newBooking`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export default function BookService({ data }) {
         const statusData = {
           status: 'Bekräftad',
         }
-        const res = await fetch(`${bookUrl}${newBooking.bookingId}/editBooking`, {
+        const res = await fetch(`${bookUrl}${newBooking?.bookingId}/editBooking`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -61,11 +61,11 @@ export default function BookService({ data }) {
         console.log(booking)
 
         const mailData = {
-          custName: data.custName,
+          custName: data?.custName,
           cleaningService: booking?.cleaningService,
           time:booking?.time,
           date:booking?.date,
-          email: data.email,
+          email: data?.email,
           bookingId: booking?.bookingId
 
         }
@@ -86,7 +86,7 @@ export default function BookService({ data }) {
   }
 
   function handleCalenderOnPress() {
-    if (time.length !== 0) {
+    if (time?.length !== 0) {
       setValue(value + 1);
       setError("");
       console.log(time, date);

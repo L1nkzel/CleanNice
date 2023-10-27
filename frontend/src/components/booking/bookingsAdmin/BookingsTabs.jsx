@@ -55,23 +55,23 @@ export default function BookingsTabs({ data }) {
   useEffect(() => {
     fetchBookings();
 
-  }, [bookings.length]);
+  }, [bookings?.length]);
 
   useLayoutEffect(() => {
     setConfirmedServices(
-      bookings.filter((confirmed) => confirmed.status === "Bekräftad")
+      bookings?.filter((confirmed) => confirmed.status === "Bekräftad")
        
     );
 
-    setBookedServices(bookings.filter((booked) => booked.status === "Bokad"));
+    setBookedServices(bookings?.filter((booked) => booked.status === "Bokad"));
     setApprovedServices(
-      bookings.filter((booked) => booked.status === "Godkänd")
+      bookings?.filter((booked) => booked.status === "Godkänd")
     );
     setFailedServices(
-      bookings.filter((booked) => booked.status === "Underkänd")
+      bookings?.filter((booked) => booked.status === "Underkänd")
     );
 
-    setHistoryServices(bookings.filter((paid) => paid.status === "Betald"));
+    setHistoryServices(bookings?.filter((paid) => paid.status === "Betald"));
 
   }, [bookings]);
 
@@ -81,7 +81,7 @@ export default function BookingsTabs({ data }) {
         credentials: "include",
         method: "DELETE",
       });
-      setBookings(bookings.filter((booking) => booking.bookingId !== id));
+      setBookings(bookings?.filter((booking) => booking.bookingId !== id));
     } else {
       return;
     }

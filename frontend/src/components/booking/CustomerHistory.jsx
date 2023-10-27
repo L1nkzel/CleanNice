@@ -11,10 +11,10 @@ const CustomerHistory = ({ data }) => {
 
   const checkUser = async () => {
     const res = await fetch(
-      `https://clean-nice.vercel.app/api/bookings/${data.customerId}/bookings`,
+      `https://clean-nice.vercel.app/api/bookings/${data?.customerId}/bookings`,
       {credentials:'include'}); 
       const result = await res.json();
-      setHistory(result.filter((booking) => booking.status === "Betald"));
+      setHistory(result?.filter((booking) => booking.status === "Betald"));
       setIsLoaded(true)
 };
 useEffect(() => {

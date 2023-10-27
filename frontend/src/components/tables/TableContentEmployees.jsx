@@ -103,7 +103,10 @@ export default function TableContentEmployees(props) {
                 type="search"
                 onChange={(e) => requestSearch(e.target.value)}
               />
-              <RegisterEmployeeModal />
+              <RegisterEmployeeModal
+              employeeData={employeeData}
+              setEmployeeData={setEmployeeData}
+              />
             </TableRow>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
