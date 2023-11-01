@@ -14,7 +14,7 @@ import React, { useState } from "react";
 import Colors from "../../Colors";
 import FormStyle from "../form/FormStyle";
 
-function EditEmployee({ row, employeeData, setEmployeeData }) {
+function EditEmployee({ row, employeeData = [] , setEmployeeData }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -59,7 +59,7 @@ function EditEmployee({ row, employeeData, setEmployeeData }) {
     });
 
     const dataF = await res.json();
-    const updatedIndex = employeeData?.findIndex((employee) => employee.employeeId === dataF.employeeId);
+    const updatedIndex =  employeeData?.findIndex((employee) => employee.employeeId === dataF.employeeId);
 
     if (updatedIndex !== -1) {
       const updatedData = [...employeeData];

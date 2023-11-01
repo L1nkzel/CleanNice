@@ -66,7 +66,7 @@ export default function BasicModal({setEmployeeData, employeeData}) {
     });
    const newEmp = await res.json();
 
-   if(res.status === 200){
+  /*  if(res.status === 200){
     setEmployeeData([...employeeData, newEmp]);
     const mailData = {
       employeeName: newEmp.employeeName,
@@ -80,8 +80,8 @@ export default function BasicModal({setEmployeeData, employeeData}) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(mailData),
-    });
-   }
+    }); 
+   }*/
     setFormData({
       employeeName: "",
       adress: "",

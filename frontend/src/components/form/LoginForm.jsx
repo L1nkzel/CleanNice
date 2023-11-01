@@ -72,7 +72,7 @@ function LoginForm() {
   return (
     <ThemeProvider theme={theme}>
 
-    <Box sx={FormStyle.container}>
+    <Box >
       <Grid container columnGap={1} sx={FormStyle.login}>
         <FormControl>
           <Title color={"white"}>Logga in</Title>

@@ -50,6 +50,7 @@ function EditEmployeePass({ row }) {
 
     const dataF = await res.json();
     console.log(dataF);
+    handleClose()
   };
 
   return (
